@@ -199,11 +199,7 @@ float cDragon::atacar(int i)
         it++;
         j++;
     }
-    float dano = (*it)->probTotal(estadisticas[(*it)->getStat()]);
-
-    delete (*it);
-
-    return dano;
+    return (*it)->probTotal(estadisticas[(*it)->getStat()]);
 }
 
 
@@ -229,8 +225,6 @@ void cDragon::aprenderAtk(cAtaque* atk)
 
     this->ataques.push_back(atk);
     this->cantAtaques++;
-
-    delete (*it);
 }
 
 
@@ -250,12 +244,9 @@ void cDragon::olvidarAtk(cAtaque* atk)
             borrador = true;
 
             cout << this->nombre << " ha olvidado como usar " << atk->getNombre() << endl;
-            delete (*it);
             return;
         }
     }
-
-    delete (*it);
 
     if (!borrador)
         throw new exception("El Dragon no conoce el ataque");
@@ -305,7 +296,6 @@ void cDragon::mostrarAtaques()
         cout << cont << ". " << (*it)->getNombre() << endl;
         it++;
     }
-    delete (*it);
 }
 
 

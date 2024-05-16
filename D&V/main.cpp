@@ -45,8 +45,6 @@ void atacarDragones(list<cVikingo*> vikingos)//en el main especificamos que no s
             (*it)->setDragonesTerminados(1);
             it++;
         }
-
-        delete (*it);
     }
 
    cVikingo::cambioComida(premio);
