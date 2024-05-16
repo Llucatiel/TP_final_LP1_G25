@@ -1,7 +1,7 @@
 #include "cVikingo.h"
 
 int cVikingo::comida = 30;
-
+int cVikingo::cantVikingos = 0;
 cVikingo::cVikingo(string nombre, string apellido, int d, int m, int a, string altura, string peso, string trabajo, int dragones_terminados)
 {
     this->nombre = nombre;
@@ -13,6 +13,8 @@ cVikingo::cVikingo(string nombre, string apellido, int d, int m, int a, string a
     this->peso = peso;
     this->trabajo = trabajo;
     this->dragones_terminados = dragones_terminados;
+
+    cantVikingos++;
 }
 
 

@@ -6,15 +6,17 @@ using namespace std;
 
 static void atacarDragones(int cantidadeVikingos)//en el main especificamos que no se puede enviar mas de 6
 {
-    if (cVikingo::cantVikingos < cantidadeVikingos || cantidadeVikingos > 6)
+    if (cVikingo::getCantVikingos() < cantidadeVikingos || cantidadeVikingos > 6)
         return; // Exception??
     unsigned int dado;
 
+    cVikingo::cambioComida(-cantidadeVikingos);
+
     cout << "los vikingos que enviaras consumiran: " << cantidadeVikingos << " de comida." << endl;
 
-    dado = cantidadeVikingos + rand() % 12;
+    dado = cantidadeVikingos + rand() % (12 - cantidadeVikingos);
 
-    int premio;
+    int premio = 0;
 
     cout << "tu dado saco " << dado << endl;
 
@@ -34,7 +36,7 @@ static void atacarDragones(int cantidadeVikingos)//en el main especificamos que 
         cout << "exito de la encruzijada de un 100%, obtienes comida: " << cantidadeVikingos * (200 / 100) << endl;
     }
 
-    cVikingo::cambioComida(premio - cantidadeVikingos);
+   cVikingo::cambioComida(premio);
 }
 
 int main()
@@ -80,27 +82,27 @@ int main()
 
     cVikingo hipo("hipo", "campo", 02, 12, 2003, "1.70", "55", "inutil", 0);
 
-    atacarDragones(6);
+   atacarDragones(1);
 
     cout << cVikingo::getComida();
 
-   /*
-    cAtaque* bola = new cAtaque("Bola de fuego", fuego, 0, 25, 40);
-    cDragon* draco = new cDragon(bola, vacio, "100", "Rojo", "100 kg", 1, 02, 12, 2003);
+    /*
+     cAtaque* bola = new cAtaque("Bola de fuego", fuego, 0, 25, 40);
+     cDragon* draco = new cDragon(bola, vacio, "100", "Rojo", "100 kg", 1, 02, 12, 2003);
 
-    cout << draco->getTiempoAdoptado() << endl;
-    try {
-        draco->mostrarAtaques();
-        draco->olvidarAtk(bola);
-        draco->mostrarAtaques();
-    }
-    catch (const exception* e) {
-        cout << e->what() << endl;
-        delete e;
-    }
+     cout << draco->getTiempoAdoptado() << endl;
+     try {
+         draco->mostrarAtaques();
+         draco->olvidarAtk(bola);
+         draco->mostrarAtaques();
+     }
+     catch (const exception* e) {
+         cout << e->what() << endl;
+         delete e;
+     }
 
-    delete draco;
-    delete bola;
-    */
+     delete draco;
+     delete bola;
+     */
     return 0;
 }

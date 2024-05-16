@@ -30,5 +30,7 @@ public:
 	int getEdad();
 
 	static int getComida() { return comida; }
+	static int getCantVikingos() { return cantVikingos; }
 	static void cambioComida(int suma);
+	
 };
