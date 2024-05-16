@@ -28,19 +28,19 @@ private:
 
 	void generarStats();//Genera por primera vez las estadisticas del dragon. Solo al llamar al constructor
 	void altaNombre();
-
+	void baja() { this->vivo = false; }
 public:
-	bool getDomado() const { return this->domado; }
+	cDragon();
 	cDragon(cAtaque* atk);
 	cDragon(cAtaque* atk, tipo segundo, string tamano, string color, string peso, int cabezas);
 	cDragon(cAtaque* atk, tipo segundo, string tamano, string color, string peso, int cabezas, int d, int m, int a);
 	~cDragon();
+
+	bool getDomado() const { return this->domado; }
 	string getNombre() const { return this->nombre; }
 	string getTamano() const { return this->tamano; }
 	int getTiempoAdoptado();
-
 	float atacar(int i);
-
 	void aprenderAtk(cAtaque* atk);
 	void olvidarAtk(cAtaque* atk);
 	void mostrarStats();

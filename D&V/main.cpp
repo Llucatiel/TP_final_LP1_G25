@@ -4,8 +4,10 @@
 
 using namespace std;
 
-static void atacarDragones(int cantidadeVikingos)//en el main especificamos que no se puede enviar mas de 6
+void atacarDragones(list<cVikingo*> vikingos)//en el main especificamos que no se puede enviar mas de 6
 {
+    int cantidadeVikingos = vikingos.size();
+    cout<< cantidadeVikingos;
     if (cVikingo::getCantVikingos() < cantidadeVikingos || cantidadeVikingos > 6)
         return; // Exception??
     unsigned int dado;
@@ -24,16 +26,27 @@ static void atacarDragones(int cantidadeVikingos)//en el main especificamos que 
         cout << "encruzijada fallida" << endl;
     }
     else if (dado < 6) {
-        premio = cantidadeVikingos * (50 / 100);
+        premio = cantidadeVikingos * 0.5;
         cout << "exito de la encruzijada de un 50%, obtienes comida: " << cantidadeVikingos * (50 / 100) << endl;
     }
     else if (dado < 9) {
-        premio = cantidadeVikingos * (100 / 100);
+        premio = cantidadeVikingos;
         cout << "exito de la encruzijada de un 50%, obtienes comida: " << cantidadeVikingos * (100 / 100) << endl;
     }
     else {
-        premio = cantidadeVikingos * (200 / 100);
+        premio = cantidadeVikingos * 2;
         cout << "exito de la encruzijada de un 100%, obtienes comida: " << cantidadeVikingos * (200 / 100) << endl;
+    }
+
+    if (dado > 2) {
+        list<cVikingo*>::iterator it = vikingos.begin();
+
+        while (it != vikingos.end()) {
+            (*it)->setDragonesTerminados(1);
+            it++;
+        }
+
+        delete (*it);
     }
 
    cVikingo::cambioComida(premio);
@@ -82,7 +95,10 @@ int main()
 
     cVikingo hipo("hipo", "campo", 02, 12, 2003, "1.70", "55", "inutil", 0);
 
-   atacarDragones(1);
+    list<cVikingo> vikingos;
+    vikingos.push_back(hipo);
+
+   atacarDragones(vikingos);
 
     cout << cVikingo::getComida();
 
@@ -104,5 +120,6 @@ int main()
      delete draco;
      delete bola;
      */
+    vikingos.clear();
     return 0;
 }

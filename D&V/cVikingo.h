@@ -2,7 +2,8 @@
 #include <string>
 #include <ctime>
 #include <cstdlib>
-#include<iostream>
+#include <iostream>
+#include <list>
 using namespace std;
 
 class cVikingo
@@ -23,14 +24,18 @@ class cVikingo
 public:
 	cVikingo(string nombre, string apellido, int d, int m, int a, string altura, string peso, string trabajo, int dragones_terminados);
 	//bool trabajar();
-	friend static void atacarDragones(int cantidadeVikingos);
+	friend void atacarDragones(list<cVikingo> vikingos);
 	//bool dragonesMatados();
-	string getNombre() { return nombre; }
-	string getApellido() { return apellido; }
+	string getNombre()const { return nombre; }
+	string getApellido() const { return apellido; }
 	int getEdad();
+	string getTrabajo() { return trabajo; }
+	void setTrabajo(string nuevo) { this->trabajo = nuevo; }
+	void setDragonesTerminados(int suma) { this->dragones_terminados += suma; }
 
 	static int getComida() { return comida; }
 	static int getCantVikingos() { return cantVikingos; }
 	static void cambioComida(int suma);
-	
+
+	~cVikingo();
 };

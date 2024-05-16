@@ -56,11 +56,36 @@ void cDragon::altaNombre()
 
 
 
+cDragon::cDragon()
+{
+    this->vivo = true;
+    this->aliento = (tipo)(-1 + (rand() % 5));
+
+    this->estadisticas = new int[4];
+    altaNombre();
+    generarStats();
+    this->vidaMax = this->estadisticas[3] * 5;
+    this->vidaActual = this->vidaMax;
+
+    this->tamano = to_string(50 + rand() % 250) + " cm";
+    string color[5] = { "Verde", "Rojo", "Azul", "Marron", "Negro" };
+    this->color = color[rand() % 5];
+    this->domado = false;
+    this->peso = to_string(40 + rand() % 460) + " kg";
+    this->cantJinetes = 0;
+    this->cantCabezas = 1 + rand() % 1;
+    if (cantCabezas > 0) {
+        do {
+            this->segundo = (tipo)(-1 + (rand() % 5));
+        } while (segundo == aliento);
+    }
+    this->cantAtaques = 1;
+}
+
 cDragon::cDragon(cAtaque* atk)
 {
     this->vivo = true;
     this->aliento = atk->getTipo();
-    this->segundo = (tipo)(-1 + (rand() % 5));
     this->ataques.push_back(atk);
 
     this->estadisticas = new int[4];
@@ -76,6 +101,11 @@ cDragon::cDragon(cAtaque* atk)
     this->peso = to_string(40 + rand() % 460) + " kg";
     this->cantJinetes = 0;
     this->cantCabezas = 1 + rand() % 1;
+    if (cantCabezas > 0) {
+        do {
+            this->segundo = (tipo)(-1 + (rand() % 5));
+        } while (segundo == aliento);
+    }
     this->cantAtaques = 1;
 }
 
@@ -85,7 +115,6 @@ cDragon::cDragon(cAtaque* atk, tipo segundo, string tamano, string color, string
 {
     this->vivo = true;
     this->aliento = atk->getTipo();
-    this->segundo = segundo;
     ataques.push_back(atk);
 
     this->estadisticas = new int[4];
@@ -100,6 +129,9 @@ cDragon::cDragon(cAtaque* atk, tipo segundo, string tamano, string color, string
     this->peso = peso;
     this->cantJinetes = 0;
     this->cantCabezas = cabezas;
+    if (cantCabezas > 0) {
+        this->segundo = segundo;
+    }
     this->cantAtaques = 1;
 }
 
@@ -167,8 +199,11 @@ float cDragon::atacar(int i)
         it++;
         j++;
     }
+    float dano = (*it)->probTotal(estadisticas[(*it)->getStat()]);
 
-    return (*it)->probTotal(estadisticas[(*it)->getStat()]);
+    delete (*it);
+
+    return dano;
 }
 
 
@@ -194,6 +229,8 @@ void cDragon::aprenderAtk(cAtaque* atk)
 
     this->ataques.push_back(atk);
     this->cantAtaques++;
+
+    delete (*it);
 }
 
 
@@ -213,9 +250,12 @@ void cDragon::olvidarAtk(cAtaque* atk)
             borrador = true;
 
             cout << this->nombre << " ha olvidado como usar " << atk->getNombre() << endl;
+            delete (*it);
             return;
         }
     }
+
+    delete (*it);
 
     if (!borrador)
         throw new exception("El Dragon no conoce el ataque");
@@ -241,7 +281,7 @@ void cDragon::perderVida(float dano)
     this->vidaActual -= dano;
 
     if (this->vidaActual <= 0)
-        this->vivo = false;
+        baja();
 }
 
 
@@ -265,7 +305,7 @@ void cDragon::mostrarAtaques()
         cout << cont << ". " << (*it)->getNombre() << endl;
         it++;
     }
-
+    delete (*it);
 }
 
 

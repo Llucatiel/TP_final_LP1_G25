@@ -21,6 +21,7 @@ private:
 public:
 	cAtaque(string nombre, tipo type, int stat, float dano, float prob);
 	~cAtaque();
+
 	int getStat() { return this->estadisticaUsada; }
 	float probTotal(int stat);
 	string getNombre() { return this->nombre; }

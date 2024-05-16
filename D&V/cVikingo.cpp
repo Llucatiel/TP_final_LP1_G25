@@ -31,3 +31,7 @@ void cVikingo::cambioComida(int suma)
 {
     comida += suma;
 }
+
+cVikingo:: ~cVikingo() {
+    cantVikingos--;
+}
