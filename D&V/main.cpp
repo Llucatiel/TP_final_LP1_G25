@@ -1,17 +1,42 @@
 #include <iostream>
 #include "cDragon.h"
+#include "cVikingo.h"
 
 using namespace std;
-/*
-template<typename C> void nombres(list<C> clase) {
-    list<C>::iterator it = clase.begin();
 
-    while (it != clase.end()) {
-        cout << (*it)->getNombre() << endl;
-        it++;
+static void atacarDragones(int cantidadeVikingos)//en el main especificamos que no se puede enviar mas de 6
+{
+    if (cVikingo::cantVikingos < cantidadeVikingos || cantidadeVikingos > 6)
+        return; // Exception??
+    unsigned int dado;
+
+    cout << "los vikingos que enviaras consumiran: " << cantidadeVikingos << " de comida." << endl;
+
+    dado = cantidadeVikingos + rand() % 12;
+
+    int premio;
+
+    cout << "tu dado saco " << dado << endl;
+
+    if (dado < 3) {
+        cout << "encruzijada fallida" << endl;
+    }
+    else if (dado < 6) {
+        premio = cantidadeVikingos * (50 / 100);
+        cout << "exito de la encruzijada de un 50%, obtienes comida: " << cantidadeVikingos * (50 / 100) << endl;
+    }
+    else if (dado < 9) {
+        premio = cantidadeVikingos * (100 / 100);
+        cout << "exito de la encruzijada de un 50%, obtienes comida: " << cantidadeVikingos * (100 / 100) << endl;
+    }
+    else {
+        premio = cantidadeVikingos * (200 / 100);
+        cout << "exito de la encruzijada de un 100%, obtienes comida: " << cantidadeVikingos * (200 / 100) << endl;
     }
 
-}*/
+    cVikingo::cambioComida(premio - cantidadeVikingos);
+}
+
 int main()
 {
     /*
@@ -53,6 +78,13 @@ int main()
     delete draco;
     */
 
+    cVikingo hipo("hipo", "campo", 02, 12, 2003, "1.70", "55", "inutil", 0);
+
+    atacarDragones(6);
+
+    cout << cVikingo::getComida();
+
+   /*
     cAtaque* bola = new cAtaque("Bola de fuego", fuego, 0, 25, 40);
     cDragon* draco = new cDragon(bola, vacio, "100", "Rojo", "100 kg", 1, 02, 12, 2003);
 
@@ -69,5 +101,6 @@ int main()
 
     delete draco;
     delete bola;
+    */
     return 0;
 }

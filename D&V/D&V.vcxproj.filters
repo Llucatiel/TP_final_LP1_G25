@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="D&amp;V.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="cDragon.cpp">
@@ -24,12 +24,18 @@
     <ClCompile Include="cAtaque.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="cVikingo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cDragon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="cAtaque.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cVikingo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
