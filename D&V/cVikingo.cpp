@@ -2,34 +2,38 @@
 
 int cVikingo::comida = 30;
 int cVikingo::cantVikingos = 0;
-cVikingo::cVikingo(string nombre, string apellido, int d, int m, int a, string altura, string peso, string trabajo, int dragones_terminados)
+
+cVikingo::cVikingo(string nombre, string apellido, int d, int m, int a, string tamano, string peso, string trabajo, int dragones_terminados)
 {
+
+    this->estadisticas = new int[3];
     this->nombre = nombre;
     this->apellido = apellido;
-    this->fechadeNacimiento.tm_mday = d;
-    this->fechadeNacimiento.tm_mon = m - 1;
-    this->fechadeNacimiento.tm_year = a - 1900;
-    this->altura = altura;
+    struct tm date = { 0 };
+    date.tm_year = a - 1900;
+    date.tm_mon = m - 1;
+    date.tm_mday = d;
+
+    this->fecha = mktime(&date);
+
+    this->tamano = tamano;
     this->peso = peso;
     this->trabajo = trabajo;
     this->dragones_terminados = dragones_terminados;
 
+    generarStats();
     cantVikingos++;
 }
 
 
-int cVikingo::getEdad()
-{
-    time_t now;
-    time(&now);
-    time_t nacimiento = mktime(&fechadeNacimiento);
-    int age = ((difftime(now, nacimiento) + 864000L / 2) / 86400L) / 365;
-    return age;
-}
-
 void cVikingo::cambioComida(int suma)
 {
     comida += suma;
+}
+
+void cVikingo::descripcion() const
+{
+    cout << " " << endl;
 }
 
 cVikingo:: ~cVikingo() {

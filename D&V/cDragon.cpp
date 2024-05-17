@@ -1,8 +1,8 @@
 #include "cDragon.h"
 
-//Genera las estadisticas del dragon al crearse el mismo
 void cDragon::generarStats()
 {
+
     int min = 0;
     int dice = 0;
     //Para generar las estadisticas, se tiran 4 dados y se resta el numero más bajo
@@ -20,7 +20,6 @@ void cDragon::generarStats()
         this->estadisticas[i] -= min;
     }
 }
-
 
 //Se le asigna al azar un nombre pre generado segun su tipo principal
 void cDragon::altaNombre()
@@ -161,27 +160,9 @@ cDragon::cDragon(cAtaque* atk, tipo segundo, string tamano, string color, string
     date.tm_mon = m - 1;
     date.tm_mday = d;
 
-    this->fechaAdopcion = mktime(&date);
+    this->fecha = mktime(&date);
     this->domado = true;
 }
-
-
-//Devuelve la cantidad de dias que lleva adoptado el dragon
-int cDragon::getTiempoAdoptado()
-{
-    if (!this->vivo)
-        throw new exception("El dragon ya no puede ser utilizado");
-
-    time_t now;
-    time(&now); //Tiempo actual
-    int edad = (int)difftime(now, this->fechaAdopcion) / 86400;
-    //Calcula la diferencia entre ahora y fecha de adopcion
-    if (edad < 365)
-        return edad;
-    return edad / 365;
-    //La divide por la cantidad de dias en un anio
-}
-
 
 //Busca en la lista de ataques el ataque a utilizar
 float cDragon::atacar(int i)
@@ -252,20 +233,6 @@ void cDragon::olvidarAtk(cAtaque* atk)
         throw new exception("El Dragon no conoce el ataque");
 }
 
-
-//Muestras las estadisticas del dragon
-void cDragon::mostrarStats()//Potencia, Fuerza, Destreza, Constitucion
-{
-    if (!this->vivo)
-        throw new exception("El dragon ya no puede ser utilizado");
-
-    cout << "Potencia: " << this->estadisticas[0] << endl;
-    cout << "Fuerza: " << this->estadisticas[1] << endl;
-    cout << "Destreza: " << this->estadisticas[2] << endl;
-    cout << "Constitucion: " << this->estadisticas[3] << endl;
-}
-
-
 //Al recibir daño, pierde vida el mismo, en caso de llegar a 0 inutiliza las funciones del dragon
 void cDragon::perderVida(float dano)
 {
@@ -275,35 +242,22 @@ void cDragon::perderVida(float dano)
         baja();
 }
 
-
-//Muestras los ataques que el dragon conoce
-void cDragon::mostrarAtaques()
+void cDragon::descripcion()const
 {
-    if (!this->vivo)
-        throw new exception("El dragon ya no puede ser utilizado");
-
-
-    if (this->cantAtaques < 1) {
-        cout << getNombre() << " no conoce ningun ataque. " << endl;
-        return;
-    }
-
-    int cont = 0;
-    list<cAtaque*>::iterator it = this->ataques.begin();
-
-    while (it != this->ataques.end()) {
-        cont++;
-        cout << cont << ". " << (*it)->getNombre() << endl;
-        it++;
-    }
+    cout << " " << endl;
 }
 
 
-
-cDragon::~cDragon()
+void cDragon::mostrarStats()
 {
-    delete[] estadisticas;
-    this->ataques.clear();
+
+    if (!this->vivo)
+        throw new exception("Lamentablemente, ya no se encuentra vivo/a.");
+
+    cout << "Fuerza: " << this->estadisticas[0] << endl;
+    cout << "Destreza: " << this->estadisticas[1] << endl;
+    cout << "Constitucion: " << this->estadisticas[2] << endl;
+    cout << "Potencia: " << this->estadisticas[3] << endl;
 }
 
 

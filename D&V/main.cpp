@@ -27,15 +27,15 @@ void atacarDragones(list<cVikingo*> vikingos)//en el main especificamos que no s
     }
     else if (dado < 6) {
         premio = cantidadeVikingos * 0.5;
-        cout << "exito de la encruzijada de un 50%, obtienes comida: " << cantidadeVikingos * (50 / 100) << endl;
+        cout << "exito de la encruzijada de un 50%, obtienes comida: " << cantidadeVikingos * 0.5 << endl;
     }
     else if (dado < 9) {
         premio = cantidadeVikingos;
-        cout << "exito de la encruzijada de un 50%, obtienes comida: " << cantidadeVikingos * (100 / 100) << endl;
+        cout << "exito de la encruzijada de un 100%, obtienes comida: " << cantidadeVikingos << endl;
     }
     else {
         premio = cantidadeVikingos * 2;
-        cout << "exito de la encruzijada de un 100%, obtienes comida: " << cantidadeVikingos * (200 / 100) << endl;
+        cout << "exito de la encruzijada de un 200%, obtienes comida: " << cantidadeVikingos * 2 << endl;
     }
 
     if (dado > 2) {
@@ -52,6 +52,29 @@ void atacarDragones(list<cVikingo*> vikingos)//en el main especificamos que no s
 
 int main()
 {
+    srand(time(0));
+
+    cAtaque* bola = new cAtaque("Bola de fuego", fuego, 0, 25, 40);
+    cDragon* draco = new cDragon(bola, vacio, "100", "Rojo", "100 kg", 1);
+
+
+    cout << draco->getNombre() << endl;
+    draco->mostrarStats();
+
+    cVikingo* hipo = new cVikingo("hipo", "campo", 02, 12, 2003, "1.70", "55", "inutil", 0);
+
+    list<cVikingo*> vikingos;
+    vikingos.push_back(hipo);
+
+    atacarDragones(vikingos);
+
+    cout << cVikingo::getComida();
+
+    hipo->mostrarStats();
+    vikingos.clear();
+
+    delete hipo;
+    delete draco;
     /*
     cAtaque *bola = new cAtaque("Bola de fuego", fuego, 0, 25, 40);
     cDragon* draco = new cDragon(bola, vacio, "100", "Rojo", "100 kg", 1);
@@ -91,15 +114,6 @@ int main()
     delete draco;
     */
 
-    cVikingo hipo("hipo", "campo", 02, 12, 2003, "1.70", "55", "inutil", 0);
-
-    list<cVikingo> vikingos;
-    vikingos.push_back(hipo);
-
-   atacarDragones(vikingos);
-
-    cout << cVikingo::getComida();
-
     /*
      cAtaque* bola = new cAtaque("Bola de fuego", fuego, 0, 25, 40);
      cDragon* draco = new cDragon(bola, vacio, "100", "Rojo", "100 kg", 1, 02, 12, 2003);
@@ -118,6 +132,5 @@ int main()
      delete draco;
      delete bola;
      */
-    vikingos.clear();
     return 0;
 }
