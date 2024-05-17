@@ -31,7 +31,7 @@ public:
 	void aprenderAtk(cAtaque* atk);
 	void olvidarAtk(cAtaque* atk);
 	void perderVida(float dano);
-	float getVida() const { return this->vidaActual; }
+	float getVidaActual() const { return this->vidaActual; }
 	void curarse() { this->vidaActual = this->vidaMax; }
 	void descripcion()const;
 };

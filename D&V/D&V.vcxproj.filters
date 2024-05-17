@@ -30,6 +30,9 @@
     <ClCompile Include="cDatos.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="cBocon.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cDragon.h">
@@ -42,6 +45,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="cDatos.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cBocon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

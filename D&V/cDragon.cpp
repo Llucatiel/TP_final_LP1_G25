@@ -78,7 +78,6 @@ cDragon::cDragon()
             this->segundo = (tipo)(-1 + (rand() % 5));
         } while (segundo == aliento);
     }
-    this->cantAtaques = 1;
 }
 
 cDragon::cDragon(cAtaque* atk)
@@ -105,7 +104,6 @@ cDragon::cDragon(cAtaque* atk)
             this->segundo = (tipo)(-1 + (rand() % 5));
         } while (segundo == aliento);
     }
-    this->cantAtaques = 1;
 }
 
 
@@ -131,7 +129,6 @@ cDragon::cDragon(cAtaque* atk, tipo segundo, string tamano, string color, string
     if (cantCabezas > 0) {
         this->segundo = segundo;
     }
-    this->cantAtaques = 1;
 }
 
 cDragon::cDragon(cAtaque* atk, tipo segundo, string tamano, string color, string peso, int cabezas, int d, int m, int a)
@@ -153,7 +150,6 @@ cDragon::cDragon(cAtaque* atk, tipo segundo, string tamano, string color, string
     this->peso = peso;
     this->cantJinetes = 0;
     this->cantCabezas = cabezas;
-    this->cantAtaques = 1;
 
     struct tm date = { 0 };
     date.tm_year = a - 1900;
@@ -170,16 +166,17 @@ float cDragon::atacar(int i)
     if (!this->vivo)
         throw new exception("El dragon ya no puede ser utilizado");
 
-    if (this->cantAtaques <= i)
+    if (this->ataques.size() < i)
         throw new exception("No se conocen tantos ataques");
 
     list<cAtaque*>::iterator it = this->ataques.begin();
+    i--;
 
-    int j = 0;
-    while (j < i) {
+    for (int j = 0; j < i; j++) 
         it++;
-        j++;
-    }
+    
+    cout << nombre << " a usado " << (*it)->getNombre() << endl;
+
     return (*it)->probTotal(estadisticas[(*it)->getStat()]);
 }
 
@@ -190,7 +187,7 @@ void cDragon::aprenderAtk(cAtaque* atk)
     if (!this->vivo)
         throw new exception("El dragon ya no puede ser utilizado");
 
-    if (this->cantAtaques >= 4)
+    if (this->ataques.size() >= 4)
         throw new exception("El dragon ya conoce 4 ataques");
 
     if (atk->getTipo() != this->aliento && atk->getTipo() != this->segundo)
@@ -205,7 +202,6 @@ void cDragon::aprenderAtk(cAtaque* atk)
     }
 
     this->ataques.push_back(atk);
-    this->cantAtaques++;
 }
 
 
@@ -221,9 +217,7 @@ void cDragon::olvidarAtk(cAtaque* atk)
     while (it != this->ataques.end()) {
         if ((*it)->getNombre() == atk->getNombre()) {
             this->ataques.erase(it);
-            this->cantAtaques--;
             borrador = true;
-
             cout << this->nombre << " ha olvidado como usar " << atk->getNombre() << endl;
             return;
         }
@@ -237,9 +231,11 @@ void cDragon::olvidarAtk(cAtaque* atk)
 void cDragon::perderVida(float dano)
 {
     this->vidaActual -= dano;
-
+    
     if (this->vidaActual <= 0)
         baja();
+    else if (dano > 0)
+    cout << "Dejandolo a " << nombre << " a " << vidaActual << " puntos de vida";
 }
 
 void cDragon::descripcion()const

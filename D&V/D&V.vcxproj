@@ -128,6 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="cAtaque.cpp" />
+    <ClCompile Include="cBocon.cpp" />
     <ClCompile Include="cDragon.cpp" />
     <ClCompile Include="cVikingo.cpp" />
     <ClCompile Include="cDatos.cpp" />
@@ -135,6 +136,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cAtaque.h" />
+    <ClInclude Include="cBocon.h" />
     <ClInclude Include="cDragon.h" />
     <ClInclude Include="cVikingo.h" />
     <ClInclude Include="cDatos.h" />

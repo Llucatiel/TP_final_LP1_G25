@@ -1,6 +1,18 @@
 #include "cAtaque.h"
 
 
+cAtaque::cAtaque(tipo type)
+{
+	this->type = type;
+	string melee[4] = { "Fuerza bruta", "Carga", "Cabezaso", "Corte horizontal" };
+	nombre = melee[rand() % 4];
+	if(this->type == fisico)
+		estadisticaUsada = 0;
+	this->dano = 12 + rand() % 27;
+	this->probabilidad = 12 + rand() % 27;
+
+}
+
 cAtaque::cAtaque(string nombre, tipo type, int stat, float dano, float prob)
 {
 	this->nombre = nombre;
@@ -28,14 +40,15 @@ float cAtaque::probTotal(int stat)
 		prob = 94;
 
 	int hit = rand() % 100;
-	cout << hit << endl;
 	if (hit == 0) {
+		cout << "HA SACADO UN CRITICO" << endl;
 		return danoTotal(stat) * 2;
 	}
-	else if (hit <= prob)
+	else if (hit <= prob) {
+		cout << "Ha acertado al objetivo" << endl;
 		return danoTotal(stat);
-
-	cout << "Fallo" << endl;
+	}
+	cout << "El ataque fallo lastimosamente..." << endl;
 
 	return 0;
 }

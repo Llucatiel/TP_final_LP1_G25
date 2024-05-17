@@ -38,7 +38,7 @@ void cDatos::mostrarAtaques()
         throw new exception("Lamentablemente, ya no se encuentra vivo/a.");
 
 
-    if (this->cantAtaques < 1) {
+    if (this->ataques.size() < 1) {
         cout << getNombre() << " no conoce ningun ataque. " << endl;
         return;
     }

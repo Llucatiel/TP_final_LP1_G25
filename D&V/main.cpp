@@ -1,54 +1,8 @@
 #include <iostream>
-#include "cDragon.h"
-#include "cVikingo.h"
+#include "cBocon.h"
 
 using namespace std;
 
-void atacarDragones(list<cVikingo*> vikingos)//en el main especificamos que no se puede enviar mas de 6
-{
-    int cantidadeVikingos = vikingos.size();
-    cout<< cantidadeVikingos;
-    if (cVikingo::getCantVikingos() < cantidadeVikingos || cantidadeVikingos > 6)
-        return; // Exception??
-    unsigned int dado;
-
-    cVikingo::cambioComida(-cantidadeVikingos);
-
-    cout << "los vikingos que enviaras consumiran: " << cantidadeVikingos << " de comida." << endl;
-
-    dado = cantidadeVikingos + rand() % (12 - cantidadeVikingos);
-
-    int premio = 0;
-
-    cout << "tu dado saco " << dado << endl;
-
-    if (dado < 3) {
-        cout << "encruzijada fallida" << endl;
-    }
-    else if (dado < 6) {
-        premio = cantidadeVikingos * 0.5;
-        cout << "exito de la encruzijada de un 50%, obtienes comida: " << cantidadeVikingos * 0.5 << endl;
-    }
-    else if (dado < 9) {
-        premio = cantidadeVikingos;
-        cout << "exito de la encruzijada de un 100%, obtienes comida: " << cantidadeVikingos << endl;
-    }
-    else {
-        premio = cantidadeVikingos * 2;
-        cout << "exito de la encruzijada de un 200%, obtienes comida: " << cantidadeVikingos * 2 << endl;
-    }
-
-    if (dado > 2) {
-        list<cVikingo*>::iterator it = vikingos.begin();
-
-        while (it != vikingos.end()) {
-            (*it)->setDragonesTerminados(1);
-            it++;
-        }
-    }
-
-   cVikingo::cambioComida(premio);
-}
 
 int main()
 {
@@ -56,25 +10,32 @@ int main()
 
     cAtaque* bola = new cAtaque("Bola de fuego", fuego, 0, 25, 40);
     cDragon* draco = new cDragon(bola, vacio, "100", "Rojo", "100 kg", 1);
-
-
-    cout << draco->getNombre() << endl;
-    draco->mostrarStats();
-
     cVikingo* hipo = new cVikingo("hipo", "campo", 02, 12, 2003, "1.70", "55", "inutil", 0);
+    cBocon* bocon = new cBocon();
 
-    list<cVikingo*> vikingos;
-    vikingos.push_back(hipo);
+    bocon->agregarDragon(draco);
+    bocon->agregarVikingo(hipo);
 
-    atacarDragones(vikingos);
+    bocon->enlistarVikingo();
+    /*
+    int cant;
+    cout << "Cantidad de vikingos a enviar: "; cin >> cant;
+    int* elegidos = new int[cant];
+    cout << "Elija los vikingos a enviar: " << endl;
+    for (int i = 0; i < cant; i++)
+        cin >> elegidos[i];
+        bocon->elegir(elegidos);
+        delete []elegidos;
+        */
 
-    cout << cVikingo::getComida();
+    bocon->pelea(draco);
 
-    hipo->mostrarStats();
-    vikingos.clear();
-
+    
+    delete bocon;
     delete hipo;
     delete draco;
+    delete bola;
+
     /*
     cAtaque *bola = new cAtaque("Bola de fuego", fuego, 0, 25, 40);
     cDragon* draco = new cDragon(bola, vacio, "100", "Rojo", "100 kg", 1);
