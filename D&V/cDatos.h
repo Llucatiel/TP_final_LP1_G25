@@ -31,7 +31,7 @@ public:
 	virtual void mostrarAtaques();
 	int getAnios();
 	virtual void descripcion()const = 0;
-	virtual ~fisico();
+	virtual ~cDatos();
 
 };
 
