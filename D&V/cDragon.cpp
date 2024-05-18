@@ -73,8 +73,8 @@ cDragon::cDragon()
     this->domado = false;
     this->peso = to_string(40 + rand() % 460) + " kg";
     this->cantJinetes = 0;
-    this->cantCabezas = 1 + (rand() % 10)/10;
-    if (cantCabezas > 0) {
+    this->cantCabezas = 1 + (1 + rand() % 12)/10;
+    if (cantCabezas > 1) {
         puntero = new cAtaque[2];
         do {
             this->segundo = (tipo)(rand() % 4);
