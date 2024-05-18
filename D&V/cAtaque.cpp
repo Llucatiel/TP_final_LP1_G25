@@ -1,16 +1,98 @@
 #include "cAtaque.h"
 
 
-cAtaque::cAtaque(tipo type)
+cAtaque::cAtaque()
 {
-	this->type = type;
-	string melee[4] = { "Fuerza bruta", "Carga", "Cabezaso", "Corte horizontal" };
-	nombre = melee[rand() % 4];
-	if(this->type == fisico)
-		estadisticaUsada = 0;
-	this->dano = 12 + rand() % 27;
-	this->probabilidad = 12 + rand() % 27;
+	this->type = (tipo)(rand() % 4);
+	string fisico[4] = { "Fuerza bruta", "Carga", "Cabezaso", "Corte horizontal" };
+	string fuego[4] = { "Bola de fuego", "Llamarada", "Lluvia de meteoros", "Cabezaso volcanico" };
+	string aire[4] = { "Tornado", "Corte aereo", "Aliento de tormenta", "Nube de algodon" };
+	string veneno[4] = { "Escupitajo sombrio", "Rociada de acido", "Derretir escamas", "Vision alterada" };
 
+
+	this->nombre = "404";
+	this->estadisticaUsada = 0;
+	this->dano = 0;
+	this->probabilidad = 0;
+
+	int elegir = rand() % 4;
+	switch (this->type)
+	{
+	case 0:
+		this->nombre = fuego[elegir];
+		this->estadisticaUsada = 3;
+		this->dano = 25 + rand() % 26;
+		this->probabilidad = 12 + rand() % 26;
+		break;
+
+	case 1:
+		this->nombre = aire[elegir];
+		this->estadisticaUsada = 1;
+		this->dano = 12 + rand() % 26;
+		this->probabilidad = 25 + rand() % 26;
+		break;
+
+	case 2:
+		this->nombre = veneno[elegir];
+		this->estadisticaUsada = 3;
+		this->dano = 19 + rand() % 26;
+		this->probabilidad = 20 + rand() % 26;
+		break;
+
+	case 3:
+		this->nombre = fisico[elegir];
+		this->estadisticaUsada = 0;
+		this->dano = 27 + rand() % 26;
+		this->probabilidad = 10 + rand() % 26;
+		break;
+
+	default:
+		break;
+	}
+}
+
+cAtaque::cAtaque(tipo type)
+{//TIPO { vacio = -1, fuego, aire, veneno, fisico}
+	this->type = type;
+	string fisico[4] = { "Fuerza bruta", "Carga", "Cabezaso", "Corte horizontal" };
+	string fuego[4] = { "Bola de fuego", "Llamarada", "Lluvia de meteoros", "Cabezaso volcanico" };
+	string aire[4] = { "Tornado", "Corte aereo", "Aliento de tormenta", "Nube de algodon" };
+	string veneno[4] = { "Escupitajo sombrio", "Rociada de acido", "Derretir escamas", "Vision alterada" };
+
+	int elegir = rand() % 4;
+	switch (this->type)
+	{
+	case 0:
+		this->nombre = fuego[elegir];
+		this->estadisticaUsada = 3;
+		this->dano = 25 + rand() % 26;
+		this->probabilidad = 12 + rand() % 26;
+		break;
+
+	case 1:
+		this->nombre = aire[elegir];
+		this->estadisticaUsada = 1;
+		this->dano = 12 + rand() % 26;
+		this->probabilidad = 25 + rand() % 26;
+		break;
+
+	case 2:
+		this->nombre = veneno[elegir];
+		this->estadisticaUsada = 3;
+		this->dano = 19 + rand() % 26;
+		this->probabilidad = 20 + rand() % 26;
+		break;
+
+	case 3:
+		this->nombre = fisico[elegir];
+		this->estadisticaUsada = 0;
+		this->dano = 27 + rand() % 26;
+		this->probabilidad = 10 + rand() % 26;
+		break;
+
+	default:
+		break;
+	}
 }
 
 cAtaque::cAtaque(string nombre, tipo type, int stat, float dano, float prob)
@@ -20,12 +102,6 @@ cAtaque::cAtaque(string nombre, tipo type, int stat, float dano, float prob)
 	this->estadisticaUsada = stat;
 	this->dano = dano;
 	this->probabilidad = prob;
-}
-
-
-
-cAtaque::~cAtaque()
-{
 }
 
 
@@ -65,3 +141,6 @@ float cAtaque::danoTotal(int stat)
 }
 
 
+cAtaque::~cAtaque()
+{
+}

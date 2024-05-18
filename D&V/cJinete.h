@@ -1,14 +1,6 @@
-class cJinete
-{
-};
 #pragma once
 #include "cVikingo.h"
 #include "cDragon.h"
-
-enum eResultado {
-	noAsistio = 0, reprobo, aprobo, primero, ultimo
-};
-typedef eResultado resultado;
 
 enum eRelacion {
 	pobre = 0, mala, mediana, buena, superbuena

@@ -9,19 +9,20 @@ using namespace std;
 
 class cVikingo : public cDatos
 {
-	string apellido;
+	
 	static int comida;
 	static int cantVikingos;
-protected:
 	string trabajo;
+
+protected:
 	int dragones_terminados;
-	
+	string apellido;
 
 public:
 	cVikingo(string nombre, string apellido, int d, int m, int a, string altura, string peso, string trabajo, int dragones_terminados);
 	//bool trabajar();
 	friend void atacarDragones(list<cVikingo> vikingos);
-	//bool dragonesMatados();
+	bool dragonesMatados() { return dragones_terminados>0?true:false;}
 	string getApellido() const { return apellido; }
 	string getTrabajo() { return trabajo; }
 	void setTrabajo(string nuevo) { this->trabajo = nuevo; }

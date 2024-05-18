@@ -19,6 +19,7 @@ private:
 
 
 public:
+	cAtaque();
 	cAtaque(tipo type);
 	cAtaque(string nombre, tipo type, int stat, float dano, float prob);
 	~cAtaque();

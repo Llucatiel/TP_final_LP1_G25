@@ -18,6 +18,7 @@ void cDragon::generarStats()
                 min = dice;
         }
         this->estadisticas[i] -= min;
+        this->estadisticas[i] *= 1,5;
     }
 }
 
@@ -58,7 +59,7 @@ void cDragon::altaNombre()
 cDragon::cDragon()
 {
     this->vivo = true;
-    this->aliento = (tipo)(-1 + (rand() % 5));
+    this->aliento = (tipo)(rand() % 4);
 
     this->estadisticas = new int[4];
     altaNombre();
@@ -72,12 +73,23 @@ cDragon::cDragon()
     this->domado = false;
     this->peso = to_string(40 + rand() % 460) + " kg";
     this->cantJinetes = 0;
-    this->cantCabezas = 1 + rand() % 1;
+    this->cantCabezas = 1 + (rand() % 10)/10;
     if (cantCabezas > 0) {
+        puntero = new cAtaque[2];
         do {
-            this->segundo = (tipo)(-1 + (rand() % 5));
+            this->segundo = (tipo)(rand() % 4);
         } while (segundo == aliento);
+        puntero[1] =  cAtaque(this->segundo);
+
+        ataques.push_back(&puntero[1]);
     }
+    else {
+        puntero = new cAtaque[1];
+        this->segundo = vacio;
+    }
+    puntero[0] = cAtaque(this->aliento);
+    ataques.push_front(&puntero[0]);
+
 }
 
 cDragon::cDragon(cAtaque* atk)
@@ -232,15 +244,34 @@ void cDragon::perderVida(float dano)
 {
     this->vidaActual -= dano;
     
-    if (this->vidaActual <= 0)
+    if (this->vidaActual <= 0) {
+        cout << getNombre() << " a perecido en batalla" << endl;
         baja();
+    }
     else if (dano > 0)
-    cout << "Dejandolo a " << nombre << " a " << vidaActual << " puntos de vida";
+        cout << "Dejandolo a " << nombre << " a " << vidaActual << " puntos de vida" << endl << endl;
+    else
+        cout << endl;
 }
 
 void cDragon::descripcion()const
 {
     cout << " " << endl;
+}
+
+void cDragon::mostrarDanos()
+{
+
+    if (!this->vivo)
+        throw new exception("El dragon ya no puede ser utilizado");
+
+    list<cAtaque*>::iterator it = this->ataques.begin();
+
+    while (it != this->ataques.end()) {
+        cout << (*it)->getNombre() << ":\n";
+        cout << "Dano: " << (*it)->getDano() << endl << "Probabilidad: " << (*it)->getProb() << endl;
+        it++;
+    }
 }
 
 

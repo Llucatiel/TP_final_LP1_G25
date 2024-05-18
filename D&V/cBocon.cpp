@@ -51,11 +51,30 @@ void cBocon:: atacarDragones(list<cVikingo*> vikingos)//en el main especificamos
     cVikingo::cambioComida(premio);
 }
 
-
-void cBocon::elegir(int* elegidos, int n)
+void cBocon::elegirDragon(int elegido)
 {
-    
 
+    list<cDragon*>::iterator it = dragones.begin();
+    bool encontrado = false;
+    int j = 0;
+    while (it != dragones.end()) {
+        if (j == elegido) {
+            encontrado = true;
+            break;
+        }
+            
+        j++;
+        it++;
+    }
+    if (!encontrado)
+        return;
+
+    pelea((*it));
+}
+
+
+void cBocon::elegirVikingo(int* elegidos, int n)
+{
     list<cVikingo*>::iterator it = vikingos.begin();
     list<cVikingo*> v;
     bool c = false;
@@ -108,23 +127,35 @@ void cBocon::pelea(cDragon* dragon)
     cDragon* enemigo = new cDragon(atk);
     bool ambos = true;
     int lim = enemigo->getCantAtk();
+    system("cls");
+
+    cout << dragon->getNombre() << " se enfrenta a " << enemigo->getNombre() << endl << "PREPARENCE PARA LA BATALLA!" << endl;
 
     while (ambos){
-        cout << "Elija el ataque a usar: " << endl;
-        dragon->mostrarAtaques();
-
-        bool atacado;
+        bool atacado = false;
         do {
+            cout << "Elija el ataque a usar: " << endl;
+            dragon->mostrarAtaques();
+            cout << "5. mostrar danos" << endl;
+            int i;
+            cin >> i;
             try {
-                int i;
-                cin >> i;
+                if (i == 5) {
+                    dragon->mostrarDanos();
+                    system("pause");
+                    system("cls");
+                    continue;
+                }
                 enemigo->perderVida(dragon->atacar(i));
                 atacado = true;
+                
            }
             catch (const exception* e) {
                 cout << e->what() << endl;
                 delete e;
                 atacado = false;
+                system("puase");
+                system("cls");
             }
         } while (!atacado);
 
@@ -140,15 +171,18 @@ void cBocon::pelea(cDragon* dragon)
         }
         ambos = dragon->getVivo();
 
-        char a;
-        cin >> a;
+        system("pause");
         system("CLS");
     }
 
     if (!dragon->getVivo())
-        cout << "Lamentamos fuertemente la perdida de " << dragon->getNombre() << endl << "peleo bien." << endl;
-    else
-        cout << "INCREIBLE LA BATALLA DADA POR " << dragon->getNombre() << endl << "Hoy vuelve victorioso a casa." << endl;
+        cout << "\nLamentamos fuertemente la perdida de " << dragon->getNombre() << endl << "peleo bien." << endl;
+    else {
+        string mayus = dragon->getNombre();
+        transform(mayus.begin(), mayus.end(), mayus.begin(), ::toupper); //Recorre el string completo, haciendo mayuscula todos sus caracteres
+        cout << "\nINCREIBLE BATALLA DADA POR " << mayus << "!!!" << endl << "Hoy vuelve victorioso a casa." << endl;
+    }
+       
     
     delete enemigo;
     delete atk;

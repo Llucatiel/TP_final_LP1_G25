@@ -3,6 +3,7 @@
 int cVikingo::comida = 30;
 int cVikingo::cantVikingos = 0;
 
+
 cVikingo::cVikingo(string nombre, string apellido, int d, int m, int a, string tamano, string peso, string trabajo, int dragones_terminados)
 {
 

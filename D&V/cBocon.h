@@ -3,6 +3,9 @@
 #include "cJinete.h"
 #include <cstdlib>
 #include <iostream>
+//Estos dos son para llevar un string de minusculas a mayusculas
+#include <algorithm>
+#include <cctype>
 
 class cBocon
 {
@@ -18,7 +21,8 @@ public:
 	void agregarJinete(cJinete* jin) { jinetes.push_back(jin); }
 
 	void atacarDragones(list<cVikingo*> vikingos);
-	void elegir(int* elegidos, int n);
+	void elegirVikingo(int* elegidos, int n);
+	void elegirDragon(int elegido);
 
 	void enlistarVikingo();
 	void enlistarDragon();

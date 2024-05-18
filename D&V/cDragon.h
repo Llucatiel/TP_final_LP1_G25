@@ -34,4 +34,5 @@ public:
 	float getVidaActual() const { return this->vidaActual; }
 	void curarse() { this->vidaActual = this->vidaMax; }
 	void descripcion()const;
+	void mostrarDanos();
 };

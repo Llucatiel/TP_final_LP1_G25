@@ -53,12 +53,6 @@ void cDatos::mostrarAtaques()
     }
 }
 
-cDatos::~cDatos()
-{
-    this->ataques.clear();
-    delete[]estadisticas;
-}
-
 int cDatos::getAnios()
 {
     if (!this->vivo)
@@ -72,4 +66,12 @@ int cDatos::getAnios()
         return edad;
     return edad / 365;
     //La divide por la cantidad de dias en un anio
+}
+
+
+cDatos::~cDatos()
+{   
+    this->ataques.clear();
+    delete[]estadisticas;
+    delete []puntero;
 }

@@ -8,33 +8,32 @@ int main()
 {
     srand(time(0));
 
-    cAtaque* bola = new cAtaque("Bola de fuego", fuego, 0, 25, 40);
-    cDragon* draco = new cDragon(bola, vacio, "100", "Rojo", "100 kg", 1);
-    cVikingo* hipo = new cVikingo("hipo", "campo", 02, 12, 2003, "1.70", "55", "inutil", 0);
+    cDragon* draco = new cDragon();
     cBocon* bocon = new cBocon();
 
     bocon->agregarDragon(draco);
-    bocon->agregarVikingo(hipo);
 
-    bocon->enlistarVikingo();
+    bocon->enlistarDragon();
+
     /*
     int cant;
     cout << "Cantidad de vikingos a enviar: "; cin >> cant;
-    int* elegidos = new int[cant];
+    int* vikingosElegidos = new int[cant];
     cout << "Elija los vikingos a enviar: " << endl;
     for (int i = 0; i < cant; i++)
-        cin >> elegidos[i];
-        bocon->elegir(elegidos);
+        cin >> vikingosElegidos[i];
+        bocon->elegirVikingo(vikingosElegidos, cant);
         delete []elegidos;
         */
 
-    bocon->pelea(draco);
+    int dragonElegido;
+    cout << "Elija el dragon a enviar: " << endl;
+        cin >> dragonElegido;
+    bocon->elegirDragon(dragonElegido);
 
-    
     delete bocon;
-    delete hipo;
     delete draco;
-    delete bola;
+
 
     /*
     cAtaque *bola = new cAtaque("Bola de fuego", fuego, 0, 25, 40);

@@ -19,12 +19,14 @@ protected:
 	int* estadisticas;
 	bool vivo = true;
 	list<cAtaque*> ataques;
+	cAtaque* puntero;
 
 	virtual void generarStats();
 	void baja() { this->vivo = false; }
+
 public:
 
-	int getCantAtk() { return this->ataques.size(); }
+	int getCantAtk() { return (int)this->ataques.size(); }
 	string getNombre() const { return this->nombre; }
 	string getTamano() const { return this->tamano; }
 	virtual void mostrarStats();
@@ -33,6 +35,5 @@ public:
 	virtual void descripcion()const = 0;
 	bool getVivo()const { return this->vivo; }
 	virtual ~cDatos();
-
 };
 
