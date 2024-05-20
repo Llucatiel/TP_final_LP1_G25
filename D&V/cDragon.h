@@ -5,16 +5,16 @@
 class cDragon : public cDatos
 {
 private:
-
+	int* estadisticas; //Potencia, Fuerza, Destreza, Constitucion
+	unsigned short int cantJinetes;
 	float vidaMax;
 	float vidaActual;
+	int cantCabezas;
 	bool domado;
-	unsigned short int cantJinetes;
+	bool vivo;
 	tipo aliento;
 	tipo segundo;
-	int* estadisticas; //Potencia, Fuerza, Destreza, Constitucion
-	int cantCabezas;
-	bool vivo;
+
 
 	void generarStats();
 	void altaNombre();
@@ -25,13 +25,14 @@ public:
 	cDragon(cAtaque* atk, tipo segundo, string tamano, string color, string peso, int cabezas);
 	cDragon(cAtaque* atk, tipo segundo, string tamano, string color, string peso, int cabezas, int d, int m, int a);
 
-	void mostrarStats();
-	bool getDomado() const { return this->domado; }
+	float getVidaActual() const { return this->vidaActual; }
 	float atacar(int i);
+	bool getDomado() const { return this->domado; }
+
+	void mostrarStats();
 	void aprenderAtk(cAtaque* atk);
 	void olvidarAtk(cAtaque* atk);
 	void perderVida(float dano);
-	float getVidaActual() const { return this->vidaActual; }
 	void curarse() { this->vidaActual = this->vidaMax; }
 	void descripcion()const;
 	void mostrarDanos();

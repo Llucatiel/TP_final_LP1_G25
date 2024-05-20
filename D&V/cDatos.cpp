@@ -1,5 +1,6 @@
 #include "cDatos.h"
 
+//Generacion al azar de las estadisticas de cada clase
 void cDatos::generarStats()
 {
 
@@ -21,6 +22,23 @@ void cDatos::generarStats()
     }
 }
 
+//Crea una espera entre accion y accion de "i" segundos. ESTATICO
+void cDatos::espera(float i) {
+    time_t now;
+    time(&now);
+    time_t then;
+    float seconds;
+    do {
+        time(&then);
+        seconds = difftime(then, now);
+    } while (seconds < i);
+    /*
+    Toma el tiempo inicial, y toma constantemente el tiempo actual hasta
+    que la diferencia sea de i segundos, allí detendrá el loop y volvera al programa
+    */
+}
+
+//Imprime por pantalla las estadisticas
 void cDatos::mostrarStats()
 {
     if (!this->vivo)
@@ -31,6 +49,7 @@ void cDatos::mostrarStats()
     cout << "Constitucion: " << this->estadisticas[2] << endl;
 }
 
+//Imprime por pantalla los ataques conocidos
 void cDatos::mostrarAtaques()
 {
 
@@ -53,6 +72,7 @@ void cDatos::mostrarAtaques()
     }
 }
 
+//Calcula la fecha creada en años, o dias en caso a ser menor de 1 año
 int cDatos::getAnios()
 {
     if (!this->vivo)
@@ -61,17 +81,18 @@ int cDatos::getAnios()
     time_t now;
     time(&now); //Tiempo actual
     int edad = (int)difftime(now, this->fecha) / 86400;
-    //Calcula la diferencia entre ahora y fecha de adopcion
+    //Calcula la diferencia entre ahora y fecha 
     if (edad < 365)
         return edad;
     return edad / 365;
     //La divide por la cantidad de dias en un anio
 }
 
-
+//Libera memoria
 cDatos::~cDatos()
 {   
     this->ataques.clear();
     delete[]estadisticas;
     delete []puntero;
 }
+

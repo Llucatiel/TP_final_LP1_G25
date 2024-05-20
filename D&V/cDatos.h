@@ -5,7 +5,6 @@
 #include <list>
 #include "cAtaque.h"
 
-
 using namespace std;
 
 class cDatos
@@ -16,24 +15,27 @@ protected:
 	string peso;
 	string tamano;
 	time_t fecha;
-	int* estadisticas;
-	bool vivo = true;
 	list<cAtaque*> ataques;
 	cAtaque* puntero;
+	int* estadisticas;
+	bool vivo = true;
+
 
 	virtual void generarStats();
 	void baja() { this->vivo = false; }
 
 public:
+	static void espera(float i);
 
-	int getCantAtk() { return (int)this->ataques.size(); }
-	string getNombre() const { return this->nombre; }
-	string getTamano() const { return this->tamano; }
 	virtual void mostrarStats();
 	virtual void mostrarAtaques();
-	int getAnios();
 	virtual void descripcion()const = 0;
-	bool getVivo()const { return this->vivo; }
 	virtual ~cDatos();
+
+	int getCantAtk() { return (int)this->ataques.size(); }
+	int getAnios();
+	bool getVivo()const { return this->vivo; }
+	string getNombre() const { return this->nombre; }
+	string getTamano() const { return this->tamano; }
 };
 

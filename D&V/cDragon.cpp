@@ -1,5 +1,6 @@
 #include "cDragon.h"
 
+//Genera estadisticas al azar para un dragon
 void cDragon::generarStats()
 {
 
@@ -25,7 +26,6 @@ void cDragon::generarStats()
 //Se le asigna al azar un nombre pre generado segun su tipo principal
 void cDragon::altaNombre()
 {
-    //TIPO { vacio = -1, fuego, aire, veneno, fisico}
     int elegir = rand() % 4;
     string fuego[4] = { "Fogon", "Chispas", "Fogata", "Llamaleon" };
     string aire[4] = { "Nomada", "Tornado", "Cizalla", "Piloto" };
@@ -56,6 +56,7 @@ void cDragon::altaNombre()
 
 
 
+//Dragon completamente al azar
 cDragon::cDragon()
 {
     this->vivo = true;
@@ -64,7 +65,7 @@ cDragon::cDragon()
     this->estadisticas = new int[4];
     altaNombre();
     generarStats();
-    this->vidaMax = this->estadisticas[3] * 5;
+    this->vidaMax = this->estadisticas[2] * 10;
     this->vidaActual = this->vidaMax;
 
     this->tamano = to_string(50 + rand() % 250) + " cm";
@@ -92,6 +93,7 @@ cDragon::cDragon()
 
 }
 
+//Dragon creado a partir de 1 ataque
 cDragon::cDragon(cAtaque* atk)
 {
     this->vivo = true;
@@ -101,7 +103,7 @@ cDragon::cDragon(cAtaque* atk)
     this->estadisticas = new int[4];
     altaNombre();
     generarStats();
-    this->vidaMax = this->estadisticas[3] * 5;
+    this->vidaMax = this->estadisticas[2] * 10;
     this->vidaActual = this->vidaMax;
 
     this->tamano = to_string(50 + rand() % 250) + " cm";
@@ -110,16 +112,18 @@ cDragon::cDragon(cAtaque* atk)
     this->domado = false;
     this->peso = to_string(40 + rand() % 460) + " kg";
     this->cantJinetes = 0;
-    this->cantCabezas = 1 + rand() % 1;
-    if (cantCabezas > 0) {
+    this->cantCabezas = 1 + (1 + rand() % 12) / 10;
+    if (cantCabezas > 1) {
         do {
-            this->segundo = (tipo)(-1 + (rand() % 5));
+            this->segundo = (tipo)(rand() % 4);
         } while (segundo == aliento);
+        puntero = new cAtaque[1];
+        puntero[0] = cAtaque(this->segundo);
+        ataques.push_front(&puntero[0]);
     }
 }
 
-
-
+//Dragon creado por sus atributos
 cDragon::cDragon(cAtaque* atk, tipo segundo, string tamano, string color, string peso, int cabezas)
 {
     this->vivo = true;
@@ -129,7 +133,7 @@ cDragon::cDragon(cAtaque* atk, tipo segundo, string tamano, string color, string
     this->estadisticas = new int[4];
     altaNombre();
     generarStats();
-    this->vidaMax = this->estadisticas[3] * 5;
+    this->vidaMax = this->estadisticas[2] * 10;
     this->vidaActual = this->vidaMax;
 
     this->tamano = tamano;
@@ -138,11 +142,15 @@ cDragon::cDragon(cAtaque* atk, tipo segundo, string tamano, string color, string
     this->peso = peso;
     this->cantJinetes = 0;
     this->cantCabezas = cabezas;
-    if (cantCabezas > 0) {
+    if (cantCabezas > 1) {
         this->segundo = segundo;
+        puntero = new cAtaque[1];
+        puntero[0] = cAtaque(this->segundo);
+        ataques.push_front(&puntero[0]);
     }
 }
 
+//Dragon domado creado por sus atributos
 cDragon::cDragon(cAtaque* atk, tipo segundo, string tamano, string color, string peso, int cabezas, int d, int m, int a)
 {
     this->vivo = true;
@@ -153,15 +161,21 @@ cDragon::cDragon(cAtaque* atk, tipo segundo, string tamano, string color, string
     this->estadisticas = new int[4];
     altaNombre();
     generarStats();
-    this->vidaMax = this->estadisticas[3] * 5;
+    this->vidaMax = this->estadisticas[2] * 10;
     this->vidaActual = this->vidaMax;
 
     this->tamano = tamano;
     this->color = color;
-    this->domado = false;
+    this->domado = true;
     this->peso = peso;
-    this->cantJinetes = 0;
+    this->cantJinetes = 1;
     this->cantCabezas = cabezas;
+    if (cantCabezas > 1) {
+        this->segundo = segundo;
+        puntero = new cAtaque[1];
+        puntero[0] = cAtaque(this->segundo);
+        ataques.push_front(&puntero[0]);
+    }
 
     struct tm date = { 0 };
     date.tm_year = a - 1900;
@@ -171,6 +185,8 @@ cDragon::cDragon(cAtaque* atk, tipo segundo, string tamano, string color, string
     this->fecha = mktime(&date);
     this->domado = true;
 }
+
+
 
 //Busca en la lista de ataques el ataque a utilizar
 float cDragon::atacar(int i)
@@ -192,6 +208,18 @@ float cDragon::atacar(int i)
     return (*it)->probTotal(estadisticas[(*it)->getStat()]);
 }
 
+//Imprime por pantalla las estadisticas del dragon
+void cDragon::mostrarStats()
+{
+
+    if (!this->vivo)
+        throw new exception("Lamentablemente, ya no se encuentra vivo/a.");
+
+    cout << "Fuerza: " << this->estadisticas[0] << endl;
+    cout << "Destreza: " << this->estadisticas[1] << endl;
+    cout << "Constitucion: " << this->estadisticas[2] << endl;
+    cout << "Potencia: " << this->estadisticas[3] << endl;
+}
 
 //Aprende un nuevo ataque en caso de no poseerlo
 void cDragon::aprenderAtk(cAtaque* atk)
@@ -211,11 +239,11 @@ void cDragon::aprenderAtk(cAtaque* atk)
         if ((*it)->getNombre() == atk->getNombre()) {
             throw new exception("El Dragon ya conoce el ataque");
         }
+        it++;
     }
 
     this->ataques.push_back(atk);
 }
-
 
 //Olvida un ataque ya aprendido
 void cDragon::olvidarAtk(cAtaque* atk)
@@ -233,6 +261,7 @@ void cDragon::olvidarAtk(cAtaque* atk)
             cout << this->nombre << " ha olvidado como usar " << atk->getNombre() << endl;
             return;
         }
+        it++;
     }
 
     if (!borrador)
@@ -254,11 +283,13 @@ void cDragon::perderVida(float dano)
         cout << endl;
 }
 
+//Imprime por pantalla la descripcion del dragon
 void cDragon::descripcion()const
 {
     cout << " " << endl;
 }
 
+//Muestra el nombre, probabilidad de golpe y daño de todos sus ataques
 void cDragon::mostrarDanos()
 {
 
@@ -272,19 +303,6 @@ void cDragon::mostrarDanos()
         cout << "Dano: " << (*it)->getDano() << endl << "Probabilidad: " << (*it)->getProb() << endl;
         it++;
     }
-}
-
-
-void cDragon::mostrarStats()
-{
-
-    if (!this->vivo)
-        throw new exception("Lamentablemente, ya no se encuentra vivo/a.");
-
-    cout << "Fuerza: " << this->estadisticas[0] << endl;
-    cout << "Destreza: " << this->estadisticas[1] << endl;
-    cout << "Constitucion: " << this->estadisticas[2] << endl;
-    cout << "Potencia: " << this->estadisticas[3] << endl;
 }
 
 

@@ -14,23 +14,22 @@ class cBocon
 	list<cJinete*> jinetes;
 
 public:
-	cBocon();
-
-	void agregarDragon(cDragon* dragon) { dragones.push_back(dragon); }
-	void agregarVikingo(cVikingo* vik) { vikingos.push_back(vik); }
-	void agregarJinete(cJinete* jin) { jinetes.push_back(jin); }
-
-	void atacarDragones(list<cVikingo*> vikingos);
-	void elegirVikingo(int* elegidos, int n);
-	void elegirDragon(int elegido);
-
-	void enlistarVikingo();
-	void enlistarDragon();
-	void pelea(cDragon* dragon);
-
+	cBocon() {};
 	~cBocon() {
 		vikingos.clear();
 		dragones.clear();
 	}
+
+	void agregarDragon(cDragon* dragon) { dragones.push_back(dragon); }
+	void agregarVikingo(cVikingo* vik) { vikingos.push_back(vik); }
+	void agregarJinete(cJinete* jin) { jinetes.push_back(jin); }
+	void enlistarVikingo();
+	void enlistarDragon();
+
+	void elegirVikingo(int* elegidos, int n);
+	void elegirDragon(int elegido);
+
+	void atacarDragones(list<cVikingo*> vikingos);
+	void pelea(cDragon* dragon);
 };
 

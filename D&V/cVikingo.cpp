@@ -1,9 +1,10 @@
 #include "cVikingo.h"
 
+//Inicializa sus atributos estaticos
 int cVikingo::comida = 30;
 int cVikingo::cantVikingos = 0;
 
-
+//Creacion por parametro de un vikingo
 cVikingo::cVikingo(string nombre, string apellido, int d, int m, int a, string tamano, string peso, string trabajo, int dragones_terminados)
 {
 
@@ -26,17 +27,13 @@ cVikingo::cVikingo(string nombre, string apellido, int d, int m, int a, string t
     cantVikingos++;
 }
 
-
-void cVikingo::cambioComida(int suma)
-{
-    comida += suma;
-}
-
+//Imprime por pantalla la descripcion del vikingo
 void cVikingo::descripcion() const
 {
     cout << " " << endl;
 }
 
+//Libera memoria
 cVikingo:: ~cVikingo() {
     cantVikingos--;
 }

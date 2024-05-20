@@ -1,6 +1,6 @@
 #include "cAtaque.h"
 
-
+//Crea ataque completamente al azar
 cAtaque::cAtaque()
 {
 	this->type = (tipo)(rand() % 4);
@@ -51,8 +51,9 @@ cAtaque::cAtaque()
 	}
 }
 
+//Crea ataque por su tipo
 cAtaque::cAtaque(tipo type)
-{//TIPO { vacio = -1, fuego, aire, veneno, fisico}
+{
 	this->type = type;
 	string fisico[4] = { "Fuerza bruta", "Carga", "Cabezaso", "Corte horizontal" };
 	string fuego[4] = { "Bola de fuego", "Llamarada", "Lluvia de meteoros", "Cabezaso volcanico" };
@@ -95,6 +96,7 @@ cAtaque::cAtaque(tipo type)
 	}
 }
 
+//Crea ataque por todos sus atributos
 cAtaque::cAtaque(string nombre, tipo type, int stat, float dano, float prob)
 {
 	this->nombre = nombre;
@@ -108,15 +110,13 @@ cAtaque::cAtaque(string nombre, tipo type, int stat, float dano, float prob)
 //Calcula si el ataque pega y el daño producido
 float cAtaque::probTotal(int stat)
 {
+	float prob = this->probabilidad * (float)stat / 10; //stat = 20 -> prob*2
 
-
-	float prob = this->probabilidad * (float)stat / 10;
-
-	if (prob >= 94)
-		prob = 94;
+	if (prob >= 90)
+		prob = 90;
 
 	int hit = rand() % 100;
-	if (hit == 0) {
+	if (hit <= 10) {
 		cout << "HA SACADO UN CRITICO" << endl;
 		return danoTotal(stat) * 2;
 	}
@@ -125,7 +125,6 @@ float cAtaque::probTotal(int stat)
 		return danoTotal(stat);
 	}
 	cout << "El ataque fallo lastimosamente..." << endl;
-
 	return 0;
 }
 
@@ -133,10 +132,10 @@ float cAtaque::probTotal(int stat)
 //Calcula el daño producido
 float cAtaque::danoTotal(int stat)
 {
-	float total = this->dano * (float)stat / 10;
+	float total = (this->dano * (float)stat / 10) + (-15 + rand() % 31);
+
 	string elemento[4] = { "fuego", "aire", "veneno", "fisico" };
 	cout << total << " de dano de " << elemento[this->type] << endl;
-
 	return total;
 }
 
