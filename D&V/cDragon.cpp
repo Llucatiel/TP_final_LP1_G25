@@ -281,6 +281,8 @@ void cDragon::perderVida(float dano)
         cout << "Dejandolo a " << nombre << " a " << vidaActual << " puntos de vida" << endl << endl;
     else
         cout << endl;
+
+    //ANIADIR COLOSITOS TODOS VIOLENTOS BIEN BONITOS, system("color...");
 }
 
 //Imprime por pantalla la descripcion del dragon

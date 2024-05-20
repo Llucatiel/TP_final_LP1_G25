@@ -121,9 +121,22 @@ void cBocon:: atacarDragones(list<cVikingo*> vikingos)//en el main especificamos
 //Pelea pokemon de dragones
 void cBocon::pelea(cDragon* dragon)
 {
-    cAtaque* atk = new cAtaque();
-    cDragon* enemigo = new cDragon(atk);
+    int at = 1 + rand() % 4;
+    cAtaque* atk = new cAtaque[at];
+    atk[0] = cAtaque();
+    cDragon* enemigo = new cDragon(&atk[0]);
     //Crea a un ataque y dragon genericos para combatir
+
+    for (int i = enemigo->getCantAtk(); i < at; i++) {
+        try {
+            atk[i] = cAtaque(enemigo->getAliento());
+            enemigo->aprenderAtk(&atk[i]);
+        }
+        catch (const exception* e) {
+            i--;
+            delete e;
+        }
+    }
 
     bool ambos = true;
     int lim = enemigo->getCantAtk();
@@ -134,8 +147,10 @@ void cBocon::pelea(cDragon* dragon)
     while (ambos){ //El combate seguira hasta que uno de los dos caiga
         bool atacado = false;
         do {
-            cout << enemigo->getNombre() << ": " << enemigo->getVidaActual() << " hp" << endl << "\t\t\t\t";
-            cout << dragon->getNombre() << ": " << dragon->getVidaActual() << " hp" << endl;
+            cout << enemigo->getNombre() << ": " << enemigo->getVidaActual() << " / " << enemigo->getVidaTotal() << " hp" << endl;
+            cout << "\t\t\t\t\t";
+            cout << dragon->getNombre() << ": " << dragon->getVidaActual() << " / " << dragon->getVidaTotal() << " hp" << endl;
+
             cout << "Elija el ataque a usar: " << endl;
             dragon->mostrarAtaques();
             cout << "5. mostrar danos" << endl;
@@ -149,9 +164,8 @@ void cBocon::pelea(cDragon* dragon)
                     system("cls");
                     continue;
                 }
-                enemigo->perderVida(dragon->atacar(i)); //Perder vida llama dentro de si a atacar, calcula si pego o no, y cuanto daño hizo
+                enemigo->perderVida(dragon->atacar(i)); //Perder vida llama dentro de si a atacar, calcula si pego o no, y cuanto danio hizo
                 atacado = true;
-                
            }
             catch (const exception* e) {
                 cout << e->what() << endl;
@@ -169,8 +183,9 @@ void cBocon::pelea(cDragon* dragon)
         if (!ambos)
             break;
 
-        cout << enemigo->getNombre() << ": " << enemigo->getVidaActual() << " hp" << endl << "\t\t\t\t";
-        cout << dragon->getNombre() << ": " << dragon->getVidaActual() << " hp" << endl;
+        cout << enemigo->getNombre() << ": " << enemigo->getVidaActual() << " / " << enemigo->getVidaTotal() << " hp" << endl;
+        cout << "\t\t\t\t\t";
+        cout << dragon->getNombre() << ": " << dragon->getVidaActual() << " / " << dragon->getVidaTotal() << " hp" << endl;
         try {
             dragon->perderVida(enemigo->atacar(rand() % lim));
         }
@@ -194,7 +209,7 @@ void cBocon::pelea(cDragon* dragon)
        
     
     delete enemigo;
-    delete atk;
+    delete []atk;
 }
 
 

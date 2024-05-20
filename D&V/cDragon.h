@@ -26,8 +26,11 @@ public:
 	cDragon(cAtaque* atk, tipo segundo, string tamano, string color, string peso, int cabezas, int d, int m, int a);
 
 	float getVidaActual() const { return this->vidaActual; }
+	float getVidaTotal() const { return this->vidaMax; }
 	float atacar(int i);
 	bool getDomado() const { return this->domado; }
+	tipo getAliento() const { return aliento; }
+	tipo getSegundo() const { return segundo; }
 
 	void mostrarStats();
 	void aprenderAtk(cAtaque* atk);
