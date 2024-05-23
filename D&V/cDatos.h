@@ -34,7 +34,10 @@ public:
 
 	int getCantAtk() { return (int)this->ataques.size(); }
 	int getAnios();
+	float atacar(int i);
+	float getStat(int i) { return this->estadisticas[i]; }
 	bool getVivo()const { return this->vivo; }
+	void mostrarDanos();
 	string getNombre() const { return this->nombre; }
 	string getTamano() const { return this->tamano; }
 };

@@ -186,28 +186,6 @@ cDragon::cDragon(cAtaque* atk, tipo segundo, string tamano, string color, string
     this->domado = true;
 }
 
-
-
-//Busca en la lista de ataques el ataque a utilizar
-float cDragon::atacar(int i)
-{
-    if (!this->vivo)
-        throw new exception("El dragon ya no puede ser utilizado");
-
-    if (this->ataques.size() < i)
-        throw new exception("No se conocen tantos ataques");
-
-    list<cAtaque*>::iterator it = this->ataques.begin();
-    i--;
-
-    for (int j = 0; j < i; j++) 
-        it++;
-    
-    cout << nombre << " a usado " << (*it)->getNombre() << endl;
-
-    return (*it)->probTotal(estadisticas[(*it)->getStat()]);
-}
-
 //Imprime por pantalla las estadisticas del dragon
 void cDragon::mostrarStats()
 {
@@ -291,21 +269,6 @@ void cDragon::descripcion()const
     cout << " " << endl;
 }
 
-//Muestra el nombre, probabilidad de golpe y daño de todos sus ataques
-void cDragon::mostrarDanos()
-{
-
-    if (!this->vivo)
-        throw new exception("El dragon ya no puede ser utilizado");
-
-    list<cAtaque*>::iterator it = this->ataques.begin();
-
-    while (it != this->ataques.end()) {
-        cout << (*it)->getNombre() << ":\n";
-        cout << "Dano: " << (*it)->getDano() << endl << "Probabilidad: " << (*it)->getProb() << endl;
-        it++;
-    }
-}
 
 
 

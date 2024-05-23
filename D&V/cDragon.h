@@ -27,7 +27,6 @@ public:
 
 	float getVidaActual() const { return this->vidaActual; }
 	float getVidaTotal() const { return this->vidaMax; }
-	float atacar(int i);
 	bool getDomado() const { return this->domado; }
 	tipo getAliento() const { return aliento; }
 	tipo getSegundo() const { return segundo; }
@@ -38,5 +37,4 @@ public:
 	void perderVida(float dano);
 	void curarse() { this->vidaActual = this->vidaMax; }
 	void descripcion()const;
-	void mostrarDanos();
 };

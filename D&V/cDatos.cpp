@@ -88,6 +88,40 @@ int cDatos::getAnios()
     //La divide por la cantidad de dias en un anio
 }
 
+float cDatos::atacar(int i)
+{
+
+    if (!this->vivo)
+        throw new exception("El dragon ya no puede ser utilizado");
+
+    if (this->ataques.size() < i)
+        throw new exception("No se conocen tantos ataques");
+
+    list<cAtaque*>::iterator it = this->ataques.begin();
+    i--;
+
+    for (int j = 0; j < i; j++)
+        it++;
+
+    cout << nombre << " a usado " << (*it)->getNombre() << endl;
+
+    return (*it)->probTotal(estadisticas[(*it)->getStat()]);
+}
+
+void cDatos::mostrarDanos()
+{
+    if (!this->vivo)
+        throw new exception("El dragon ya no puede ser utilizado");
+
+    list<cAtaque*>::iterator it = this->ataques.begin();
+
+    while (it != this->ataques.end()) {
+        cout << (*it)->getNombre() << ":\n";
+        cout << "Dano: " << (*it)->getDano() << endl << "Probabilidad: " << (*it)->getProb() << endl;
+        it++;
+    }
+}
+
 //Libera memoria
 cDatos::~cDatos()
 {   
