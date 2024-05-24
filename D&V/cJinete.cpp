@@ -1,5 +1,23 @@
 #include "cJinete.h"
 
+cJinete::cJinete(string nombre, string pelo, int d, int m, int a, string apodo, cDragon* dragon)
+{
+	this->nombre = nombre;
+	this->color = pelo;
+	struct tm date = { 0 };
+	date.tm_year = a - 1900;
+	date.tm_mon = m - 1;
+	date.tm_mday = d;
+	this->fecha = mktime(&date);
+	this->apodo = apodo;
+	this->dragon = dragon;
+}
+
+cJinete::cJinete(cVikingo& viki)
+{
+	this->nombre = viki.nombre;
+}
+
 void cJinete::asignarDragon(cDragon* dragon)
 {
 	this->dragon = dragon;

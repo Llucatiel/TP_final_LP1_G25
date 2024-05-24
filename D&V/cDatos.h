@@ -3,6 +3,7 @@
 #include <ctime>
 #include <iostream>
 #include <list>
+#include <sstream>
 #include "cAtaque.h"
 
 using namespace std;
@@ -34,6 +35,8 @@ public:
 
 	int getCantAtk() { return (int)this->ataques.size(); }
 	int getAnios();
+	virtual string To_string();
+	void imprimirDatos();
 	float atacar(int i);
 	float getStat(int i) { return this->estadisticas[i]; }
 	bool getVivo()const { return this->vivo; }

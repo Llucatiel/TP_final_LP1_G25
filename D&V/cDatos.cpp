@@ -88,6 +88,25 @@ int cDatos::getAnios()
     //La divide por la cantidad de dias en un anio
 }
 
+string cDatos::To_string()
+{
+    stringstream ss;
+
+    ss << "nombre: " << nombre << endl;
+    ss << "color de pelo: " << color << endl;
+    ss << "peso: " << peso << endl;
+    ss << "tamaño: " << tamano << endl;
+    ss << "nacimiento: " << fecha << endl;
+
+    return ss.str();
+}
+
+void cDatos::imprimirDatos()
+{
+    string info = To_string();
+    cout << info;
+}
+
 float cDatos::atacar(int i)
 {
 
