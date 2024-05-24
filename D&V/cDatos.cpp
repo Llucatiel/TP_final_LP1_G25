@@ -141,6 +141,30 @@ void cDatos::mostrarDanos()
     }
 }
 
+
+void cDatos::operator+(cAtaque* atk)
+{
+        if (!this->vivo)
+            throw new exception("Lo lamento, pero ya no es utilizable");
+
+        if (this->ataques.size() >= 4)
+            throw new exception("Ya se conocen 4 ataques");
+
+        if (atk->getTipo() != fisico)
+            throw new exception("No es capaz de aprender a usar el ataque");
+
+        list<cAtaque*>::iterator it = this->ataques.begin();
+
+        while (it != this->ataques.end()) {
+            if ((*it)->getNombre() == atk->getNombre()) {
+                throw new exception("Ya se conocia el ataque.");
+            }
+            it++;
+        }
+
+        this->ataques.push_back(atk);
+}
+
 //Libera memoria
 cDatos::~cDatos()
 {   

@@ -127,10 +127,11 @@ void cBocon::pelea(cDragon* dragon)
     cDragon* enemigo = new cDragon(&atk[0]);
     //Crea a un ataque y dragon genericos para combatir
 
+    
     for (int i = enemigo->getCantAtk(); i < at; i++) {
         try {
             atk[i] = cAtaque(enemigo->getAliento());
-            enemigo->aprenderAtk(&atk[i]);
+            enemigo+atk[i];
         }
         catch (const exception* e) {
             i--;

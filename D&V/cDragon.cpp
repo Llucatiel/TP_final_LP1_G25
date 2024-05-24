@@ -202,7 +202,7 @@ void cDragon::mostrarStats()
 }
 
 //Aprende un nuevo ataque en caso de no poseerlo
-void cDragon::aprenderAtk(cAtaque* atk)
+void cDragon::operator+(cAtaque* atk)
 {
     if (!this->vivo)
         throw new exception("El dragon ya no puede ser utilizado");
