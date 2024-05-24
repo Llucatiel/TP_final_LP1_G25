@@ -32,7 +32,7 @@ public:
 	tipo getSegundo() const { return segundo; }
 
 	void mostrarStats();
-	void aprenderAtk(cAtaque* atk);
+	void operator+(cAtaque* atk);
 	void olvidarAtk(cAtaque* atk);
 	void perderVida(float dano);
 	void curarse() { this->vidaActual = this->vidaMax; }

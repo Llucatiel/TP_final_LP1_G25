@@ -4,7 +4,7 @@
 #include <iostream>
 #include <list>
 #include "cAtaque.h"
-
+#include <Windows.h>
 using namespace std;
 
 class cDatos
@@ -37,8 +37,10 @@ public:
 	float atacar(int i);
 	float getStat(int i) { return this->estadisticas[i]; }
 	bool getVivo()const { return this->vivo; }
-	void mostrarDanos();
 	string getNombre() const { return this->nombre; }
 	string getTamano() const { return this->tamano; }
+
+	void mostrarDanos();
+	virtual void operator+(cAtaque* atk);
 };
 
