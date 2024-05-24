@@ -4,10 +4,10 @@
 #include <cstdlib>
 #include <iostream>
 #include <list>
-#include "cDatos.h"
+#include "cPersonaje.h"
 using namespace std;
 
-class cVikingo : public cDatos
+class cVikingo : public cPersonaje
 {
 	static int comida;
 	static int cantVikingos;

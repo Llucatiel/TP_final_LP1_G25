@@ -1,10 +1,12 @@
 #pragma once
 #include <cstdlib>
-#include "cDatos.h"
+#include "cPersonaje.h"
 
-class cDragon : public cDatos
+class cDragon : public cPersonaje
 {
-private:
+	static int cantDragones;
+
+	int identificador;
 	int* estadisticas; //Potencia, Fuerza, Destreza, Constitucion
 	unsigned short int cantJinetes;
 	float vidaMax;
@@ -28,13 +30,15 @@ public:
 	float getVidaActual() const { return this->vidaActual; }
 	float getVidaTotal() const { return this->vidaMax; }
 	bool getDomado() const { return this->domado; }
+	int getIdentificador() const { return this->identificador; }
 	tipo getAliento() const { return aliento; }
 	tipo getSegundo() const { return segundo; }
 
 	void mostrarStats();
 	void operator+(cAtaque* atk);
-	void olvidarAtk(cAtaque* atk);
 	void perderVida(float dano);
 	void curarse() { this->vidaActual = this->vidaMax; }
 	void descripcion()const;
+	//void domar() {};
 };
+

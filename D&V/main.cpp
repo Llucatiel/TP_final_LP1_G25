@@ -10,7 +10,7 @@ int main()
     cDragon* draco = new cDragon();
     cBocon* bocon = new cBocon();
 
-    bocon->agregarDragon(draco);
+    (*bocon) + (draco);
 
     bocon->enlistarDragon();
 

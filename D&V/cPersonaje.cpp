@@ -1,7 +1,7 @@
-#include "cDatos.h"
+#include "cPersonaje.h"
 
 //Generacion al azar de las estadisticas de cada clase
-void cDatos::generarStats()
+void cPersonaje::generarStats()
 {
 
     int min = 0;
@@ -23,7 +23,7 @@ void cDatos::generarStats()
 }
 
 //Crea una espera entre accion y accion de "i" segundos. ESTATICO
-void cDatos::espera(float i) {
+void cPersonaje::espera(float i) {
     time_t now;
     time(&now);
     time_t then;
@@ -39,7 +39,7 @@ void cDatos::espera(float i) {
 }
 
 //Imprime por pantalla las estadisticas
-void cDatos::mostrarStats()
+void cPersonaje::mostrarStats()
 {
     if (!this->vivo)
         throw new exception("Lamentablemente, ya no se encuentra vivo/a.");
@@ -50,7 +50,7 @@ void cDatos::mostrarStats()
 }
 
 //Imprime por pantalla los ataques conocidos
-void cDatos::mostrarAtaques()
+void cPersonaje::mostrarAtaques()
 {
 
     if (!this->vivo)
@@ -73,7 +73,7 @@ void cDatos::mostrarAtaques()
 }
 
 //Calcula la fecha creada en años, o dias en caso a ser menor de 1 año
-int cDatos::getAnios()
+int cPersonaje::getAnios()
 {
     if (!this->vivo)
         throw new exception("El dragon ya no puede ser utilizado");
@@ -88,7 +88,7 @@ int cDatos::getAnios()
     //La divide por la cantidad de dias en un anio
 }
 
-string cDatos::To_string()
+string cPersonaje::To_string()
 {
     stringstream ss;
 
@@ -101,13 +101,13 @@ string cDatos::To_string()
     return ss.str();
 }
 
-void cDatos::imprimirDatos()
+void cPersonaje::imprimirDatos()
 {
     string info = To_string();
     cout << info;
 }
 
-float cDatos::atacar(int i)
+float cPersonaje::atacar(int i)
 {
 
     if (!this->vivo)
@@ -127,7 +127,7 @@ float cDatos::atacar(int i)
     return (*it)->probTotal((*it)->getStat());
 }
 
-void cDatos::mostrarDanos()
+void cPersonaje::mostrarDanos()
 {
     if (!this->vivo)
         throw new exception("El dragon ya no puede ser utilizado");
@@ -141,8 +141,8 @@ void cDatos::mostrarDanos()
     }
 }
 
-
-void cDatos::operator+(cAtaque* atk)
+//Aprende un nuevo ataque
+void cPersonaje::operator+(cAtaque* atk)
 {
         if (!this->vivo)
             throw new exception("Lo lamento, pero ya no es utilizable");
@@ -165,8 +165,32 @@ void cDatos::operator+(cAtaque* atk)
         this->ataques.push_back(atk);
 }
 
+//Olvida un ataque ya aprendido
+void cPersonaje::operator-(cAtaque* atk)
+{
+
+    if (!this->vivo)
+        throw new exception("Lo lamentamos, ya no puede ser utilizado");
+
+    list<cAtaque*>::iterator it = this->ataques.begin();
+    bool borrador = false;
+
+    while (it != this->ataques.end()) {
+        if ((*it)->getNombre() == atk->getNombre()) {
+            this->ataques.erase(it);
+            borrador = true;
+            cout << this->nombre << " ha olvidado como usar " << atk->getNombre() << endl;
+            return;
+        }
+        it++;
+    }
+
+    if (!borrador)
+        throw new exception("Ataque no conocido");
+}
+
 //Libera memoria
-cDatos::~cDatos()
+cPersonaje::~cPersonaje()
 {   
     this->ataques.clear();
     delete[]estadisticas;

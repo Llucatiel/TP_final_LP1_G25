@@ -6,9 +6,10 @@
 #include <sstream>
 #include "cAtaque.h"
 #include <Windows.h>
+
 using namespace std;
 
-class cDatos
+class cPersonaje
 {
 protected:
 	string nombre;
@@ -27,15 +28,16 @@ protected:
 
 public:
 	static void espera(float i);
-
+	//	CREAR CONSTRUCTOR OARA QUE ANDA
 	virtual void mostrarStats();
 	virtual void mostrarAtaques();
 	virtual void descripcion()const = 0;
-	virtual ~cDatos();
+	virtual void operator+(cAtaque* atk);
+	virtual string To_string();
+	virtual ~cPersonaje();
 
 	int getCantAtk() { return (int)this->ataques.size(); }
 	int getAnios();
-	virtual string To_string();
 	void imprimirDatos();
 	float atacar(int i);
 	float getStat(int i) { return this->estadisticas[i]; }
@@ -44,6 +46,6 @@ public:
 	string getTamano() const { return this->tamano; }
 
 	void mostrarDanos();
-	virtual void operator+(cAtaque* atk);
+	void operator-(cAtaque* atk);
 };
 
