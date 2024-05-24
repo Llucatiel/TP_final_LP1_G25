@@ -27,6 +27,12 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="cDatos.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cBocon.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="cJinete.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -39,6 +45,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="cVikingo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cDatos.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cBocon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="cJinete.h">

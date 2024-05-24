@@ -1,51 +1,40 @@
 #pragma once
-#include <ctime>
 #include <cstdlib>
-#include "cAtaque.h"
-#include <list>
+#include "cDatos.h"
 
-
-class cDragon
+class cDragon : public cDatos
 {
 private:
-	string nombre;
+	int* estadisticas; //Potencia, Fuerza, Destreza, Constitucion
+	unsigned short int cantJinetes;
 	float vidaMax;
 	float vidaActual;
-	string tamano;
-	string color;
+	int cantCabezas;
 	bool domado;
-	string peso;
-	unsigned short int cantJinetes;
+	bool vivo;
 	tipo aliento;
 	tipo segundo;
-	list<cAtaque*> ataques;
-	int* estadisticas; //Potencia, Fuerza, Destreza, Constitucion
-	int cantCabezas;
-	int cantAtaques;
-	time_t fechaAdopcion;
-	bool vivo;
 
 
-	void generarStats();//Genera por primera vez las estadisticas del dragon. Solo al llamar al constructor
+	void generarStats();
 	void altaNombre();
-	void baja() { this->vivo = false; }
+
 public:
 	cDragon();
 	cDragon(cAtaque* atk);
 	cDragon(cAtaque* atk, tipo segundo, string tamano, string color, string peso, int cabezas);
 	cDragon(cAtaque* atk, tipo segundo, string tamano, string color, string peso, int cabezas, int d, int m, int a);
-	~cDragon();
 
+	float getVidaActual() const { return this->vidaActual; }
+	float getVidaTotal() const { return this->vidaMax; }
 	bool getDomado() const { return this->domado; }
-	string getNombre() const { return this->nombre; }
-	string getTamano() const { return this->tamano; }
-	int getTiempoAdoptado();
-	float atacar(int i);
+	tipo getAliento() const { return aliento; }
+	tipo getSegundo() const { return segundo; }
+
+	void mostrarStats();
 	void aprenderAtk(cAtaque* atk);
 	void olvidarAtk(cAtaque* atk);
-	void mostrarStats();
-	void mostrarAtaques();
 	void perderVida(float dano);
-	float getVida() const { return this->vidaActual; }
 	void curarse() { this->vidaActual = this->vidaMax; }
+	void descripcion()const;
 };

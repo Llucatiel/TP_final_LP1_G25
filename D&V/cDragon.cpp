@@ -1,8 +1,9 @@
 #include "cDragon.h"
 
-//Genera las estadisticas del dragon al crearse el mismo
+//Genera estadisticas al azar para un dragon
 void cDragon::generarStats()
 {
+
     int min = 0;
     int dice = 0;
     //Para generar las estadisticas, se tiran 4 dados y se resta el numero más bajo
@@ -18,14 +19,13 @@ void cDragon::generarStats()
                 min = dice;
         }
         this->estadisticas[i] -= min;
+        this->estadisticas[i] *= 1,5;
     }
 }
-
 
 //Se le asigna al azar un nombre pre generado segun su tipo principal
 void cDragon::altaNombre()
 {
-    //TIPO { vacio = -1, fuego, aire, veneno, fisico}
     int elegir = rand() % 4;
     string fuego[4] = { "Fogon", "Chispas", "Fogata", "Llamaleon" };
     string aire[4] = { "Nomada", "Tornado", "Cizalla", "Piloto" };
@@ -56,15 +56,16 @@ void cDragon::altaNombre()
 
 
 
+//Dragon completamente al azar
 cDragon::cDragon()
 {
     this->vivo = true;
-    this->aliento = (tipo)(-1 + (rand() % 5));
+    this->aliento = (tipo)(rand() % 4);
 
     this->estadisticas = new int[4];
     altaNombre();
     generarStats();
-    this->vidaMax = this->estadisticas[3] * 5;
+    this->vidaMax = this->estadisticas[2] * 10;
     this->vidaActual = this->vidaMax;
 
     this->tamano = to_string(50 + rand() % 250) + " cm";
@@ -73,15 +74,26 @@ cDragon::cDragon()
     this->domado = false;
     this->peso = to_string(40 + rand() % 460) + " kg";
     this->cantJinetes = 0;
-    this->cantCabezas = 1 + rand() % 1;
-    if (cantCabezas > 0) {
+    this->cantCabezas = 1 + (1 + rand() % 12)/10;
+    if (cantCabezas > 1) {
+        puntero = new cAtaque[2];
         do {
-            this->segundo = (tipo)(-1 + (rand() % 5));
+            this->segundo = (tipo)(rand() % 4);
         } while (segundo == aliento);
+        puntero[1] =  cAtaque(this->segundo);
+
+        ataques.push_back(&puntero[1]);
     }
-    this->cantAtaques = 1;
+    else {
+        puntero = new cAtaque[1];
+        this->segundo = vacio;
+    }
+    puntero[0] = cAtaque(this->aliento);
+    ataques.push_front(&puntero[0]);
+
 }
 
+//Dragon creado a partir de 1 ataque
 cDragon::cDragon(cAtaque* atk)
 {
     this->vivo = true;
@@ -91,7 +103,7 @@ cDragon::cDragon(cAtaque* atk)
     this->estadisticas = new int[4];
     altaNombre();
     generarStats();
-    this->vidaMax = this->estadisticas[3] * 5;
+    this->vidaMax = this->estadisticas[2] * 10;
     this->vidaActual = this->vidaMax;
 
     this->tamano = to_string(50 + rand() % 250) + " cm";
@@ -100,17 +112,18 @@ cDragon::cDragon(cAtaque* atk)
     this->domado = false;
     this->peso = to_string(40 + rand() % 460) + " kg";
     this->cantJinetes = 0;
-    this->cantCabezas = 1 + rand() % 1;
-    if (cantCabezas > 0) {
+    this->cantCabezas = 1 + (1 + rand() % 12) / 10;
+    if (cantCabezas > 1) {
         do {
-            this->segundo = (tipo)(-1 + (rand() % 5));
+            this->segundo = (tipo)(rand() % 4);
         } while (segundo == aliento);
+        puntero = new cAtaque[1];
+        puntero[0] = cAtaque(this->segundo);
+        ataques.push_front(&puntero[0]);
     }
-    this->cantAtaques = 1;
 }
 
-
-
+//Dragon creado por sus atributos
 cDragon::cDragon(cAtaque* atk, tipo segundo, string tamano, string color, string peso, int cabezas)
 {
     this->vivo = true;
@@ -120,7 +133,7 @@ cDragon::cDragon(cAtaque* atk, tipo segundo, string tamano, string color, string
     this->estadisticas = new int[4];
     altaNombre();
     generarStats();
-    this->vidaMax = this->estadisticas[3] * 5;
+    this->vidaMax = this->estadisticas[2] * 10;
     this->vidaActual = this->vidaMax;
 
     this->tamano = tamano;
@@ -129,12 +142,15 @@ cDragon::cDragon(cAtaque* atk, tipo segundo, string tamano, string color, string
     this->peso = peso;
     this->cantJinetes = 0;
     this->cantCabezas = cabezas;
-    if (cantCabezas > 0) {
+    if (cantCabezas > 1) {
         this->segundo = segundo;
+        puntero = new cAtaque[1];
+        puntero[0] = cAtaque(this->segundo);
+        ataques.push_front(&puntero[0]);
     }
-    this->cantAtaques = 1;
 }
 
+//Dragon domado creado por sus atributos
 cDragon::cDragon(cAtaque* atk, tipo segundo, string tamano, string color, string peso, int cabezas, int d, int m, int a)
 {
     this->vivo = true;
@@ -145,63 +161,43 @@ cDragon::cDragon(cAtaque* atk, tipo segundo, string tamano, string color, string
     this->estadisticas = new int[4];
     altaNombre();
     generarStats();
-    this->vidaMax = this->estadisticas[3] * 5;
+    this->vidaMax = this->estadisticas[2] * 10;
     this->vidaActual = this->vidaMax;
 
     this->tamano = tamano;
     this->color = color;
-    this->domado = false;
+    this->domado = true;
     this->peso = peso;
-    this->cantJinetes = 0;
+    this->cantJinetes = 1;
     this->cantCabezas = cabezas;
-    this->cantAtaques = 1;
+    if (cantCabezas > 1) {
+        this->segundo = segundo;
+        puntero = new cAtaque[1];
+        puntero[0] = cAtaque(this->segundo);
+        ataques.push_front(&puntero[0]);
+    }
 
     struct tm date = { 0 };
     date.tm_year = a - 1900;
     date.tm_mon = m - 1;
     date.tm_mday = d;
 
-    this->fechaAdopcion = mktime(&date);
+    this->fecha = mktime(&date);
     this->domado = true;
 }
 
-
-//Devuelve la cantidad de dias que lleva adoptado el dragon
-int cDragon::getTiempoAdoptado()
+//Imprime por pantalla las estadisticas del dragon
+void cDragon::mostrarStats()
 {
+
     if (!this->vivo)
-        throw new exception("El dragon ya no puede ser utilizado");
+        throw new exception("Lamentablemente, ya no se encuentra vivo/a.");
 
-    time_t now;
-    time(&now); //Tiempo actual
-    int edad = (int)difftime(now, this->fechaAdopcion) / 86400;
-    //Calcula la diferencia entre ahora y fecha de adopcion
-    if (edad < 365)
-        return edad;
-    return edad / 365;
-    //La divide por la cantidad de dias en un anio
+    cout << "Fuerza: " << this->estadisticas[0] << endl;
+    cout << "Destreza: " << this->estadisticas[1] << endl;
+    cout << "Constitucion: " << this->estadisticas[2] << endl;
+    cout << "Potencia: " << this->estadisticas[3] << endl;
 }
-
-
-//Busca en la lista de ataques el ataque a utilizar
-float cDragon::atacar(int i)
-{
-    if (!this->vivo)
-        throw new exception("El dragon ya no puede ser utilizado");
-
-    if (this->cantAtaques <= i)
-        throw new exception("No se conocen tantos ataques");
-
-    list<cAtaque*>::iterator it = this->ataques.begin();
-
-    int j = 0;
-    while (j < i) {
-        it++;
-        j++;
-    }
-    return (*it)->probTotal(estadisticas[(*it)->getStat()]);
-}
-
 
 //Aprende un nuevo ataque en caso de no poseerlo
 void cDragon::aprenderAtk(cAtaque* atk)
@@ -209,7 +205,7 @@ void cDragon::aprenderAtk(cAtaque* atk)
     if (!this->vivo)
         throw new exception("El dragon ya no puede ser utilizado");
 
-    if (this->cantAtaques >= 4)
+    if (this->ataques.size() >= 4)
         throw new exception("El dragon ya conoce 4 ataques");
 
     if (atk->getTipo() != this->aliento && atk->getTipo() != this->segundo)
@@ -221,12 +217,11 @@ void cDragon::aprenderAtk(cAtaque* atk)
         if ((*it)->getNombre() == atk->getNombre()) {
             throw new exception("El Dragon ya conoce el ataque");
         }
+        it++;
     }
 
     this->ataques.push_back(atk);
-    this->cantAtaques++;
 }
-
 
 //Olvida un ataque ya aprendido
 void cDragon::olvidarAtk(cAtaque* atk)
@@ -240,71 +235,40 @@ void cDragon::olvidarAtk(cAtaque* atk)
     while (it != this->ataques.end()) {
         if ((*it)->getNombre() == atk->getNombre()) {
             this->ataques.erase(it);
-            this->cantAtaques--;
             borrador = true;
-
             cout << this->nombre << " ha olvidado como usar " << atk->getNombre() << endl;
             return;
         }
+        it++;
     }
 
     if (!borrador)
         throw new exception("El Dragon no conoce el ataque");
 }
 
-
-//Muestras las estadisticas del dragon
-void cDragon::mostrarStats()//Potencia, Fuerza, Destreza, Constitucion
-{
-    if (!this->vivo)
-        throw new exception("El dragon ya no puede ser utilizado");
-
-    cout << "Potencia: " << this->estadisticas[0] << endl;
-    cout << "Fuerza: " << this->estadisticas[1] << endl;
-    cout << "Destreza: " << this->estadisticas[2] << endl;
-    cout << "Constitucion: " << this->estadisticas[3] << endl;
-}
-
-
 //Al recibir daño, pierde vida el mismo, en caso de llegar a 0 inutiliza las funciones del dragon
 void cDragon::perderVida(float dano)
 {
     this->vidaActual -= dano;
-
-    if (this->vidaActual <= 0)
+    
+    if (this->vidaActual <= 0) {
+        cout << getNombre() << " a perecido en batalla" << endl;
         baja();
-}
-
-
-//Muestras los ataques que el dragon conoce
-void cDragon::mostrarAtaques()
-{
-    if (!this->vivo)
-        throw new exception("El dragon ya no puede ser utilizado");
-
-
-    if (this->cantAtaques < 1) {
-        cout << getNombre() << " no conoce ningun ataque. " << endl;
-        return;
     }
+    else if (dano > 0)
+        cout << "Dejandolo a " << nombre << " a " << vidaActual << " puntos de vida" << endl << endl;
+    else
+        cout << endl;
 
-    int cont = 0;
-    list<cAtaque*>::iterator it = this->ataques.begin();
-
-    while (it != this->ataques.end()) {
-        cont++;
-        cout << cont << ". " << (*it)->getNombre() << endl;
-        it++;
-    }
+    //ANIADIR COLOSITOS TODOS VIOLENTOS BIEN BONITOS, system("color...");
 }
 
-
-
-cDragon::~cDragon()
+//Imprime por pantalla la descripcion del dragon
+void cDragon::descripcion()const
 {
-    delete[] estadisticas;
-    this->ataques.clear();
+    cout << " " << endl;
 }
+
 
 
 
