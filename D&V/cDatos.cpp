@@ -105,7 +105,7 @@ float cDatos::atacar(int i)
 
     cout << nombre << " a usado " << (*it)->getNombre() << endl;
 
-    return (*it)->probTotal(estadisticas[(*it)->getStat()]);
+    return (*it)->probTotal((*it)->getStat());
 }
 
 void cDatos::mostrarDanos()

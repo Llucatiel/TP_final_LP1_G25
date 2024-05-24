@@ -19,6 +19,8 @@ void cDragon::generarStats()
                 min = dice;
         }
         this->estadisticas[i] -= min;
+        if (this->estadisticas[i] < 6)
+            this->estadisticas[i] = 8;
         this->estadisticas[i] *= 1,5;
     }
 }

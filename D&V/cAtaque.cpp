@@ -67,34 +67,36 @@ cAtaque::cAtaque(tipo type)
 	case 0:
 		this->nombre = fuego[elegir];
 		this->estadisticaUsada = 3;
-		this->dano = 25 + rand() % 26;
-		this->probabilidad = 12 + rand() % 26;
+		this->dano = 35 + rand() % 26;
+		this->probabilidad = 83 + rand() % 26;
 		break;
 
 	case 1:
 		this->nombre = aire[elegir];
 		this->estadisticaUsada = 1;
-		this->dano = 12 + rand() % 26;
-		this->probabilidad = 25 + rand() % 26;
+		this->dano = 22 + rand() % 26;
+		this->probabilidad = 89 + rand() % 26;
 		break;
 
 	case 2:
 		this->nombre = veneno[elegir];
 		this->estadisticaUsada = 3;
-		this->dano = 19 + rand() % 26;
-		this->probabilidad = 20 + rand() % 26;
+		this->dano = 29 + rand() % 26;
+		this->probabilidad = 85 + rand() % 26;
 		break;
 
 	case 3:
 		this->nombre = fisico[elegir];
 		this->estadisticaUsada = 0;
-		this->dano = 27 + rand() % 26;
-		this->probabilidad = 10 + rand() % 26;
+		this->dano = 37 + rand() % 26;
+		this->probabilidad = 80 + rand() % 26;
 		break;
 
 	default:
 		break;
 	}
+	if (this->probabilidad > 99)
+		this->probabilidad = 95;
 }
 
 //Crea ataque por todos sus atributos
@@ -113,19 +115,19 @@ float cAtaque::probTotal(int stat)
 {
 	float prob = this->probabilidad * (float)stat / 10; //stat = 20 -> prob*2
 
-	if (prob >= 90)
-		prob = 90;
+	if (prob > 95)
+		prob = 95;
 
 	int hit = rand() % 100;
 	if (hit <= 10) {
 		cout << "HA SACADO UN CRITICO" << endl;
 		for (int i = 0; i < 3; i++) {
 			system("color 47");
-			cDatos::espera(0.005);
+			cDatos::espera(0.0001);
 			system("color 67");
-			cDatos::espera(0.005);
+			cDatos::espera(0.0001);
 		}
-		system("color 0");
+		system("color 07");
 		return danoTotal(stat) * 2;
 	}
 	else if (hit <= prob) {
@@ -146,7 +148,9 @@ float cAtaque::probTotal(int stat)
 //Calcula el daño producido
 float cAtaque::danoTotal(int stat)
 {
-	float total = (this->dano * (float)stat / 10) + (-15 + rand() % 31);
+	float total = (this->dano * (float)stat / 10) + (rand() % 16);
+	if (total <= 0)
+		total = 5;
 
 	string elemento[4] = { "fuego", "aire", "veneno", "fisico" };
 	cout << total << " de dano de " << elemento[this->type] << endl;

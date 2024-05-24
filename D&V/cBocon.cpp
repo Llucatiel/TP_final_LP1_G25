@@ -177,7 +177,7 @@ void cBocon::pelea(cDragon* dragon)
         } while (!atacado);
 
         //Espera 3 segundos y sigue con el programa
-        cDatos::espera(3.5);
+        cDatos::espera(1.8);
         system("cls");
         ambos = enemigo->getVivo();
         if (!ambos)
@@ -195,7 +195,7 @@ void cBocon::pelea(cDragon* dragon)
         }
         ambos = dragon->getVivo();
 
-        cDatos::espera(3.5);
+        cDatos::espera(1.8);
         system("CLS");
     }
 
