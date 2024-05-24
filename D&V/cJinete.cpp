@@ -1,6 +1,6 @@
 #include "cJinete.h"
 
-cJinete::cJinete(string nombre, string pelo, int d, int m, int a, string apodo, cDragon* dragon)
+cJinete::cJinete(string nombre, string pelo, int d, int m, int a, string apodo, cDragon* dragon): cVikingo()
 {
 	this->nombre = nombre;
 	this->color = pelo;
@@ -13,9 +13,10 @@ cJinete::cJinete(string nombre, string pelo, int d, int m, int a, string apodo, 
 	this->dragon = dragon;
 }
 
-cJinete::cJinete(cVikingo& viki)
+cJinete::cJinete(cVikingo& viki):cVikingo()
 {
-	this->nombre = viki.nombre;
+	this->nombre = viki.getNombre();
+	this->color = viki.
 }
 
 void cJinete::asignarDragon(cDragon* dragon)
