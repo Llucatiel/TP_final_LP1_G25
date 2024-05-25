@@ -1,17 +1,17 @@
 #pragma once
-#include "cDragon.h"
 #include "cJinete.h"
-#include <cstdlib>
-#include <iostream>
-//Estos dos son para llevar un string de minusculas a mayusculas
+//Estos dos son para llevar un string de minusculas a mayusculas ->
 #include <algorithm>
 #include <cctype>
+
+class cVikingo;
 
 class cBocon
 {
 	list<cDragon*> dragones;
 	list<cVikingo*> vikingos;
 	list<cJinete*> jinetes;
+
 
 public:
 	cBocon() {};
@@ -31,5 +31,7 @@ public:
 
 	void atacarDragones(list<cVikingo*> vikingos);
 	void pelea(list<cJinete*> jin);
+
+	void transformacion(cVikingo& vikingos);
 };
 

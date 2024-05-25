@@ -1,6 +1,6 @@
 #pragma once
-#include <cstdlib>
 #include "cPersonaje.h"
+#include "cBocon.h"
 
 class cDragon : public cPersonaje
 {
@@ -20,12 +20,14 @@ class cDragon : public cPersonaje
 
 	void generarStats();
 	void altaNombre();
-
+	static int sumaVuelta() { return ++cantDragones; }
 public:
 	cDragon();
 	cDragon(cAtaque* atk);
 	cDragon(cAtaque* atk, tipo segundo, string tamano, string color, string peso, int cabezas);
 	cDragon(cAtaque* atk, tipo segundo, string tamano, string color, string peso, int cabezas, int d, int m, int a);
+	
+	void domar();
 
 	float getVidaActual() const { return this->vidaActual; }
 	float getVidaTotal() const { return this->vidaMax; }

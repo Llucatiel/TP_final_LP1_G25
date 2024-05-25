@@ -1,8 +1,4 @@
 #pragma once
-#include <string>
-#include <iostream>
-
-using namespace std;
 
 enum TIPO { vacio = -1, fuego, aire, veneno, fisico };
 typedef TIPO tipo;
