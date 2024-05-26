@@ -48,6 +48,7 @@ public:
 	string getTamano() const { return this->tamano; }
 	cAtaque* getAtk(int i);
 	void mostrarDanos();
+	list<cAtaque*> getListAtaques()const { return this->ataques; }
 	void operator-(cAtaque* atk);
 };
 
