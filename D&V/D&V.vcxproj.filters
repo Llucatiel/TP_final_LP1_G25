@@ -27,7 +27,7 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="cPersonaje.cpp">
+    <ClCompile Include="cDatos.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="cBocon.cpp">
@@ -47,7 +47,7 @@
     <ClInclude Include="cVikingo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="cPersonaje.h">
+    <ClInclude Include="cDatos.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="cBocon.h">

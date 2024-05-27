@@ -20,9 +20,9 @@ public:
 		dragones.clear();
 	}
 
-	void operator+(cDragon* dragon) { dragones.push_back(dragon); }
-	void operator+(cVikingo* vik) { vikingos.push_back(vik); }
-	void operator+(cJinete* jin) { jinetes.push_back(jin); }
+	void agregarDragon(cDragon* dragon) { dragones.push_back(dragon); }
+	void agregarVikingo(cVikingo* vik) { vikingos.push_back(vik); }
+	void agregarJinete(cJinete* jin) { jinetes.push_back(jin); }
 	void enlistarVikingo();
 	void enlistarDragon();
 
@@ -30,6 +30,6 @@ public:
 	void elegirDragon(int elegido);
 
 	void atacarDragones(list<cVikingo*> vikingos);
-	void pelea(list<cJinete*> jin);
+	void pelea(cDragon* dragon);
 };
 

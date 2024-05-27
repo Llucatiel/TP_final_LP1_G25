@@ -1,7 +1,5 @@
 #include "cDragon.h"
 
-int cDragon::cantDragones = 0;
-
 //Genera estadisticas al azar para un dragon
 void cDragon::generarStats()
 {
@@ -59,6 +57,7 @@ void cDragon::altaNombre()
 }
 
 
+
 //Dragon completamente al azar
 cDragon::cDragon()
 {
@@ -93,6 +92,7 @@ cDragon::cDragon()
     }
     puntero[0] = cAtaque(this->aliento);
     ataques.push_front(&puntero[0]);
+
 }
 
 //Dragon creado a partir de 1 ataque
@@ -186,9 +186,6 @@ cDragon::cDragon(cAtaque* atk, tipo segundo, string tamano, string color, string
 
     this->fecha = mktime(&date);
     this->domado = true;
-
-    cDragon::cantDragones++;
-    this->identificador = cantDragones;
 }
 
 //Imprime por pantalla las estadisticas del dragon
@@ -226,6 +223,29 @@ void cDragon::operator+(cAtaque* atk)
     }
 
     this->ataques.push_back(atk);
+}
+
+//Olvida un ataque ya aprendido
+void cDragon::olvidarAtk(cAtaque* atk)
+{
+    if (!this->vivo)
+        throw new exception("El dragon ya no puede ser utilizado");
+
+    list<cAtaque*>::iterator it = this->ataques.begin();
+    bool borrador = false;
+
+    while (it != this->ataques.end()) {
+        if ((*it)->getNombre() == atk->getNombre()) {
+            this->ataques.erase(it);
+            borrador = true;
+            cout << this->nombre << " ha olvidado como usar " << atk->getNombre() << endl;
+            return;
+        }
+        it++;
+    }
+
+    if (!borrador)
+        throw new exception("El Dragon no conoce el ataque");
 }
 
 //Al recibir daño, pierde vida el mismo, en caso de llegar a 0 inutiliza las funciones del dragon
