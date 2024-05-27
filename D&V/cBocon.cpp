@@ -164,7 +164,7 @@ void cBocon::pelea(list<cJinete*> jin)
 
     cout << dragon->getNombre() << " se enfrenta a " << enemigo->getNombre() << endl << "PREPARENCE PARA LA BATALLA!" << endl << endl;
 
-    while (ambos){ //El combate seguira hasta que uno de los dos caiga
+    while (ambos) { //El combate seguira hasta que uno de los dos caiga
         bool atacado = false;
         do {
             cout << enemigo->getNombre() << ": " << enemigo->getVidaActual() << " / " << enemigo->getVidaTotal() << " hp" << endl;
@@ -230,7 +230,7 @@ void cBocon::pelea(list<cJinete*> jin)
                 it = jin.begin();
             }
 
-            }while (!atacado);
+        } while (!atacado);
 
         //Espera 1.5 segundos y sigue con el programa
         Sleep(1500);
@@ -270,23 +270,24 @@ void cBocon::pelea(list<cJinete*> jin)
                 ambos = false;
                 perdida = true;
             }
-    }
+        }
 
-    if (!dragon->getVivo()) {
-        cout << "Lamentamos fuertemente la perdida de " << dragon->getNombre() << endl << "peleo bien." << endl;
-        if (!perdida)
-            cout << "Nuestros fuertes jinetes volveran a casa, con pena y tristeza, pero victorios." << endl;
-        else
-            cout << "Que el Valhalla les guarde un lugar a nuestros grandes guerreros." << endl;
+        if (!dragon->getVivo()) {
+            cout << "Lamentamos fuertemente la perdida de " << dragon->getNombre() << endl << "peleo bien." << endl;
+            if (!perdida)
+                cout << "Nuestros fuertes jinetes volveran a casa, con pena y tristeza, pero victorios." << endl;
+            else
+                cout << "Que el Valhalla les guarde un lugar a nuestros grandes guerreros." << endl;
+        }
+        else {
+            string mayus = dragon->getNombre();
+            transform(mayus.begin(), mayus.end(), mayus.begin(), ::toupper); //Recorre el string completo, haciendo mayuscula todos sus caracteres
+            cout << "INCREIBLE BATALLA DADA POR " << mayus << "!!!" << endl << "Hoy vuelve victorioso a casa." << endl;
+        }
+
+        delete enemigo;
+        delete[]atk;
     }
-    else {
-        string mayus = dragon->getNombre();
-        transform(mayus.begin(), mayus.end(), mayus.begin(), ::toupper); //Recorre el string completo, haciendo mayuscula todos sus caracteres
-        cout << "INCREIBLE BATALLA DADA POR " << mayus << "!!!" << endl << "Hoy vuelve victorioso a casa." << endl;
-    }
-      
-    delete enemigo;
-    delete []atk;
 }
 
 
