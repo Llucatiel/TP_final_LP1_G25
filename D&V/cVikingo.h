@@ -4,10 +4,10 @@
 #include <cstdlib>
 #include <iostream>
 #include <list>
-#include "cDatos.h"
+#include "cPersonaje.h"
 using namespace std;
 
-class cVikingo : public cDatos
+class cVikingo : public cPersonaje
 {
 	static int comida;
 	static int cantVikingos;
@@ -25,7 +25,6 @@ public:
 	static int getComida() { return comida; }
 	static int getCantVikingos() { return cantVikingos; }
 	static void cambioComida(int suma) { comida += suma; };
-	friend void atacarDragones(list<cVikingo> vikingos); //Declarada en cBocon
 
 	//bool trabajar();
 	bool dragonesMatados() { return dragones_terminados>0?true:false;}

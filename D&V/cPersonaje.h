@@ -1,14 +1,12 @@
 #pragma once
-#include <string>
 #include <ctime>
-#include <iostream>
 #include <list>
 #include <sstream>
 #include "cAtaque.h"
-#include <Windows.h>
+
 using namespace std;
 
-class cDatos
+class cPersonaje
 {
 protected:
 	string nombre;
@@ -26,12 +24,13 @@ protected:
 	void baja() { this->vivo = false; }
 
 public:
+	cPersonaje() {};
 	static void espera(float i);
 
 	virtual void mostrarStats();
 	virtual void mostrarAtaques();
 	virtual void descripcion()const = 0;
-	virtual ~cDatos();
+	virtual ~cPersonaje();
 
 	int getCantAtk() { return (int)this->ataques.size(); }
 	int getAnios();

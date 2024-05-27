@@ -1,8 +1,8 @@
 #pragma once
 #include <cstdlib>
-#include "cDatos.h"
+#include "cPersonaje.h"
 
-class cDragon : public cDatos
+class cDragon : public cPersonaje
 {
 private:
 	int* estadisticas; //Potencia, Fuerza, Destreza, Constitucion

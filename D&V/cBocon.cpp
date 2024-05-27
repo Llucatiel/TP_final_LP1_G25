@@ -131,7 +131,7 @@ void cBocon::pelea(cDragon* dragon)
     for (int i = enemigo->getCantAtk(); i < at; i++) {
         try {
             atk[i] = cAtaque(enemigo->getAliento());
-            enemigo+atk[i];
+            (*enemigo)+(&atk[i]);
         }
         catch (const exception* e) {
             i--;
@@ -178,7 +178,7 @@ void cBocon::pelea(cDragon* dragon)
         } while (!atacado);
 
         //Espera 3 segundos y sigue con el programa
-        cDatos::espera(1.8);
+        Sleep(1800);
         system("cls");
         ambos = enemigo->getVivo();
         if (!ambos)
@@ -196,7 +196,7 @@ void cBocon::pelea(cDragon* dragon)
         }
         ambos = dragon->getVivo();
 
-        cDatos::espera(1.8);
+        Sleep(1800);
         system("CLS");
     }
 

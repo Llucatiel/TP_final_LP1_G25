@@ -17,8 +17,6 @@ cJinete::cJinete(cVikingo& viki):cVikingo()
 {
 
 	this->nombre = viki.getNombre();
-
-
 	//this->nombre = viki.nombre;
 
 }
