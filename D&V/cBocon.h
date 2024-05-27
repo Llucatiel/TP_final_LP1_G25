@@ -1,8 +1,5 @@
 #pragma once
-#include "cDragon.h"
 #include "cJinete.h"
-#include <cstdlib>
-#include <iostream>
 //Estos dos son para llevar un string de minusculas a mayusculas
 #include <algorithm>
 #include <cctype>

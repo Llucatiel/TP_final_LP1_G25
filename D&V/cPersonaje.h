@@ -25,7 +25,7 @@ protected:
 
 public:
 	cPersonaje() {}
-	cPersonaje(string nombre, string color, string peso, string tamano);
+	cPersonaje(string nombre, string color, string peso, string tamano, int d, int m, int a);
 
 	virtual void mostrarStats();
 	virtual void mostrarAtaques();
@@ -42,6 +42,8 @@ public:
 	bool getVivo()const { return this->vivo; }
 	string getNombre() const { return this->nombre; }
 	string getTamano() const { return this->tamano; }
+	cAtaque* getAtk(int i);
+	list<cAtaque*> getListAtaques()const { return this->ataques; }
 
 	void mostrarDanos();
 	void operator-(cAtaque* atk);

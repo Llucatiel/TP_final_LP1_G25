@@ -22,12 +22,18 @@ void cPersonaje::generarStats()
     }
 }
 
-cPersonaje::cPersonaje(string nombre, string color, string peso, string tamano)
+cPersonaje::cPersonaje(string nombre, string color, string peso, string tamano, int d, int m, int a)
 {
     this->nombre = nombre;
     this->color = color;
     this->peso = peso;
     this->tamano = tamano;
+
+    struct tm date = { 0 };
+    date.tm_year = a - 1900;
+    date.tm_mon = m - 1;
+    date.tm_mday = d;
+    this->fecha = mktime(&date);
 }
 
 //Imprime por pantalla las estadisticas
@@ -117,6 +123,26 @@ float cPersonaje::atacar(int i)
     cout << nombre << " a usado " << (*it)->getNombre() << endl;
 
     return (*it)->probTotal((*it)->getStat());
+}
+
+cAtaque* cPersonaje::getAtk(int i)
+{
+
+    if (!this->vivo)
+        throw new exception("Lamentablemente, ya no se encuentra vivo/a.");
+
+
+    if (this->ataques.size() < 1) 
+        throw new exception("No se conoce ningun ataque. ");
+    
+
+    list<cAtaque*>::iterator it = this->ataques.begin();
+
+    for (int j = 0; j < i && it != this->ataques.end(); j++) {
+        it++;
+    }
+
+    return (*it);
 }
 
 void cPersonaje::mostrarDanos()

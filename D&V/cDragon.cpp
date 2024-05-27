@@ -1,5 +1,7 @@
 #include "cDragon.h"
 
+int cDragon::cantDragones = 0;
+
 //Genera estadisticas al azar para un dragon
 void cDragon::generarStats()
 {
@@ -186,6 +188,14 @@ cDragon::cDragon(cAtaque* atk, tipo segundo, string tamano, string color, string
 
     this->fecha = mktime(&date);
     this->domado = true;
+}
+
+void cDragon::domar()
+{
+    this->domado = true;
+    time(&fecha);
+    this->cantJinetes = 1;
+    this->identificador = sumaVuelta();
 }
 
 //Imprime por pantalla las estadisticas del dragon

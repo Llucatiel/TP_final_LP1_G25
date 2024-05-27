@@ -1,5 +1,4 @@
 #pragma once
-#include <cstdlib>
 #include "cPersonaje.h"
 
 class cDragon : public cPersonaje
@@ -22,6 +21,10 @@ private:
 	void generarStats();
 	void altaNombre();
 
+	static int sumaVuelta() {
+		cantDragones++;
+		return cantDragones; }
+
 public:
 	cDragon();
 	cDragon(cAtaque* atk);
@@ -35,6 +38,7 @@ public:
 	tipo getAliento() const { return aliento; }
 	tipo getSegundo() const { return segundo; }
 
+	void domar();
 	void mostrarStats();
 	void operator+(cAtaque* atk);
 	void olvidarAtk(cAtaque* atk);
