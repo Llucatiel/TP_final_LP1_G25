@@ -1,5 +1,5 @@
 #include "cAtaque.h"
-#include "cPersonaje.h" //Rompe programa si se borra :/ , sabemos que no deberia de ir
+#include "cPersonaje.h"
 
 //Crea ataque completamente al azar
 cAtaque::cAtaque()

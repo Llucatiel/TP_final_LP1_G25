@@ -291,6 +291,4 @@ void cBocon::pelea(list<cJinete*> jin)
     delete []atk;
 }
 
-void cBocon::transformacion(cVikingo& vikingos)
-{
-}
+

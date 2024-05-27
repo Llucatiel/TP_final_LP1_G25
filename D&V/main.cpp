@@ -9,20 +9,11 @@ int main()
 
     cDragon* draco = new cDragon();
     cBocon* bocon = new cBocon();
-    cVikingo* vik = new cVikingo("Juan Carlos", "Rubio", "Bodoque", 2, 12, 2003, "1.73", "55", "inutil", 0);
-    
+
     (*bocon) + (draco);
-    
-    try {
-        bocon->enlistarDragon();
-        draco->perderVida(draco->getVidaTotal() * 0.8);
-        vik->domar(draco);
-    }
-    catch (const exception* e) {
-        cout << e->what() << endl;
-        delete e;
-    }
-    
+
+    bocon->enlistarDragon();
+
     /*
     int cant;
     cout << "Cantidad de vikingos a enviar: "; cin >> cant;
@@ -33,14 +24,12 @@ int main()
         bocon->elegirVikingo(vikingosElegidos, cant);
         delete []elegidos;
         */
-    /*
+
     int dragonElegido;
     cout << "Elija el dragon a enviar: " << endl;
         cin >> dragonElegido;
     bocon->elegirDragon(dragonElegido);
-    */
 
-    delete vik;
     delete bocon;
     delete draco;
 

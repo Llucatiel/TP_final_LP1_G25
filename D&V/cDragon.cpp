@@ -191,14 +191,6 @@ cDragon::cDragon(cAtaque* atk, tipo segundo, string tamano, string color, string
     this->identificador = cantDragones;
 }
 
-void cDragon::domar()
-{
-    this->domado = true;
-    time(&fecha);
-    this->cantJinetes = 1;
-    this->identificador = sumaVuelta();
-}
-
 //Imprime por pantalla las estadisticas del dragon
 void cDragon::mostrarStats()
 {

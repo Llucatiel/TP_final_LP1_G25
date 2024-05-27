@@ -1,7 +1,11 @@
 #pragma once
+#include <string>
+#include <ctime>
+#include <cstdlib>
+#include <iostream>
+#include <list>
 #include "cPersonaje.h"
-#include "cDragon.h"
-
+using namespace std;
 
 class cVikingo : public cPersonaje
 {
@@ -15,17 +19,16 @@ protected:
 
 public:
 	cVikingo();
-	cVikingo(string nombre, string color, string apellido, int d, int m, int a, string altura, string peso, string trabajo, int dragones_terminados);
+	cVikingo(string nombre, string apellido, int d, int m, int a, string altura, string peso, string trabajo, int dragones_terminados);
 	~cVikingo();
 
 	static int getComida() { return comida; }
 	static int getCantVikingos() { return cantVikingos; }
 	static void cambioComida(int suma) { comida += suma; };
-	friend void cBocon::transformacion(cVikingo& vikingos);
+	friend void atacarDragones(list<cVikingo> vikingos); //Declarada en cBocon
 
 	//bool trabajar();
 	bool dragonesMatados() { return dragones_terminados>0?true:false;}
-	bool domar(cDragon* dragon);
 	string getApellido() const { return apellido; }
 	string getTrabajo() { return trabajo; }
 

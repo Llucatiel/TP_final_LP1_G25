@@ -4,86 +4,27 @@
 int cVikingo::comida = 30;
 int cVikingo::cantVikingos = 0;
 
-cVikingo::cVikingo()
-{
-}
-
 //Creacion por parametro de un vikingo
-cVikingo::cVikingo(string nombre, string color, string apellido, int d, int m, int a, string altura, string peso, string trabajo, int dragones_terminados)
-   : cPersonaje(nombre, color, peso, altura, d, m, a) {
+cVikingo::cVikingo(string nombre, string apellido, int d, int m, int a, string tamano, string peso, string trabajo, int dragones_terminados):cPersonaje(nombre,ap)
+{
+
     this->estadisticas = new int[3];
+    this->nombre = nombre;
     this->apellido = apellido;
+    struct tm date = { 0 };
+    date.tm_year = a - 1900;
+    date.tm_mon = m - 1;
+    date.tm_mday = d;
+
+    this->fecha = mktime(&date);
+
+    this->tamano = tamano;
     this->peso = peso;
     this->trabajo = trabajo;
     this->dragones_terminados = dragones_terminados;
+
     generarStats();
     cantVikingos++;
-}
-
-bool cVikingo::domar(cDragon* dragon)
-{
-    if(dragon->getVidaActual()>dragon->getVidaTotal()*0.75)
-        throw new exception("El dragon a domar no se encuentra lo suficientemente bajo de vida.");
-
-    time_t now;
-    time_t diff;
-    int dice = 0;
-    string escrito;
-    float complejo = dragon->getVidaActual();
-    float fuerza = getStat(0)>getStat(1)?getStat(0):getStat(1); //Decide si el vikingo es mejor con su fuerza o su destreza
-
-    cout << "DEBES DE MANTENER AL DRAGON ATADO, ESCRIBE EN PANTALLA LAS PALABRAS QUE MANDAREMOS A CONTINUACION: " << endl;
-    cout << "Cuidado!! Todas las palabras estaran en mayusculas." << endl;
-    system("pause");
-
-    while (complejo > 0 && complejo<dragon->getVidaTotal()*0.65) {
-        dice = rand() % 5;
-        switch (dice) {
-        case 0:
-            cout << "APRETAR" << endl;
-            time(&now);
-            while(escrito != "APRETAR")
-                cin >> escrito;
-            break;
-        case 1:
-            cout << "TIRONEAR" << endl;
-            time(&now);
-            while (escrito != "TIRONEAR")
-                cin >> escrito;
-            break;
-        case 2:
-            cout << "GOLPEAR" << endl;
-            time(&now);
-            while (escrito != "GOLPEAR")
-                cin >> escrito;
-            break;
-        case 3:
-            cout << "PATEAR" << endl;
-            time(&now);
-            while (escrito != "PATEAR")
-                cin >> escrito;
-            break;
-        default:
-            continue;
-        }
-        time(&diff);
-        float hecho = fuerza - difftime(now, diff)*4;
-        if (hecho < 0)
-            cout << "El dragon se esta liberando! MAS RAPIDO Y CON MAS FUERZA" << endl;
-        else
-            cout << "BIEN HECHO, SIGUE ASI, CON VELOCIDAD." << endl;
-        complejo -= hecho;
-        Sleep(500 + rand() % 1000);
-        system("cls");
-    }
-    if (complejo <= 0) {
-        cout << dragon->getNombre() << " ha sido domado con exito. Felicidades!" << endl;
-        return true;
-    }
-    else
-        cout << dragon->getNombre() << " ha logrado escapar, que lastima." << endl;
-    return false;
-    
 }
 
 //Imprime por pantalla la descripcion del vikingo
