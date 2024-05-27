@@ -86,23 +86,9 @@ int cPersonaje::getAnios()
     //La divide por la cantidad de dias en un anio
 }
 
-string cPersonaje::To_string()
-{
-    stringstream ss;
-
-    ss << "nombre: " << nombre << endl;
-    ss << "color de pelo: " << color << endl;
-    ss << "peso: " << peso << endl;
-    ss << "tamaño: " << tamano << endl;
-    ss << "nacimiento: " << fecha << endl;
-
-    return ss.str();
-}
-
 void cPersonaje::imprimirDatos()
 {
-    string info = To_string();
-    cout << info;
+    cout << *this << endl;
 }
 
 float cPersonaje::atacar(int i)
@@ -215,3 +201,12 @@ cPersonaje::~cPersonaje()
     delete []puntero;
 }
 
+ostream& operator<<(ostream& os, const cPersonaje& cPe)
+{
+    os << "nombre: " << cPe.nombre << endl;
+    cPe.impresion();
+    os << "peso: " << cPe.peso << "kg" << endl;
+    os << "tamano: " << cPe.tamano << "cm" << endl;
+
+    return os;
+}

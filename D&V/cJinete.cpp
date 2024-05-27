@@ -1,23 +1,15 @@
 #include "cJinete.h"
 
-cJinete::cJinete(string nombre, string pelo, int d, int m, int a, string apodo, cDragon* dragon): cVikingo()
+cJinete::cJinete(string nombre, string apellido, string pelo,string altura, string peso, int d, int m, int a, string apodo, cDragon* dragon):
+	cVikingo(nombre, pelo, apellido, d, m, a, altura, peso, "Jinete", dragones_terminados)
 {
-	this->nombre = nombre;
-	this->color = pelo;
-	struct tm date = { 0 };
-	date.tm_year = a - 1900;
-	date.tm_mon = m - 1;
-	date.tm_mday = d;
-	this->fecha = mktime(&date);
 	this->apodo = apodo;
 	this->dragon = dragon;
 }
 
-cJinete::cJinete(cVikingo& viki):cVikingo()
+cJinete::cJinete(cVikingo& viki, cDragon *dragon):cVikingo(viki.getNombre(),viki.getColor(), viki.getApellido(), 1, 1, 1000, viki.getTam(),viki.getPeso(), "Jinete", NULL)
 {
-	this->nombre = viki.getNombre();
-	this->apellido = viki.getApellido();
-	this->dragon = getDragon();
+	this->dragon = dragon;
 	this->ataques = viki.getListAtaques();
 
 }

@@ -61,22 +61,20 @@ void cDragon::altaNombre()
 
 
 //Dragon completamente al azar
-cDragon::cDragon()
+cDragon::cDragon() :cPersonaje("sinNombre", "sinColor", to_string(40 + rand() % 460), to_string(50 + rand() % 250), 1, 1, 1000)
 {
-    this->vivo = true;
     this->aliento = (tipo)(rand() % 4);
-
     this->estadisticas = new int[4];
     altaNombre();
     generarStats();
     this->vidaMax = this->estadisticas[2] * 10;
     this->vidaActual = this->vidaMax;
 
-    this->tamano = to_string(50 + rand() % 250) + " cm";
-    string color[5] = { "Verde", "Rojo", "Azul", "Marron", "Negro" };
-    this->color = color[rand() % 5];
+    string col[5] = { "Verde", "Rojo", "Azul", "Marron", "Negro" };
+    this->color = col[rand() % 5];
     this->domado = false;
-    this->peso = to_string(40 + rand() % 460) + " kg";
+    this->fecha = NULL;
+
     this->cantJinetes = 0;
     this->cantCabezas = 1 + (1 + rand() % 12)/10;
     if (cantCabezas > 1) {
@@ -94,15 +92,15 @@ cDragon::cDragon()
     }
     puntero[0] = cAtaque(this->aliento);
     ataques.push_front(&puntero[0]);
-
 }
 
 //Dragon creado a partir de 1 ataque
-cDragon::cDragon(cAtaque* atk)
+cDragon::cDragon(cAtaque* atk) :cPersonaje("sinNombre", "sinColor", to_string(40 + rand() % 460), to_string(50 + rand() % 250), 1, 1, 1)
 {
-    this->vivo = true;
     this->aliento = atk->getTipo();
     this->ataques.push_back(atk);
+    string col[5] = { "Verde", "Rojo", "Azul", "Marron", "Negro" };
+    this->color = col[rand() % 5];
 
     this->estadisticas = new int[4];
     altaNombre();
@@ -110,11 +108,9 @@ cDragon::cDragon(cAtaque* atk)
     this->vidaMax = this->estadisticas[2] * 10;
     this->vidaActual = this->vidaMax;
 
-    this->tamano = to_string(50 + rand() % 250) + " cm";
-    string color[5] = { "Verde", "Rojo", "Azul", "Marron", "Negro" };
-    this->color = color[rand() % 5];
     this->domado = false;
-    this->peso = to_string(40 + rand() % 460) + " kg";
+    this->fecha = NULL;
+
     this->cantJinetes = 0;
     this->cantCabezas = 1 + (1 + rand() % 12) / 10;
     if (cantCabezas > 1) {
@@ -128,9 +124,8 @@ cDragon::cDragon(cAtaque* atk)
 }
 
 //Dragon creado por sus atributos
-cDragon::cDragon(cAtaque* atk, tipo segundo, string tamano, string color, string peso, int cabezas)
+cDragon::cDragon(cAtaque* atk, tipo segundo, string tamano, string color, string peso, int cabezas): cPersonaje("sinNombre", color, peso, tamano, 1, 1, 1)
 {
-    this->vivo = true;
     this->aliento = atk->getTipo();
     ataques.push_back(atk);
 
@@ -140,10 +135,9 @@ cDragon::cDragon(cAtaque* atk, tipo segundo, string tamano, string color, string
     this->vidaMax = this->estadisticas[2] * 10;
     this->vidaActual = this->vidaMax;
 
-    this->tamano = tamano;
-    this->color = color;
+    this->fecha = NULL;
     this->domado = false;
-    this->peso = peso;
+
     this->cantJinetes = 0;
     this->cantCabezas = cabezas;
     if (cantCabezas > 1) {
@@ -155,9 +149,8 @@ cDragon::cDragon(cAtaque* atk, tipo segundo, string tamano, string color, string
 }
 
 //Dragon domado creado por sus atributos
-cDragon::cDragon(cAtaque* atk, tipo segundo, string tamano, string color, string peso, int cabezas, int d, int m, int a)
+cDragon::cDragon(cAtaque* atk, tipo segundo, string tamano, string color, string peso, int cabezas, int d, int m, int a) : cPersonaje("sinNombre", color, peso, tamano, d, m, a)
 {
-    this->vivo = true;
     this->aliento = atk->getTipo();
     this->segundo = segundo;
     ataques.push_back(atk);
@@ -168,10 +161,8 @@ cDragon::cDragon(cAtaque* atk, tipo segundo, string tamano, string color, string
     this->vidaMax = this->estadisticas[2] * 10;
     this->vidaActual = this->vidaMax;
 
-    this->tamano = tamano;
-    this->color = color;
     this->domado = true;
-    this->peso = peso;
+
     this->cantJinetes = 1;
     this->cantCabezas = cabezas;
     if (cantCabezas > 1) {
@@ -180,14 +171,6 @@ cDragon::cDragon(cAtaque* atk, tipo segundo, string tamano, string color, string
         puntero[0] = cAtaque(this->segundo);
         ataques.push_front(&puntero[0]);
     }
-
-    struct tm date = { 0 };
-    date.tm_year = a - 1900;
-    date.tm_mon = m - 1;
-    date.tm_mday = d;
-
-    this->fecha = mktime(&date);
-    this->domado = true;
 }
 
 void cDragon::domar()
@@ -280,8 +263,3 @@ void cDragon::descripcion()const
 {
     cout << " " << endl;
 }
-
-
-
-
-

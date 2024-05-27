@@ -11,7 +11,8 @@ int main()
     cBocon* bocon = new cBocon();
 
     (*bocon)+(draco);
-
+    //cout << *(draco);
+    draco->imprimirDatos();
     bocon->enlistarDragon();
 
     int dragonElegido;

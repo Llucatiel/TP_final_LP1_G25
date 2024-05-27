@@ -1,6 +1,8 @@
 #pragma once
 #include "cPersonaje.h"
 
+
+
 class cDragon : public cPersonaje
 {
 private:
@@ -20,10 +22,13 @@ private:
 
 	void generarStats();
 	void altaNombre();
+	void impresion() const {
+		if (getDomado())
+			cout << "Edad: " << fecha << endl;
+		cout << "Color de escamas: " << color << endl;
+	}
 
-	static int sumaVuelta() {
-		cantDragones++;
-		return cantDragones; }
+	static int sumaVuelta() { return ++cantDragones; }
 
 public:
 	cDragon();

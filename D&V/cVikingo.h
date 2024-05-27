@@ -18,8 +18,13 @@ protected:
 	int dragones_terminados;
 	string apellido;
 
+	virtual void impresion() const {
+		cout << "Apellido: " << apellido << endl;
+		cout << "Trabajo: " << trabajo << endl;
+		cout << "Edad: " << fecha << endl;
+		cout << "Color de pelo: " << color << endl;
+	}
 public:
-	cVikingo() {}
 	cVikingo(string nombre, string color, string apellido, int d, int m, int a, string altura, string peso, string trabajo, int dragones_terminados);
 	~cVikingo();
 
@@ -32,6 +37,7 @@ public:
 	bool domar(cDragon* dragon);
 	string getApellido() const { return apellido; }
 	string getTrabajo() { return trabajo; }
+	int getDragonesTerminados() const { return this->dragones_terminados; }
 
 	void setTrabajo(string nuevo) { this->trabajo = nuevo; }
 	void setDragonesTerminados(int suma) { this->dragones_terminados += suma; }
