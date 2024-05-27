@@ -129,15 +129,15 @@ void cBocon:: atacarDragones(list<cVikingo*> vikingos)//en el main especificamos
 //Pelea pokemon de dragones
 void cBocon::pelea(list<cJinete*> jin)
 {
-    int lim = 1 + rand() % 4;
-    cAtaque* atk = new cAtaque[lim];
+    int at = 1 + rand() % 4;
+    cAtaque* atk = new cAtaque[at];
     atk[0] = cAtaque();
-    cDragon* enemigo = new cDragon(&atk[0]); //Crea a un ataque y dragon genericos para combatir
-    
+    cDragon* enemigo = new cDragon(&atk[0]);
+    //Crea a un ataque y dragon genericos para combatir
     list<cJinete*>::iterator it = jin.begin();
     cDragon* dragon = (*it)->getDragon();
-        
-    for (int i = enemigo->getCantAtk(); i < lim; i++) {
+
+    for (int i = enemigo->getCantAtk(); i < at; i++) {
         try {
             atk[i] = cAtaque(enemigo->getAliento());
             (*enemigo)+(&atk[i]);
@@ -148,18 +148,8 @@ void cBocon::pelea(list<cJinete*> jin)
         }
     }
 
-    float life = 0;
-    life = (*it)->getStat(2) * 5;
-    if (jin.size() == 2) {
-        it++;
-        life += (*it)->getStat(2) * 5;
-        it = jin.begin();
-    }
-    float max = life;
-
     bool ambos = true;
-    bool perdida = false;
-    lim = enemigo->getCantAtk();
+    int lim = enemigo->getCantAtk();
     system("cls");
 
     cout << dragon->getNombre() << " se enfrenta a " << enemigo->getNombre() << endl << "PREPARENCE PARA LA BATALLA!" << endl << endl;
@@ -169,71 +159,34 @@ void cBocon::pelea(list<cJinete*> jin)
         do {
             cout << enemigo->getNombre() << ": " << enemigo->getVidaActual() << " / " << enemigo->getVidaTotal() << " hp" << endl;
             cout << "\t\t\t\t\t";
-            //ATAQUE DE DRAGON
-            if (dragon->getVivo()) {
-                cout << dragon->getNombre() << ": " << dragon->getVidaActual() << " / " << dragon->getVidaTotal() << " hp" << endl;
+            cout << dragon->getNombre() << ": " << dragon->getVidaActual() << " / " << dragon->getVidaTotal() << " hp" << endl;
 
-                cout << "Elija el ataque a usar: " << endl;
-                dragon->mostrarAtaques();
-                cout << "5. mostrar danos" << endl;
+            cout << "Elija el ataque a usar: " << endl;
+            dragon->mostrarAtaques();
+            cout << "5. mostrar danos" << endl;
+            int i;
+            cin >> i;
 
-                int i;
-                cin >> i;
-
-                try {
-                    if (i == 5) {
-                        dragon->mostrarDanos();
-                        system("pause");
-                        system("cls");
-                        continue;
-                    }
-                    enemigo->perderVida(dragon->atacar(i)); //Perder vida llama dentro de si a atacar, calcula si pego o no, y cuanto danio hizo
-                    atacado = true;
-                }
-                catch (const exception* e) {
-                    cout << e->what() << endl;
-                    delete e;
-                    atacado = false;
-                    system("puase");
+            try {
+                if (i == 5) {
+                    dragon->mostrarDanos();
+                    system("pause");
                     system("cls");
+                    continue;
                 }
+                enemigo->perderVida(dragon->atacar(i)); //Perder vida llama dentro de si a atacar, calcula si pego o no, y cuanto danio hizo
+                atacado = true;
+           }
+            catch (const exception* e) {
+                cout << e->what() << endl;
+                delete e;
+                atacado = false;
+                system("puase");
+                system("cls");
             }
-            else {
-                cout << "Jinetes: " << life << " / " << max << " hp" << endl;
-                while (it != jin.end()) {
-                    cout << "Elija el ataque a usar: " << endl;
-                    (*it)->mostrarAtaques();
-                    cout << "5. mostrar danos" << endl;
+        } while (!atacado);
 
-                    int i;
-                    cin >> i;
-
-                    float dano = 0;
-                    try {
-                        if (i == 5) {
-                            (*it)->mostrarDanos();
-                            system("pause");
-                            system("cls");
-                            continue;
-                        }
-                        enemigo->perderVida((*it)->atacar(i)); //Perder vida llama dentro de si a atacar, calcula si pego o no, y cuanto danio hizo
-                        atacado = true;
-                    }
-                    catch (const exception* e) {
-                        cout << e->what() << endl;
-                        delete e;
-                        atacado = false;
-                        system("puase");
-                        system("cls");
-                    }
-                    it++;
-                }
-                it = jin.begin();
-            }
-            
-        }while (!atacado);
-
-        //Espera 1.5 segundos y sigue con el programa
+        //Espera 3 segundos y sigue con el programa
         Sleep(1500);
         system("cls");
         ambos = enemigo->getVivo();
@@ -242,51 +195,29 @@ void cBocon::pelea(list<cJinete*> jin)
 
         cout << enemigo->getNombre() << ": " << enemigo->getVidaActual() << " / " << enemigo->getVidaTotal() << " hp" << endl;
         cout << "\t\t\t\t\t";
-        if (dragon->getVivo()) {
-            cout << dragon->getNombre() << ": " << dragon->getVidaActual() << " / " << dragon->getVidaTotal() << " hp" << endl;
-            try {
-                dragon->perderVida(enemigo->atacar(rand() % lim));
-            }
-            catch (const exception* e) {
-                cout << e->what() << endl;
-                delete e;
-            }
-            if (!dragon->getVivo()) {
-                Sleep(15000);
-                cout << dragon->getNombre() << " ha perecido en batalla, pero aun no es el fin!" << endl;
-            }
-            Sleep(1000);
-            system("CLS");
+        cout << dragon->getNombre() << ": " << dragon->getVidaActual() << " / " << dragon->getVidaTotal() << " hp" << endl;
+        try {
+            dragon->perderVida(enemigo->atacar(rand() % lim));
         }
-        else {
-            cout << "Jinetes: " << life << " / " << max << " hp" << endl;
-            try {
-                life -= enemigo->atacar(rand() % lim);
-            }
-            catch (const exception* e) {
-                cout << e->what() << endl;
-                delete e;
-            }
-            if (life <= 0) {
-                ambos = false;
-                perdida = true;
-            }
+        catch (const exception* e) {
+            cout << e->what() << endl;
+            delete e;
         }
+        ambos = dragon->getVivo();
+
+        Sleep(1500);
+        system("CLS");
     }
 
-    if (!dragon->getVivo()) {
+    if (!dragon->getVivo())
         cout << "Lamentamos fuertemente la perdida de " << dragon->getNombre() << endl << "peleo bien." << endl;
-        if (!perdida)
-            cout << "Nuestros fuertes jinetes volveran a casa, con pena y tristeza, pero victorios." << endl;
-        else
-            cout << "Que el Valhalla les guarde un lugar a nuestros grandes guerreros." << endl;
-    }
     else {
         string mayus = dragon->getNombre();
         transform(mayus.begin(), mayus.end(), mayus.begin(), ::toupper); //Recorre el string completo, haciendo mayuscula todos sus caracteres
         cout << "INCREIBLE BATALLA DADA POR " << mayus << "!!!" << endl << "Hoy vuelve victorioso a casa." << endl;
     }
        
+    
     delete enemigo;
     delete []atk;
 }

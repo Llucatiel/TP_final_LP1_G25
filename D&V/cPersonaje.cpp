@@ -22,12 +22,20 @@ void cPersonaje::generarStats()
     }
 }
 
-cPersonaje::cPersonaje(string nombre, string color, string peso, string tamano)
-{
-    this->nombre = nombre;
-    this->color = color;
-    this->peso = peso;
-    this->tamano = tamano;
+//Crea una espera entre accion y accion de "i" segundos. ESTATICO
+void cPersonaje::espera(float i) {
+    time_t now;
+    time(&now);
+    time_t then;
+    float seconds;
+    do {
+        time(&then);
+        seconds = difftime(then, now);
+    } while (seconds < i);
+    /*
+    Toma el tiempo inicial, y toma constantemente el tiempo actual hasta
+    que la diferencia sea de i segundos, allí detendrá el loop y volvera al programa
+    */
 }
 
 //Imprime por pantalla las estadisticas

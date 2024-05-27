@@ -27,8 +27,8 @@ protected:
 	void baja() { this->vivo = false; }
 
 public:
-	cPersonaje();
-	cPersonaje(string nombre, string color, string peso, string tamano);
+	static void espera(float i);
+	//	CREAR CONSTRUCTOR OARA QUE ANDA
 	virtual void mostrarStats();
 	virtual void mostrarAtaques();
 	virtual void descripcion()const = 0;
