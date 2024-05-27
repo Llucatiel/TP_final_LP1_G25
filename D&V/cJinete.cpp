@@ -15,12 +15,12 @@ cJinete::cJinete(string nombre, string pelo, int d, int m, int a, string apodo, 
 
 cJinete::cJinete(cVikingo& viki):cVikingo()
 {
-<<<<<<< Updated upstream
+
 	this->nombre = viki.getNombre();
-	this->color = viki.
-=======
+
+
 	//this->nombre = viki.nombre;
->>>>>>> Stashed changes
+
 }
 
 void cJinete::asignarDragon(cDragon* dragon)

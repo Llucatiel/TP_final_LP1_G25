@@ -18,7 +18,7 @@ protected:
 	string apellido;
 
 public:
-	cVikingo();
+	cVikingo() {}
 	cVikingo(string nombre, string apellido, int d, int m, int a, string altura, string peso, string trabajo, int dragones_terminados);
 	~cVikingo();
 
