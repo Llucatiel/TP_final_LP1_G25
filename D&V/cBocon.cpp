@@ -68,15 +68,7 @@ void cBocon::elegirDragon(int elegido)
     if (!encontrado)
         return;
 
-    list<cJinete*>::iterator ij = jinetes.begin();
-    list<cJinete*> jin;
-    while (ij != jinetes.end()) {
-        if ((*ij)->getDragon()->getIdentificador() == (*it)->getIdentificador())
-            jin.push_back((*ij));
-        ij++;
-    }
-
-    pelea(jin);
+    pelea((*it));
 }
 
 //Pelea entre los vikingos y los dragones
@@ -127,20 +119,19 @@ void cBocon:: atacarDragones(list<cVikingo*> vikingos)//en el main especificamos
 }
 
 //Pelea pokemon de dragones
-void cBocon::pelea(list<cJinete*> jin)
+void cBocon::pelea(cDragon* dragon)
 {
     int at = 1 + rand() % 4;
     cAtaque* atk = new cAtaque[at];
     atk[0] = cAtaque();
     cDragon* enemigo = new cDragon(&atk[0]);
     //Crea a un ataque y dragon genericos para combatir
-    list<cJinete*>::iterator it = jin.begin();
-    cDragon* dragon = (*it)->getDragon();
 
+    
     for (int i = enemigo->getCantAtk(); i < at; i++) {
         try {
             atk[i] = cAtaque(enemigo->getAliento());
-            (*enemigo)+(&atk[i]);
+            enemigo+atk[i];
         }
         catch (const exception* e) {
             i--;
@@ -187,7 +178,7 @@ void cBocon::pelea(list<cJinete*> jin)
         } while (!atacado);
 
         //Espera 3 segundos y sigue con el programa
-        Sleep(1500);
+        cDatos::espera(1.8);
         system("cls");
         ambos = enemigo->getVivo();
         if (!ambos)
@@ -205,7 +196,7 @@ void cBocon::pelea(list<cJinete*> jin)
         }
         ambos = dragon->getVivo();
 
-        Sleep(1500);
+        cDatos::espera(1.8);
         system("CLS");
     }
 

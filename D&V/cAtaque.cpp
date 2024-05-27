@@ -1,5 +1,5 @@
 #include "cAtaque.h"
-#include "cPersonaje.h"
+#include "cDatos.h"
 
 //Crea ataque completamente al azar
 cAtaque::cAtaque()
@@ -123,9 +123,9 @@ float cAtaque::probTotal(int stat)
 		cout << "HA SACADO UN CRITICO" << endl;
 		for (int i = 0; i < 3; i++) {
 			system("color 47");
-			Sleep(100);
+			cDatos::espera(0.0001);
 			system("color 67");
-			Sleep(100);
+			cDatos::espera(0.0001);
 		}
 		system("color 07");
 		return danoTotal(stat) * 2;
@@ -134,9 +134,9 @@ float cAtaque::probTotal(int stat)
 		cout << "Ha acertado al objetivo" << endl;
 		for (int i = 0; i < 3; i++) {
 			system("color 87");
-			Sleep(100);
+			cDatos::espera(0.005);
 			system("color 07");
-			Sleep(100);
+			cDatos::espera(0.005);
 		}
 		return danoTotal(stat);
 	}
