@@ -5,6 +5,9 @@
 class cDragon : public cPersonaje
 {
 private:
+	static int cantDragones;
+
+	int identificador;
 	int* estadisticas; //Potencia, Fuerza, Destreza, Constitucion
 	unsigned short int cantJinetes;
 	float vidaMax;
@@ -28,6 +31,7 @@ public:
 	float getVidaActual() const { return this->vidaActual; }
 	float getVidaTotal() const { return this->vidaMax; }
 	bool getDomado() const { return this->domado; }
+	int getIdentificador() const { return this->identificador; }
 	tipo getAliento() const { return aliento; }
 	tipo getSegundo() const { return segundo; }
 

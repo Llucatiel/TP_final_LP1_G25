@@ -32,10 +32,9 @@ void cPersonaje::espera(float i) {
         time(&then);
         seconds = difftime(then, now);
     } while (seconds < i);
-    /*
-    Toma el tiempo inicial, y toma constantemente el tiempo actual hasta
-    que la diferencia sea de i segundos, allí detendrá el loop y volvera al programa
-    */
+    //Toma el tiempo inicial, y toma constantemente el tiempo actual hasta
+    //que la diferencia sea de i segundos, allí detendrá el loop y volvera al programa
+    
 }
 
 //Imprime por pantalla las estadisticas
@@ -141,7 +140,7 @@ void cPersonaje::mostrarDanos()
     }
 }
 
-
+//Aprende un nuevo ataque
 void cPersonaje::operator+(cAtaque* atk)
 {
         if (!this->vivo)
@@ -163,6 +162,30 @@ void cPersonaje::operator+(cAtaque* atk)
         }
 
         this->ataques.push_back(atk);
+}
+
+//Olvida un ataque ya aprendido
+void cPersonaje::operator-(cAtaque* atk)
+{
+
+    if (!this->vivo)
+        throw new exception("Lo lamentamos, ya no puede ser utilizado");
+
+    list<cAtaque*>::iterator it = this->ataques.begin();
+    bool borrador = false;
+
+    while (it != this->ataques.end()) {
+        if ((*it)->getNombre() == atk->getNombre()) {
+            this->ataques.erase(it);
+            borrador = true;
+            cout << this->nombre << " ha olvidado como usar " << atk->getNombre() << endl;
+            return;
+        }
+        it++;
+    }
+
+    if (!borrador)
+        throw new exception("Ataque no conocido");
 }
 
 //Libera memoria
