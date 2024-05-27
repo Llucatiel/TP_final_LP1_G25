@@ -15,10 +15,7 @@ cJinete::cJinete(string nombre, string pelo, int d, int m, int a, string apodo, 
 
 cJinete::cJinete(cVikingo& viki):cVikingo()
 {
-	this->nombre = viki.getNombre();
-	this->apellido = viki.getApellido();
-	this->dragon = getDragon();
-	this->ataques = viki.getListAtaques();
+
 }
 
 void cJinete::asignarDragon(cDragon* dragon)
