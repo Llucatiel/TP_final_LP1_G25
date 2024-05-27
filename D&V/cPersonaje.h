@@ -24,8 +24,8 @@ protected:
 	void baja() { this->vivo = false; }
 
 public:
-	cPersonaje() {};
-	static void espera(float i);
+	cPersonaje() {}
+	cPersonaje(string nombre, string color, string peso, string tamano);
 
 	virtual void mostrarStats();
 	virtual void mostrarAtaques();
