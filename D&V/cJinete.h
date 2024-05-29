@@ -17,10 +17,8 @@ class cJinete :public cVikingo
 	relacion relacionDragon = pobre;
 
 	void impresion() const {
-		cout << "Apellido: " << apellido << endl;
-		cout << "Dragon: " << dragon->getNombre() << endl;
-		cout << "Edad: " << fecha << endl;
-		cout << "Color de pelo: " << color << endl;
+		cout<< apellido;
+		cout << "y su empedernido dragon es el poderoso: " << dragon->getNombre() << ". Lleva vagando por estas tierras desde hace "<<fecha<<" años con su melena "<<color<<".";
 	}
 
 public:
