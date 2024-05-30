@@ -19,8 +19,10 @@ protected:
 	string apellido;
 
 	virtual void impresion() const {
-		cout << apellido << "uno de nuestros grandes "<<trabajo<<"en berk. ";
-		cout<< "Lleva vagando por estas tierras desde hace "<<fecha<<" años con su melena "<<color<<".";
+		cout << "Apellido: " << apellido << endl;
+		cout << "Trabajo: " << trabajo << endl;
+		cout << "Edad: " << fecha << endl;
+		cout << "Color de pelo: " << color << endl;
 	}
 public:
 	cVikingo(string nombre, string color, string apellido, int d, int m, int a, string altura, string peso, string trabajo, int dragones_terminados);

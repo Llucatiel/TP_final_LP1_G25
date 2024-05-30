@@ -24,7 +24,8 @@ private:
 	void altaNombre();
 	void impresion() const {
 		if (getDomado())
-			cout << "tiene " << fecha << " años y posee unas escamas color "<<color<<endl;
+			cout << "Edad: " << fecha << endl;
+		cout << "Color de escamas: " << color << endl;
 	}
 
 	static int sumaVuelta() { return ++cantDragones; }
