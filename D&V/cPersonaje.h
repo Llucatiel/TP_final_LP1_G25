@@ -17,7 +17,7 @@ protected:
 	list<cAtaque*> ataques;
 	cAtaque* puntero = NULL;
 	int* estadisticas = NULL;
-	bool vivo = true;
+	bool vivo;
 
 
 	virtual void generarStats();
@@ -31,6 +31,7 @@ public:
 	virtual void mostrarAtaques();
 	virtual void descripcion()const = 0;
 	virtual void operator+(cAtaque* atk);
+	virtual string To_string();
 	friend ostream& operator<<(ostream& os, const cPersonaje& cPe);
 	virtual ~cPersonaje();
 

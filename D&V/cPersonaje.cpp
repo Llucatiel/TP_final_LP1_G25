@@ -28,6 +28,7 @@ cPersonaje::cPersonaje(string nombre, string color, string peso, string tamano, 
     this->color = color;
     this->peso = peso;
     this->tamano = tamano;
+    this->vivo = true;
 
     struct tm date = { 0 };
     date.tm_year = a - 1900;
@@ -68,6 +69,20 @@ void cPersonaje::mostrarAtaques()
         cout << cont << ". " << (*it)->getNombre() << endl;
         it++;
     }
+}
+
+
+string cPersonaje::To_string()
+{
+     stringstream ss;
+
+    ss << "Nombre: " << nombre << endl;
+    ss << "Color de pelo: " << color << endl;
+    ss << "Peso: " << peso << endl;
+    ss << "Tamano: " << tamano << endl;
+    ss << "Edad: " << fecha << endl;
+
+    return ss.str();
 }
 
 //Calcula la fecha creada en años, o dias en caso a ser menor de 1 año
@@ -203,10 +218,10 @@ cPersonaje::~cPersonaje()
 
 ostream& operator<<(ostream& os, const cPersonaje& cPe)
 {
-    os << "nombre: " << cPe.nombre << endl;
+    os << "Nombre: " << cPe.nombre << endl;
     cPe.impresion();
-    os << "peso: " << cPe.peso << "kg" << endl;
-    os << "tamano: " << cPe.tamano << "cm" << endl;
+    os << "Peso: " << cPe.peso << " kg" << endl;
+    os << "Tamano: " << cPe.tamano << " cm" << endl;
 
     return os;
 }

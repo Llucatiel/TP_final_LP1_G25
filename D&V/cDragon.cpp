@@ -175,6 +175,8 @@ cDragon::cDragon(cAtaque* atk, tipo segundo, string tamano, string color, string
 
 void cDragon::domar()
 {
+    if (domado)
+        throw new exception("El dragon ya se encuentra domado.");
     this->domado = true;
     time(&fecha);
     this->cantJinetes = 1;

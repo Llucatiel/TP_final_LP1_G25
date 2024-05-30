@@ -18,6 +18,7 @@ class cJinete :public cVikingo
 
 	void impresion() const {
 		cout << "Apellido: " << apellido << endl;
+		cout << "Apodo: " << apodo << endl;
 		cout << "Dragon: " << dragon->getNombre() << endl;
 		cout << "Edad: " << fecha << endl;
 		cout << "Color de pelo: " << color << endl;

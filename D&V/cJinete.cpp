@@ -9,9 +9,16 @@ cJinete::cJinete(string nombre, string apellido, string pelo,string altura, stri
 
 cJinete::cJinete(cVikingo& viki, cDragon *dragon):cVikingo(viki.getNombre(),viki.getColor(), viki.getApellido(), 1, 1, 1000, viki.getTam(),viki.getPeso(), "Jinete", NULL)
 {
-	this->dragon = dragon;
+	try {
+		dragon->domar();
+		this->dragon = dragon;
+	}
+	catch (const exception* e) {
+		cout << e->what();
+		this->dragon = NULL;
+		delete e;
+	}
 	this->ataques = viki.getListAtaques();
-
 }
 
 void cJinete::asignarDragon(cDragon* dragon)
