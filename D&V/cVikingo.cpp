@@ -22,7 +22,7 @@ cVikingo::cVikingo(string nombre, string color, string apellido, int d, int m, i
     this->peso = peso;
     this->trabajo = trabajo;
     this->dragones_terminados = dragones_terminados;
-
+    ataques.push_back(new cAtaque(fisico));
     generarStats();
     cantVikingos++;
 }
@@ -30,7 +30,7 @@ cVikingo::cVikingo(string nombre, string color, string apellido, int d, int m, i
 //Imprime por pantalla la descripcion del vikingo
 void cVikingo::descripcion() const
 {
-    cout << " El es nuestro gran guerrero " <<nombre<<" "<<apellido<<" nuestro gran "<<trabajo<<" que lleva rondando por estas tierras desde hace "<<getAnios<<" primaveras."<< endl;
+    cout << " El es nuestro gran guerrero " <<nombre<<" "<<apellido<<" nuestro gran "<<trabajo<<" que lleva rondando por estas tierras desde hace "<<" 3 " << " primaveras." << endl;
     cout << "su brillante cabellera " << color << " resplandece ante el atardecer de este peso pesado de " << peso << "kg"<<endl;
     if (dragones_terminados > 0)
         cout << "lleva " << dragones_terminados << " cadaveres de dragones en su espalda" << endl;

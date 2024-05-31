@@ -92,20 +92,13 @@ cDragon::cDragon() :cPersonaje("sinNombre", "sinColor", to_string(40 + rand() % 
     this->cantJinetes = 0;
     this->cantCabezas = 1 + (1 + rand() % 12)/10;
     if (cantCabezas > 1) {
-        puntero = new cAtaque[2];
         do {
             this->segundo = (tipo)(rand() % 4);
         } while (segundo == aliento);
-        puntero[1] =  cAtaque(this->segundo);
+        ataques.push_back(new cAtaque(segundo));
+    }
 
-        ataques.push_back(&puntero[1]);
-    }
-    else {
-        puntero = new cAtaque[1];
-        this->segundo = vacio;
-    }
-    puntero[0] = cAtaque(this->aliento);
-    ataques.push_front(&puntero[0]);
+    ataques.push_front(new cAtaque(aliento));
 }
 
 //Dragon creado a partir de 1 ataque
@@ -130,9 +123,7 @@ cDragon::cDragon(cAtaque* atk) :cPersonaje("sinNombre", "sinColor", to_string(40
         do {
             this->segundo = (tipo)(rand() % 4);
         } while (segundo == aliento);
-        puntero = new cAtaque;
-        puntero[0] = cAtaque(this->segundo);
-        ataques.push_front(&puntero[0]);
+        ataques.push_front(new cAtaque(segundo));
     }
 }
 
@@ -155,9 +146,7 @@ cDragon::cDragon(cAtaque* atk, tipo segundo, string tamano, string color, string
     this->cantCabezas = cabezas;
     if (cantCabezas > 1) {
         this->segundo = segundo;
-        puntero = new cAtaque[1];
-        puntero[0] = cAtaque(this->segundo);
-        ataques.push_front(&puntero[0]);
+        ataques.push_front(new cAtaque(segundo));
     }
 }
 
@@ -180,9 +169,7 @@ cDragon::cDragon(cAtaque* atk, tipo segundo, string tamano, string color, string
     this->cantCabezas = cabezas;
     if (cantCabezas > 1) {
         this->segundo = segundo;
-        puntero = new cAtaque[1];
-        puntero[0] = cAtaque(this->segundo);
-        ataques.push_front(&puntero[0]);
+        ataques.push_front(new cAtaque(segundo));
     }
 }
 
@@ -219,17 +206,16 @@ tipo cDragon::getSegundo() const
 void cDragon::domar()
 {
     if (domado)
-        throw new exception("El dragon ya se encuentra domado.");
+        throw new exception("Lamentablemente, ya no se encuentra vivo/a.");
     this->domado = true;
     time(&fecha);
-    this->cantJinetes = 1;
+    this->cantJinetes++;
     this->identificador = sumaVuelta();
 }
 
 //Imprime por pantalla las estadisticas del dragon
 void cDragon::mostrarStats()
 {
-
     if (!this->vivo)
         throw new exception("Lamentablemente, ya no se encuentra vivo/a.");
 
@@ -243,7 +229,7 @@ void cDragon::mostrarStats()
 void cDragon::operator+(cAtaque* atk)
 {
     if (!this->vivo)
-        throw new exception("El dragon ya no puede ser utilizado");
+        throw new exception("Lamentablemente, ya no se encuentra vivo/a.");
 
     if (this->ataques.size() >= 4)
         throw new exception("El dragon ya conoce 4 ataques");
@@ -288,6 +274,6 @@ void cDragon::curarse()
 //Imprime por pantalla la descripcion del dragon
 void cDragon::descripcion()const
 {
-    cout << "el es el poderoso "<<nombre<<", un magnifico dragon de "<<peso<<" kg y de escamas "<<color<<" que lleva "<<getAnios<<"volando por estas tierras." << endl;
+    cout << "el es el poderoso "<<nombre<<", un magnifico dragon de "<<peso<<" kg y de escamas "<<color<<" que lleva "<<" 3 " << "volando por estas tierras." << endl;
     cout << "tiene un temible aliento de " << aliento << endl;
 }

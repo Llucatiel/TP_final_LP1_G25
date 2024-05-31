@@ -10,12 +10,17 @@ int main()
     cDragon* draco = new cDragon();
     cDragon* ocard = new cDragon();
     cBocon* bocon = new cBocon();
+    cVikingo* bodoque = new cVikingo("Juan Carlos", "Rojo", "Bodoque", 2, 12, 2003, "0.50", "3", "Notero", 0);
+
+    bodoque->descripcion();
 
     (*bocon)+(draco);
     (*bocon) + (ocard);
-    cout << *(draco);
+    (*bocon) + (bodoque);
+    list<cVikingo*> lv;
+    lv.push_back(bodoque);
+    bocon->conversion(draco, lv);
 
-    bocon->enlistarDragon();
     /*
     int dragonElegido;
     cout << "Elija el dragon a enviar: " << endl;

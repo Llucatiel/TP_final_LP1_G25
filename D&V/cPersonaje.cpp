@@ -29,6 +29,7 @@ void cPersonaje::impresion() const
 
 cPersonaje::cPersonaje(string nombre, string color, string peso, string tamano, int d, int m, int a)
 {
+    ataques.clear();
     this->nombre = nombre;
     this->color = color;
     this->peso = peso;
@@ -98,7 +99,7 @@ int cPersonaje::getAnios()
 
     time_t now;
     time(&now); //Tiempo actual
-    int edad = (int)difftime(now, this->fecha) / 86400;
+    int edad = difftime(now, this->fecha) / 86400;
     //Calcula la diferencia entre ahora y fecha 
     if (edad < 365)
         return edad;
@@ -235,7 +236,6 @@ void cPersonaje::operator-(cAtaque* atk)
         if ((*it)->getNombre() == atk->getNombre()) {
             delete (*it);
             this->ataques.erase(it);
-            cout << this->nombre << " ha olvidado como usar " << atk->getNombre() << endl;
             return;
         }
         it++;
@@ -256,7 +256,6 @@ cPersonaje::~cPersonaje()
     baja();
     this->ataques.clear();
     delete[]estadisticas;
-    delete []puntero;
 }
 
 ostream& operator<<(ostream& os, const cPersonaje& cPe)

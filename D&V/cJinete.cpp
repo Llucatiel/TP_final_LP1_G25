@@ -23,6 +23,7 @@ cJinete::cJinete(cVikingo& viki, cDragon *dragon):cVikingo(viki.getNombre(),viki
 	try {
 		dragon->domar();
 		this->dragon = dragon;
+		*this - getAtk(0);
 	}
 	catch (const exception* e) {
 		cout << e->what();
@@ -30,6 +31,8 @@ cJinete::cJinete(cVikingo& viki, cDragon *dragon):cVikingo(viki.getNombre(),viki
 		delete e;
 	}
 	this->ataques = viki.getListAtaques();
+	for (int i = 0; i < 3; i++)
+		this->estadisticas[i] = viki.getStat(i);
 }
 
 void cJinete::asignarDragon(cDragon* dragon)

@@ -15,7 +15,6 @@ protected:
 	string tamano;
 	time_t fecha;
 	list<cAtaque*> ataques;
-	cAtaque* puntero = NULL;
 	int* estadisticas = NULL;
 	bool vivo;
 

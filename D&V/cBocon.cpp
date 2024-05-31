@@ -8,11 +8,8 @@ cBocon::cBocon()
     valhalla.clear();
     dragonesNoDomados.clear();
 
-    cDragon* dragon = new cDragon[8];
-    for (int i = 0; i < 8; i++) {
-        dragon[i] = cDragon(); //NO ANDA ESTE CONSTRUCTORRRRRRRRRR AAAAAAAAAAAAAAAAAAAAAAA
-        dragonesNoDomados.push_back(&dragon[i]);
-    }
+    for (int i = 0; i < 8; i++) 
+        dragonesNoDomados.push_back(new cDragon());
 }
 
 cBocon::~cBocon()
@@ -66,7 +63,7 @@ void cBocon::operator+(cJinete* jin)
     jinetes.push_back(jin);
 }
 
-void cBocon::operator+(cPersonaje* perdida)
+void cBocon::encuentrePaz(cPersonaje* perdida)
 {
     valhalla.push_back(perdida);
 }
@@ -97,18 +94,19 @@ void cBocon::enlistarDragon()
     }
 }
 
-void cBocon::conversion(cDragon* dragon, cVikingo* vikingo)
+void cBocon::conversion(cDragon* dragon, list<cVikingo*> vikingo)
 {
-    cJinete* nuevo = new cJinete(*vikingo, dragon);
-    (*this)+(nuevo);
-
-    (*this) + vikingo;
-    list<cVikingo*>::iterator it = vikingos.begin();
-
-    while (it != vikingos.end()) {
-        if ((*it)->getNombre() == vikingo->getNombre()) {
-            vikingos.erase(it);
-            break;
+    list<cVikingo*>::iterator it = vikingo.begin();
+    list<cVikingo*>::iterator its = vikingos.begin();
+    int cant = vikingo.size();
+    for (int i = 0; i < cant; i++) {
+        (*this) + (new cJinete(*(*it), dragon));
+        while (its != vikingos.end()) {
+            if ((*its)->getNombre() == (*it)->getNombre()) {
+                vikingos.erase(its);
+                break;
+            }
+            its++;
         }
         it++;
     }
@@ -218,17 +216,14 @@ void cBocon:: atacarDragones(list<cVikingo*> vikingos)//en el main especificamos
 void cBocon::pelea(list<cJinete*> jin)
 {
     int lim = 1 + rand() % 4;
-    cAtaque* atk = new cAtaque[lim];
-    atk[0] = cAtaque();
-    cDragon* enemigo = new cDragon(&atk[0]);
+    cDragon* enemigo = new cDragon(new cAtaque());
     //Crea a un ataque y dragon genericos para combatir
     list<cJinete*>::iterator it = jin.begin();
     cDragon* dragon = (*it)->getDragon();
 
     for (int i = enemigo->getCantAtk(); i < lim; i++) {
         try {
-            atk[i] = cAtaque(enemigo->getAliento());
-            (*enemigo) + (&atk[i]);
+            (*enemigo) + (new cAtaque(enemigo->getAliento()));
         }
         catch (const exception* e) {
             i--;
@@ -374,6 +369,5 @@ void cBocon::pelea(list<cJinete*> jin)
         }
 
         delete enemigo;
-        delete[]atk;
     }
 }
