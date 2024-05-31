@@ -21,8 +21,8 @@ protected:
 
 
 	virtual void generarStats();
-	void baja() { this->vivo = false; }
-	virtual void impresion() const{ cout << "Edad: " << fecha << endl; }
+	void baja();
+	virtual void impresion() const;
 
 public:
 	cPersonaje(string nombre, string color, string peso, string tamano, int d, int m, int a);
@@ -35,19 +35,19 @@ public:
 	friend ostream& operator<<(ostream& os, const cPersonaje& cPe);
 	virtual ~cPersonaje();
 
-	int getCantAtk() { return (int)this->ataques.size(); }
+	int getCantAtk();
 	int getAnios();
 	void imprimirDatos();
 	float atacar(int i);
-	float getStat(int i) { return this->estadisticas[i]; }
-	bool getVivo()const { return this->vivo; }
-	string getNombre() const { return this->nombre; }
-	string getTamano() const { return this->tamano; }
-	string getColor() const { return this->color; }
-	string getTam() const { return this->tamano; }
-	string getPeso() const { return this->peso; }
+	bool getVivo()const;
+	float getStat(int i);
+	string getNombre()const;
+	string getTamano() const;
+	string getColor() const;
+	string getPeso() const;
 	cAtaque* getAtk(int i);
-	list<cAtaque*> getListAtaques()const { return this->ataques; }
+	list<cAtaque*> getListAtaques()const;
+	time_t getTimer();
 
 	void mostrarDanos();
 	void operator-(cAtaque* atk);

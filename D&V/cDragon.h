@@ -22,13 +22,9 @@ private:
 
 	void generarStats();
 	void altaNombre();
-	void impresion() const {
-		if (getDomado())
-			cout << "Edad: " << fecha << endl;
-		cout << "Color de escamas: " << color << endl;
-	}
+	void impresion() const;
 
-	static int sumaVuelta() { return ++cantDragones; }
+	static int sumaVuelta();
 
 public:
 	cDragon();
@@ -36,18 +32,17 @@ public:
 	cDragon(cAtaque* atk, tipo segundo, string tamano, string color, string peso, int cabezas);
 	cDragon(cAtaque* atk, tipo segundo, string tamano, string color, string peso, int cabezas, int d, int m, int a);
 
-	float getVidaActual() const { return this->vidaActual; }
-	float getVidaTotal() const { return this->vidaMax; }
-	bool getDomado() const { return this->domado; }
-	int getIdentificador() const { return this->identificador; }
-	tipo getAliento() const { return aliento; }
-	tipo getSegundo() const { return segundo; }
+	float getVidaActual() const;
+	float getVidaTotal() const;
+	bool getDomado() const;
+	int getIdentificador() const;
+	tipo getAliento() const;
+	tipo getSegundo() const;
 
 	void domar();
 	void mostrarStats();
 	void operator+(cAtaque* atk);
-	void olvidarAtk(cAtaque* atk);
 	void perderVida(float dano);
-	void curarse() { this->vidaActual = this->vidaMax; }
+	void curarse();
 	void descripcion()const;
 };

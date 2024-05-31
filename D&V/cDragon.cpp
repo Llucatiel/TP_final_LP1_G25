@@ -2,6 +2,13 @@
 
 int cDragon::cantDragones = 0;
 
+string col[5] = { "Verde", "Rojo", "Azul", "Marron", "Negro" };
+
+string FUEGO[] = { "Fogon", "Chispas", "Fogata", "Llamaleon" };
+string AIRE[] = { "Nomada", "Tornado", "Cizalla", "Piloto" };
+string VENENO[] = { "Toxina", "Patogeno", "Ponzona", "Ala letal" };
+string FISICO[] = { "Patada", "Fuerza bruta", "Mr. Musculo", "Pinzas" };
+
 //Genera estadisticas al azar para un dragon
 void cDragon::generarStats()
 {
@@ -31,31 +38,39 @@ void cDragon::generarStats()
 void cDragon::altaNombre()
 {
     int elegir = rand() % 4;
-    string fuego[4] = { "Fogon", "Chispas", "Fogata", "Llamaleon" };
-    string aire[4] = { "Nomada", "Tornado", "Cizalla", "Piloto" };
-    string veneno[4] = { "Toxina", "Patogeno", "Ponzona", "Ala letal" };
-    string fisico[4] = { "Patada", "Fuerza bruta", "Mr. Musculo", "Pinzas" };
     switch (this->aliento)
     {
     case 0:
-        this->nombre = fuego[elegir];
+        this->nombre = FUEGO[elegir];
         break;
 
     case 1:
-        this->nombre = aire[elegir];
+        this->nombre = AIRE[elegir];
         break;
 
     case 2:
-        this->nombre = veneno[elegir];
+        this->nombre = VENENO[elegir];
         break;
 
     case 3:
-        this->nombre = fisico[elegir];
+        this->nombre = FISICO[elegir];
         break;
 
     default:
         break;
     }
+}
+
+void cDragon::impresion() const
+{
+    if (getDomado())
+        cout << "Edad: " << fecha << endl;
+    cout << "Color de escamas: " << color << endl;
+}
+
+int cDragon::sumaVuelta()
+{
+    return ++cantDragones;
 }
 
 
@@ -70,7 +85,6 @@ cDragon::cDragon() :cPersonaje("sinNombre", "sinColor", to_string(40 + rand() % 
     this->vidaMax = this->estadisticas[2] * 10;
     this->vidaActual = this->vidaMax;
 
-    string col[5] = { "Verde", "Rojo", "Azul", "Marron", "Negro" };
     this->color = col[rand() % 5];
     this->domado = false;
     this->fecha = NULL;
@@ -99,7 +113,6 @@ cDragon::cDragon(cAtaque* atk) :cPersonaje("sinNombre", "sinColor", to_string(40
 {
     this->aliento = atk->getTipo();
     this->ataques.push_back(atk);
-    string col[5] = { "Verde", "Rojo", "Azul", "Marron", "Negro" };
     this->color = col[rand() % 5];
 
     this->estadisticas = new int[4];
@@ -117,7 +130,7 @@ cDragon::cDragon(cAtaque* atk) :cPersonaje("sinNombre", "sinColor", to_string(40
         do {
             this->segundo = (tipo)(rand() % 4);
         } while (segundo == aliento);
-        puntero = new cAtaque[1];
+        puntero = new cAtaque;
         puntero[0] = cAtaque(this->segundo);
         ataques.push_front(&puntero[0]);
     }
@@ -173,6 +186,36 @@ cDragon::cDragon(cAtaque* atk, tipo segundo, string tamano, string color, string
     }
 }
 
+float cDragon::getVidaActual() const
+{
+    return this->vidaActual;
+}
+
+float cDragon::getVidaTotal() const
+{
+    return this->vidaMax;
+}
+
+bool cDragon::getDomado() const
+{
+    return this->domado;
+}
+
+int cDragon::getIdentificador() const
+{
+    return this->identificador;
+}
+
+tipo cDragon::getAliento() const
+{
+    return aliento;
+}
+
+tipo cDragon::getSegundo() const
+{
+    return segundo;
+}
+
 void cDragon::domar()
 {
     if (domado)
@@ -220,29 +263,6 @@ void cDragon::operator+(cAtaque* atk)
     this->ataques.push_back(atk);
 }
 
-//Olvida un ataque ya aprendido
-void cDragon::olvidarAtk(cAtaque* atk)
-{
-    if (!this->vivo)
-        throw new exception("El dragon ya no puede ser utilizado");
-
-    list<cAtaque*>::iterator it = this->ataques.begin();
-    bool borrador = false;
-
-    while (it != this->ataques.end()) {
-        if ((*it)->getNombre() == atk->getNombre()) {
-            this->ataques.erase(it);
-            borrador = true;
-            cout << this->nombre << " ha olvidado como usar " << atk->getNombre() << endl;
-            return;
-        }
-        it++;
-    }
-
-    if (!borrador)
-        throw new exception("El Dragon no conoce el ataque");
-}
-
 //Al recibir daño, pierde vida el mismo, en caso de llegar a 0 inutiliza las funciones del dragon
 void cDragon::perderVida(float dano)
 {
@@ -258,6 +278,11 @@ void cDragon::perderVida(float dano)
         cout << endl;
 
     //ANIADIR COLOSITOS TODOS VIOLENTOS BIEN BONITOS, system("color...");
+}
+
+void cDragon::curarse()
+{
+    this->vidaActual = this->vidaMax;
 }
 
 //Imprime por pantalla la descripcion del dragon

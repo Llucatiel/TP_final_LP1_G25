@@ -18,28 +18,23 @@ protected:
 	int dragones_terminados;
 	string apellido;
 
-	virtual void impresion() const {
-		cout << "Apellido: " << apellido << endl;
-		cout << "Trabajo: " << trabajo << endl;
-		cout << "Edad: " << fecha << endl;
-		cout << "Color de pelo: " << color << endl;
-	}
+	virtual void impresion() const;
 public:
 	cVikingo(string nombre, string color, string apellido, int d, int m, int a, string altura, string peso, string trabajo, int dragones_terminados);
-	~cVikingo();
+	virtual ~cVikingo();
 
-	static int getComida() { return comida; }
-	static int getCantVikingos() { return cantVikingos; }
-	static void cambioComida(int suma) { comida += suma; };
+	static int getComida();
+	static int getCantVikingos();
+	static void cambioComida(int suma);
 
 	//bool trabajar();
-	bool dragonesMatados() { return dragones_terminados>0?true:false;}
+	bool dragonesMatados();
 	bool domar(cDragon* dragon);
-	string getApellido() const { return apellido; }
-	string getTrabajo() { return trabajo; }
-	int getDragonesTerminados() const { return this->dragones_terminados; }
+	string getApellido() const;
+	string getTrabajo();
+	int getDragonesTerminados() const;
 
-	void setTrabajo(string nuevo) { this->trabajo = nuevo; }
-	void setDragonesTerminados(int suma) { this->dragones_terminados += suma; }
+	void setTrabajo(string nuevo);
+	void setDragonesTerminados(int suma);
 	void descripcion()const;
 };

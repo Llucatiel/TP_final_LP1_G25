@@ -5,8 +5,7 @@
 
 using namespace std;
 
-enum TIPO { vacio = -1, fuego, aire, veneno, fisico };
-typedef TIPO tipo;
+enum tipo { vacio = -1, fuego, aire, veneno, fisico };
 
 
 class cAtaque
@@ -28,9 +27,9 @@ public:
 	~cAtaque();
 
 	float probTotal(int stat);
-	float getDano() { return this->dano; }
-	float getProb() { return this->probabilidad; }
-	int getStat() { return this->estadisticaUsada; }
-	string getNombre() { return this->nombre; }
-	tipo getTipo() { return this->type; }
+	float getDano();
+	float getProb();
+	int getStat();
+	string getNombre();
+	tipo getTipo();
 };

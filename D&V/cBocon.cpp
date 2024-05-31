@@ -1,5 +1,76 @@
 #include "cBocon.h"
 
+cBocon::cBocon()
+{
+    vikingos.clear();
+    jinetes.clear();
+    dragones.clear();
+    valhalla.clear();
+    dragonesNoDomados.clear();
+
+    cDragon* dragon = new cDragon[8];
+    for (int i = 0; i < 8; i++) {
+        dragon[i] = cDragon(); //NO ANDA ESTE CONSTRUCTORRRRRRRRRR AAAAAAAAAAAAAAAAAAAAAAA
+        dragonesNoDomados.push_back(&dragon[i]);
+    }
+}
+
+cBocon::~cBocon()
+{
+    if (!vikingos.empty()) {
+        list<cVikingo*>::iterator v = vikingos.begin();
+        while (v != vikingos.end()) {
+            delete (*v);
+            v++;
+        }
+    }
+    if (!jinetes.empty()) {
+        list<cJinete*>::iterator j = jinetes.begin();
+        while (j != jinetes.end()) {
+            delete (*j);
+            j++;
+        }
+    }
+    if (!dragones.empty()) {
+        list<cDragon*>::iterator d = dragones.begin();
+        while (d != dragones.end()) {
+            delete (*d);
+            d++;
+        }
+    }
+    if (!valhalla.empty()) {
+        list<cPersonaje*>::iterator p = valhalla.begin();
+        while (p != valhalla.end()) {
+            delete (*p);
+            p++;
+        }
+    }
+    jinetes.clear();
+    vikingos.clear();
+    dragones.clear();
+    valhalla.clear();
+}
+
+void cBocon::operator+(cDragon* dragon)
+{
+    dragones.push_back(dragon);
+}
+
+void cBocon::operator+(cVikingo* vik)
+{
+    vikingos.push_back(vik);
+}
+
+void cBocon::operator+(cJinete* jin)
+{
+    jinetes.push_back(jin);
+}
+
+void cBocon::operator+(cPersonaje* perdida)
+{
+    valhalla.push_back(perdida);
+}
+
 //Muestra la lista de vikingos
 void cBocon::enlistarVikingo()
 {
@@ -22,6 +93,23 @@ void cBocon::enlistarDragon()
     while (it != dragones.end()) {
         cout << i << ". " << (*it)->getNombre() << endl;
         i++;
+        it++;
+    }
+}
+
+void cBocon::conversion(cDragon* dragon, cVikingo* vikingo)
+{
+    cJinete* nuevo = new cJinete(*vikingo, dragon);
+    (*this)+(nuevo);
+
+    (*this) + vikingo;
+    list<cVikingo*>::iterator it = vikingos.begin();
+
+    while (it != vikingos.end()) {
+        if ((*it)->getNombre() == vikingo->getNombre()) {
+            vikingos.erase(it);
+            break;
+        }
         it++;
     }
 }
@@ -289,5 +377,3 @@ void cBocon::pelea(list<cJinete*> jin)
         delete[]atk;
     }
 }
-
-

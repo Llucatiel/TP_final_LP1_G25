@@ -4,6 +4,14 @@
 int cVikingo::comida = 30;
 int cVikingo::cantVikingos = 0;
 
+void cVikingo::impresion() const
+{
+    cout << "Apellido: " << apellido << endl;
+    cout << "Trabajo: " << trabajo << endl;
+    cout << "Edad: " << fecha << endl;
+    cout << "Color de pelo: " << color << endl;
+}
+
 //Creacion por parametro de un vikingo
 cVikingo::cVikingo(string nombre, string color, string apellido, int d, int m, int a, string altura, string peso, string trabajo, int dragones_terminados)
  : cPersonaje(nombre, color, peso, altura, d, m, a) 
@@ -23,6 +31,11 @@ cVikingo::cVikingo(string nombre, string color, string apellido, int d, int m, i
 void cVikingo::descripcion() const
 {
     cout << " " << endl;
+}
+
+bool cVikingo::dragonesMatados()
+{
+    return dragones_terminados > 0 ? true : false;
 }
 
 bool cVikingo::domar(cDragon* dragon)
@@ -91,7 +104,47 @@ bool cVikingo::domar(cDragon* dragon)
 
 }
 
+string cVikingo::getApellido() const
+{
+    return apellido;
+}
+
+string cVikingo::getTrabajo()
+{
+    return trabajo;
+}
+
+int cVikingo::getDragonesTerminados() const
+{
+    return this->dragones_terminados;
+}
+
+void cVikingo::setTrabajo(string nuevo)
+{
+    this->trabajo = nuevo;
+}
+
+void cVikingo::setDragonesTerminados(int suma)
+{
+    this->dragones_terminados += suma;
+}
+
 //Libera memoria
 cVikingo:: ~cVikingo() {
     cantVikingos--;
+}
+
+int cVikingo::getComida()
+{
+    return comida;
+}
+
+int cVikingo::getCantVikingos()
+{
+    return cantVikingos;
+}
+
+void cVikingo::cambioComida(int suma)
+{
+    comida += suma;
 }

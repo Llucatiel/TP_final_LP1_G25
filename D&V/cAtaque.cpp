@@ -1,15 +1,14 @@
 #include "cAtaque.h"
 
+string Fisico[] = { "Fuerza bruta", "Carga", "Cabezaso", "Corte horizontal" };
+string Fuego[] = { "Bola de fuego", "Llamarada", "Lluvia de meteoros", "Cabezaso volcanico" };
+string Aire[] = { "Tornado", "Corte aereo", "Aliento de tormenta", "Nube de algodon" };
+string Veneno[] = { "Escupitajo sombrio", "Rociada de acido", "Derretir escamas", "Vision alterada" };
 
 //Crea ataque completamente al azar
 cAtaque::cAtaque()
 {
 	this->type = (tipo)(rand() % 4);
-	string fisico[4] = { "Fuerza bruta", "Carga", "Cabezaso", "Corte horizontal" };
-	string fuego[4] = { "Bola de fuego", "Llamarada", "Lluvia de meteoros", "Cabezaso volcanico" };
-	string aire[4] = { "Tornado", "Corte aereo", "Aliento de tormenta", "Nube de algodon" };
-	string veneno[4] = { "Escupitajo sombrio", "Rociada de acido", "Derretir escamas", "Vision alterada" };
-
 
 	this->nombre = "404";
 	this->estadisticaUsada = 0;
@@ -20,28 +19,28 @@ cAtaque::cAtaque()
 	switch (this->type)
 	{
 	case 0:
-		this->nombre = fuego[elegir];
+		this->nombre = Fuego[elegir];
 		this->estadisticaUsada = 3;
 		this->dano = 25 + rand() % 26;
 		this->probabilidad = 12 + rand() % 26;
 		break;
 
 	case 1:
-		this->nombre = aire[elegir];
+		this->nombre = Aire[elegir];
 		this->estadisticaUsada = 1;
 		this->dano = 12 + rand() % 26;
 		this->probabilidad = 25 + rand() % 26;
 		break;
 
 	case 2:
-		this->nombre = veneno[elegir];
+		this->nombre = Veneno[elegir];
 		this->estadisticaUsada = 3;
 		this->dano = 19 + rand() % 26;
 		this->probabilidad = 20 + rand() % 26;
 		break;
 
 	case 3:
-		this->nombre = fisico[elegir];
+		this->nombre = Fisico[elegir];
 		this->estadisticaUsada = 0;
 		this->dano = 27 + rand() % 26;
 		this->probabilidad = 10 + rand() % 26;
@@ -142,6 +141,31 @@ float cAtaque::probTotal(int stat)
 	}
 	cout << "El ataque fallo lastimosamente..." << endl;
 	return 0;
+}
+
+float cAtaque::getDano()
+{
+	return this->dano;
+}
+
+float cAtaque::getProb()
+{
+	return this->probabilidad;
+}
+
+int cAtaque::getStat()
+{
+	return this->estadisticaUsada;
+}
+
+string cAtaque::getNombre()
+{
+	return this->nombre;
+}
+
+tipo cAtaque::getTipo()
+{
+	return this->type;
 }
 
 

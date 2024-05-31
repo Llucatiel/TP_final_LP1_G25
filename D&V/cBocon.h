@@ -7,21 +7,22 @@
 class cBocon
 {
 	list<cDragon*> dragones;
+	list<cDragon*> dragonesNoDomados;
 	list<cVikingo*> vikingos;
 	list<cJinete*> jinetes;
+	list<cPersonaje*> valhalla;
 
 public:
-	cBocon() {};
-	~cBocon() {
-		vikingos.clear();
-		dragones.clear();
-	}
+	cBocon();
+	~cBocon();
 
-	void operator+(cDragon* dragon) { dragones.push_back(dragon); }
-	void operator+(cVikingo* vik) { vikingos.push_back(vik); }
-	void operator+(cJinete* jin) { jinetes.push_back(jin); }
+	void operator+(cDragon* dragon);
+	void operator+(cVikingo* vik);
+	void operator+(cJinete* jin);
+	void operator+(cPersonaje* perdida);
 	void enlistarVikingo();
 	void enlistarDragon();
+	void conversion(cDragon* dragon, cVikingo* vikingo);
 
 	void elegirVikingo(int* elegidos, int n);
 	void elegirDragon(int elegido);
