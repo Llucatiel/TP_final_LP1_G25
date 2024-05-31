@@ -288,5 +288,6 @@ void cDragon::curarse()
 //Imprime por pantalla la descripcion del dragon
 void cDragon::descripcion()const
 {
-    cout << " " << endl;
+    cout << "el es el poderoso "<<nombre<<", un magnifico dragon de "<<peso<<" kg y de escamas "<<color<<" que lleva "<<getAnios<<"volando por estas tierras." << endl;
+    cout << "tiene un temible aliento de " << aliento << endl;
 }

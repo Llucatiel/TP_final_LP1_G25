@@ -12,9 +12,10 @@ class cVikingo : public cPersonaje
 {
 	static int comida;
 	static int cantVikingos;
-	string trabajo;
+
 
 protected:
+	string trabajo;
 	int dragones_terminados;
 	string apellido;
 
