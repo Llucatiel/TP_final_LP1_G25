@@ -129,7 +129,7 @@ float cPersonaje::atacar(int i)
 
     cout << nombre << " a usado " << (*it)->getNombre() << endl;
 
-    return (*it)->probTotal((*it)->getStat());
+    return (*it)->probTotal(this->getStat((*it)->getStat()));
 }
 
 int cPersonaje::getCantAtk()
@@ -272,9 +272,11 @@ void cPersonaje::baja() {
     this->vivo = false;
     list<cAtaque*>::iterator it = ataques.begin();
 
-    while (it != ataques.end()) {
-        delete (*it);
-        it++;
+    if (!ataques.empty()) {
+        while (it != ataques.end()) {
+            delete (*it);
+            it++;
+        }
     }
 }
 

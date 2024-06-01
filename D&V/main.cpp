@@ -17,10 +17,13 @@ int main()
     (*bocon)+(draco);
     (*bocon) + (ocard);
     (*bocon) + (bodoque);
+    
     list<cVikingo*> lv;
     lv.push_back(bodoque);
     bocon->conversion(draco, lv);
 
+    bocon->enlistarDragon();
+    bocon->elegirDragon(0);
     /*
     int dragonElegido;
     cout << "Elija el dragon a enviar: " << endl;

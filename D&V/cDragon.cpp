@@ -38,7 +38,7 @@ void cDragon::generarStats()
 void cDragon::altaNombre()
 {
     int elegir = rand() % 4;
-    switch (this->aliento)
+    switch (this->tipo_ataque)
     {
     case 0:
         this->nombre = FUEGO[elegir];
@@ -76,16 +76,15 @@ int cDragon::sumaVuelta()
 
 
 //Dragon completamente al azar
-cDragon::cDragon() :cPersonaje("sinNombre", "sinColor", to_string(40 + rand() % 460), to_string(50 + rand() % 250), 1, 1, 1000)
+cDragon::cDragon() :cPersonaje("sinNombre", col[rand() % 5], to_string(40 + rand() % 460), to_string(50 + rand() % 250), 1, 1, 1000)
 {
-    this->aliento = (tipo)(rand() % 4);
+    this->tipo_ataque = (tipo)(rand() % 4);
     this->estadisticas = new int[4];
     altaNombre();
     generarStats();
     this->vidaMax = this->estadisticas[2] * 10;
     this->vidaActual = this->vidaMax;
 
-    this->color = col[rand() % 5];
     this->domado = false;
     this->fecha = NULL;
 
@@ -93,20 +92,19 @@ cDragon::cDragon() :cPersonaje("sinNombre", "sinColor", to_string(40 + rand() % 
     this->cantCabezas = 1 + (1 + rand() % 12)/10;
     if (cantCabezas > 1) {
         do {
-            this->segundo = (tipo)(rand() % 4);
-        } while (segundo == aliento);
-        ataques.push_back(new cAtaque(segundo));
+            this->secundario = (tipo)(rand() % 4);
+        } while (secundario == tipo_ataque);
+        ataques.push_back(new cAtaque(secundario));
     }
 
-    ataques.push_front(new cAtaque(aliento));
+    ataques.push_front(new cAtaque(tipo_ataque));
 }
 
 //Dragon creado a partir de 1 ataque
-cDragon::cDragon(cAtaque* atk) :cPersonaje("sinNombre", "sinColor", to_string(40 + rand() % 460), to_string(50 + rand() % 250), 1, 1, 1)
+cDragon::cDragon(cAtaque* atk) :cPersonaje("sinNombre", col[rand() % 5], to_string(40 + rand() % 460), to_string(50 + rand() % 250), 1, 1, 1)
 {
-    this->aliento = atk->getTipo();
+    this->tipo_ataque = atk->getTipo();
     this->ataques.push_back(atk);
-    this->color = col[rand() % 5];
 
     this->estadisticas = new int[4];
     altaNombre();
@@ -121,16 +119,16 @@ cDragon::cDragon(cAtaque* atk) :cPersonaje("sinNombre", "sinColor", to_string(40
     this->cantCabezas = 1 + (1 + rand() % 12) / 10;
     if (cantCabezas > 1) {
         do {
-            this->segundo = (tipo)(rand() % 4);
-        } while (segundo == aliento);
-        ataques.push_front(new cAtaque(segundo));
+            this->secundario = (tipo)(rand() % 4);
+        } while (secundario == tipo_ataque);
+        ataques.push_front(new cAtaque(secundario));
     }
 }
 
 //Dragon creado por sus atributos
-cDragon::cDragon(cAtaque* atk, tipo segundo, string tamano, string color, string peso, int cabezas): cPersonaje("sinNombre", color, peso, tamano, 1, 1, 1)
+cDragon::cDragon(cAtaque* atk, tipo secundario, string tamano, string color, string peso, int cabezas): cPersonaje("sinNombre", color, peso, tamano, 1, 1, 1)
 {
-    this->aliento = atk->getTipo();
+    this->tipo_ataque = atk->getTipo();
     ataques.push_back(atk);
 
     this->estadisticas = new int[4];
@@ -145,16 +143,16 @@ cDragon::cDragon(cAtaque* atk, tipo segundo, string tamano, string color, string
     this->cantJinetes = 0;
     this->cantCabezas = cabezas;
     if (cantCabezas > 1) {
-        this->segundo = segundo;
-        ataques.push_front(new cAtaque(segundo));
+        this->secundario = secundario;
+        ataques.push_front(new cAtaque(secundario));
     }
 }
 
 //Dragon domado creado por sus atributos
-cDragon::cDragon(cAtaque* atk, tipo segundo, string tamano, string color, string peso, int cabezas, int d, int m, int a) : cPersonaje("sinNombre", color, peso, tamano, d, m, a)
+cDragon::cDragon(cAtaque* atk, tipo secundario, string tamano, string color, string peso, int cabezas, int d, int m, int a) : cPersonaje("sinNombre", color, peso, tamano, d, m, a)
 {
-    this->aliento = atk->getTipo();
-    this->segundo = segundo;
+    this->tipo_ataque = atk->getTipo();
+    this->secundario = secundario;
     ataques.push_back(atk);
 
     this->estadisticas = new int[4];
@@ -168,9 +166,13 @@ cDragon::cDragon(cAtaque* atk, tipo segundo, string tamano, string color, string
     this->cantJinetes = 1;
     this->cantCabezas = cabezas;
     if (cantCabezas > 1) {
-        this->segundo = segundo;
-        ataques.push_front(new cAtaque(segundo));
+        this->secundario = secundario;
+        ataques.push_front(new cAtaque(secundario));
     }
+}
+
+cDragon::~cDragon()
+{
 }
 
 float cDragon::getVidaActual() const
@@ -195,18 +197,18 @@ int cDragon::getIdentificador() const
 
 tipo cDragon::getAliento() const
 {
-    return aliento;
+    return tipo_ataque;
 }
 
-tipo cDragon::getSegundo() const
+tipo cDragon::getsecundario() const
 {
-    return segundo;
+    return secundario;
 }
 
 void cDragon::domar()
 {
     if (domado)
-        throw new exception("Lamentablemente, ya no se encuentra vivo/a.");
+        throw new exception("Lamentablemente, este dragon ya esta domado");
     this->domado = true;
     time(&fecha);
     this->cantJinetes++;
@@ -234,7 +236,7 @@ void cDragon::operator+(cAtaque* atk)
     if (this->ataques.size() >= 4)
         throw new exception("El dragon ya conoce 4 ataques");
 
-    if (atk->getTipo() != this->aliento && atk->getTipo() != this->segundo)
+    if (atk->getTipo() != this->tipo_ataque && atk->getTipo() != this->secundario)
         throw new exception("El tipo de ataque no corresponde con el del Dragon");
 
     list<cAtaque*>::iterator it = this->ataques.begin();
@@ -256,7 +258,7 @@ void cDragon::perderVida(float dano)
     
     if (this->vidaActual <= 0) {
         cout << getNombre() << " a perecido en batalla" << endl;
-        baja();
+        this->vivo = false;
     }
     else if (dano > 0)
         cout << "Dejandolo a " << nombre << " a " << vidaActual << " puntos de vida" << endl << endl;
@@ -275,5 +277,5 @@ void cDragon::curarse()
 void cDragon::descripcion()const
 {
     cout << "el es el poderoso "<<nombre<<", un magnifico dragon de "<<peso<<" kg y de escamas "<<color<<" que lleva "<<" 3 " << "volando por estas tierras." << endl;
-    cout << "tiene un temible aliento de " << aliento << endl;
+    cout << "tiene un temible tipo_ataque de " << tipo_ataque << endl;
 }

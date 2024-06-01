@@ -35,6 +35,13 @@ cBocon::~cBocon()
             d++;
         }
     }
+    if (!dragonesNoDomados.empty()) {
+        list<cDragon*>::iterator d = dragonesNoDomados.begin();
+        while (d != dragonesNoDomados.end()) {
+            delete (*d);
+            d++;
+        }
+    }
     if (!valhalla.empty()) {
         list<cPersonaje*>::iterator p = valhalla.begin();
         while (p != valhalla.end()) {
@@ -45,6 +52,7 @@ cBocon::~cBocon()
     jinetes.clear();
     vikingos.clear();
     dragones.clear();
+    dragonesNoDomados.clear();
     valhalla.clear();
 }
 
@@ -63,8 +71,41 @@ void cBocon::operator+(cJinete* jin)
     jinetes.push_back(jin);
 }
 
-void cBocon::encuentrePaz(cPersonaje* perdida)
+void cBocon::encuentrePaz(cDragon* perdida)
 {
+    list<cDragon*>::iterator it;
+    for (it = dragones.begin(); it != dragones.end(); it++) {
+        if ((*it)->getIdentificador() == perdida->getIdentificador()) {
+            dragones.erase(it);
+            break;
+        }
+    }
+
+    perdida->baja();
+    valhalla.push_back(perdida);
+}
+
+void cBocon::encuentrePaz(cVikingo* perdida)
+{
+    list<cVikingo*>::iterator it;
+    for (it = vikingos.begin(); it != vikingos.end(); it++) {
+        if ((*it)->getNombre() == perdida->getNombre()) {
+            vikingos.erase(it);
+            break;
+        }
+    }
+    valhalla.push_back(perdida);
+}
+
+void cBocon::encuentrePaz(cJinete* perdida)
+{
+    list<cJinete*>::iterator it;
+    for (it = jinetes.begin(); it != jinetes.end(); it++) {
+        if ((*it)->getNombre() == perdida->getNombre()) {
+            jinetes.erase(it);
+            break;
+        }
+    }
     valhalla.push_back(perdida);
 }
 
@@ -223,7 +264,8 @@ void cBocon::pelea(list<cJinete*> jin)
 
     for (int i = enemigo->getCantAtk(); i < lim; i++) {
         try {
-            (*enemigo) + (new cAtaque(enemigo->getAliento()));
+            cAtaque* atk = new cAtaque(enemigo->getAliento());
+            (*enemigo) + atk;
         }
         catch (const exception* e) {
             i--;
@@ -334,7 +376,7 @@ void cBocon::pelea(list<cJinete*> jin)
                 delete e;
             }
             if (!dragon->getVivo()) {
-                Sleep(15000);
+                Sleep(3000);
                 cout << dragon->getNombre() << " ha perecido en batalla, pero aun no es el fin!" << endl;
             }
             Sleep(1000);
@@ -353,21 +395,29 @@ void cBocon::pelea(list<cJinete*> jin)
                 ambos = false;
                 perdida = true;
             }
+            Sleep(1000);
+            system("CLS");
         }
-
-        if (!dragon->getVivo()) {
-            cout << "Lamentamos fuertemente la perdida de " << dragon->getNombre() << endl << "peleo bien." << endl;
-            if (!perdida)
-                cout << "Nuestros fuertes jinetes volveran a casa, con pena y tristeza, pero victorios." << endl;
-            else
-                cout << "Que el Valhalla les guarde un lugar a nuestros grandes guerreros." << endl;
-        }
-        else {
-            string mayus = dragon->getNombre();
-            transform(mayus.begin(), mayus.end(), mayus.begin(), ::toupper); //Recorre el string completo, haciendo mayuscula todos sus caracteres
-            cout << "INCREIBLE BATALLA DADA POR " << mayus << "!!!" << endl << "Hoy vuelve victorioso a casa." << endl;
-        }
-
-        delete enemigo;
     }
+    if (!dragon->getVivo()) {
+        cout << "Lamentamos fuertemente la perdida de " << dragon->getNombre() << endl << "peleo bien." << endl;
+        encuentrePaz(dragon);
+        if (!perdida) {
+            cout << "Nuestros fuertes jinetes volveran a casa, con pena y tristeza, pero victorios." << endl;
+            for (list<cJinete*>::iterator it = jin.begin(); it != jin.end(); it++)
+                encuentrePaz((*it));
+        }
+        else
+            cout << "Que el Valhalla les guarde un lugar a nuestros grandes guerreros." << endl;
+    }
+    else {
+        string mayus = dragon->getNombre();
+        transform(mayus.begin(), mayus.end(), mayus.begin(), ::toupper); //Recorre el string completo, haciendo mayuscula todos sus caracteres
+        cout << "INCREIBLE BATALLA DADA POR " << mayus << "!!!" << endl << "Hoy vuelve victorioso a casa." << endl;
+    }
+    delete enemigo;
+}
+
+void encuentrePaz(cDragon* perdida)
+{
 }

@@ -14,6 +14,7 @@ protected:
 	string peso;
 	string tamano;
 	time_t fecha;
+	tipo tipo_ataque;
 	list<cAtaque*> ataques;
 	int* estadisticas = NULL;
 	bool vivo;

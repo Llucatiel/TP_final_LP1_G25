@@ -4,6 +4,8 @@
 #include <algorithm>
 #include <cctype>
 
+class cDragon;
+
 class cBocon
 {
 	list<cDragon*> dragones;
@@ -19,7 +21,9 @@ public:
 	void operator+(cDragon* dragon);
 	void operator+(cVikingo* vik);
 	void operator+(cJinete* jin);
-	void encuentrePaz(cPersonaje* perdida);
+	void encuentrePaz(cDragon* perdida);
+	void encuentrePaz(cVikingo* perdida);
+	void encuentrePaz(cJinete* perdida);
 	void enlistarVikingo();
 	void enlistarDragon();
 	void conversion(cDragon* dragon, list<cVikingo*> vikingo);

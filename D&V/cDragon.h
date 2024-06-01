@@ -1,23 +1,18 @@
 #pragma once
 #include "cPersonaje.h"
 
-
-
 class cDragon : public cPersonaje
 {
 private:
 	static int cantDragones;
 
 	int identificador;
-	int* estadisticas; //Potencia, Fuerza, Destreza, Constitucion
 	unsigned short int cantJinetes;
 	float vidaMax;
 	float vidaActual;
 	int cantCabezas;
 	bool domado;
-	bool vivo;
-	tipo aliento;
-	tipo segundo;
+	tipo secundario;
 
 
 	void generarStats();
@@ -29,15 +24,18 @@ private:
 public:
 	cDragon();
 	cDragon(cAtaque* atk);
-	cDragon(cAtaque* atk, tipo segundo, string tamano, string color, string peso, int cabezas);
-	cDragon(cAtaque* atk, tipo segundo, string tamano, string color, string peso, int cabezas, int d, int m, int a);
+	cDragon(cAtaque* atk, tipo secundario, string tamano, string color, string peso, int cabezas);
+	cDragon(cAtaque* atk, tipo secundario, string tamano, string color, string peso, int cabezas, int d, int m, int a);
+	~cDragon();
+
+	friend void cBocon::encuentrePaz(cDragon*);
 
 	float getVidaActual() const;
 	float getVidaTotal() const;
 	bool getDomado() const;
 	int getIdentificador() const;
 	tipo getAliento() const;
-	tipo getSegundo() const;
+	tipo getsecundario() const;
 
 	void domar();
 	void mostrarStats();
