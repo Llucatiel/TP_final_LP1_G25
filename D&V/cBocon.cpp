@@ -80,8 +80,6 @@ void cBocon::encuentrePaz(cDragon* perdida)
             break;
         }
     }
-
-    perdida->baja();
     valhalla.push_back(perdida);
 }
 
@@ -402,13 +400,14 @@ void cBocon::pelea(list<cJinete*> jin)
     if (!dragon->getVivo()) {
         cout << "Lamentamos fuertemente la perdida de " << dragon->getNombre() << endl << "peleo bien." << endl;
         encuentrePaz(dragon);
-        if (!perdida) {
+        if (!perdida) 
             cout << "Nuestros fuertes jinetes volveran a casa, con pena y tristeza, pero victorios." << endl;
+        
+        else {
+            cout << "Que el Valhalla les guarde un lugar a nuestros grandes guerreros." << endl;
             for (list<cJinete*>::iterator it = jin.begin(); it != jin.end(); it++)
                 encuentrePaz((*it));
         }
-        else
-            cout << "Que el Valhalla les guarde un lugar a nuestros grandes guerreros." << endl;
     }
     else {
         string mayus = dragon->getNombre();
@@ -416,8 +415,4 @@ void cBocon::pelea(list<cJinete*> jin)
         cout << "INCREIBLE BATALLA DADA POR " << mayus << "!!!" << endl << "Hoy vuelve victorioso a casa." << endl;
     }
     delete enemigo;
-}
-
-void encuentrePaz(cDragon* perdida)
-{
 }
