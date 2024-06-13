@@ -28,8 +28,6 @@ public:
 	cDragon(cAtaque* atk, tipo secundario, string tamano, string color, string peso, int cabezas, int d, int m, int a);
 	~cDragon();
 
-	friend void cBocon::encuentrePaz(cDragon*);
-
 	float getVidaActual() const;
 	float getVidaTotal() const;
 	bool getDomado() const;
