@@ -31,6 +31,7 @@ public:
 	float getVidaActual() const;
 	float getVidaTotal() const;
 	bool getDomado() const;
+	unsigned int getCantCabezas() const;
 	int getIdentificador() const;
 	tipo getAliento() const;
 	tipo getsecundario() const;

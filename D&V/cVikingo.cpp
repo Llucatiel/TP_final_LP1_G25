@@ -1,7 +1,6 @@
 #include "cVikingo.h"
 
 //Inicializa sus atributos estaticos
-int cVikingo::comida = 30;
 int cVikingo::cantVikingos = 0;
 
 void cVikingo::impresion() const
@@ -132,22 +131,12 @@ void cVikingo::setDragonesTerminados(int suma)
     this->dragones_terminados += suma;
 }
 
-//Libera memoria
 cVikingo:: ~cVikingo() {
     cantVikingos--;
 }
 
-int cVikingo::getComida()
-{
-    return comida;
-}
 
 int cVikingo::getCantVikingos()
 {
     return cantVikingos;
-}
-
-void cVikingo::cambioComida(int suma)
-{
-    comida += suma;
 }

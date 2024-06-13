@@ -10,9 +10,7 @@ using namespace std;
 
 class cVikingo : public cPersonaje
 {
-	static int comida;
 	static int cantVikingos;
-
 
 protected:
 	string trabajo;
@@ -24,9 +22,7 @@ public:
 	cVikingo(string nombre, string color, string apellido, int d, int m, int a, string altura, string peso, string trabajo, int dragones_terminados);
 	virtual ~cVikingo();
 
-	static int getComida();
 	static int getCantVikingos();
-	static void cambioComida(int suma);
 
 	//bool trabajar();
 	bool dragonesMatados();

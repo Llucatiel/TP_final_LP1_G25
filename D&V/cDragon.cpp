@@ -195,6 +195,11 @@ int cDragon::getIdentificador() const
     return this->identificador;
 }
 
+unsigned int cDragon::getCantCabezas() const
+{
+    return cantCabezas;
+}
+
 tipo cDragon::getAliento() const
 {
     return tipo_ataque;
@@ -207,8 +212,11 @@ tipo cDragon::getsecundario() const
 
 void cDragon::domar()
 {
-    if (domado)
+    if (domado) {
+        if((cantCabezas == 2 && cantJinetes == 2) || (cantCabezas == 1))
         throw new exception("Lamentablemente, este dragon ya esta domado");
+    }
+
     this->domado = true;
     time(&fecha);
     this->cantJinetes++;

@@ -8,6 +8,7 @@ class cDragon;
 
 class cBocon
 {
+	static int comida;
 	list<cDragon*> dragones;
 	list<cDragon*> dragonesNoDomados;
 	list<cVikingo*> vikingos;
@@ -17,6 +18,14 @@ class cBocon
 public:
 	cBocon();
 	~cBocon();
+
+	static int getComida();
+	static void cambioComida(int suma);
+
+	int getCantDrag();
+	int getCantVik();
+	int getCantJin();
+
 
 	void operator+(cDragon* dragon);
 	void operator+(cVikingo* vik);

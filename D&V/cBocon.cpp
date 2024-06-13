@@ -1,5 +1,33 @@
 #include "cBocon.h"
 
+int cBocon::comida = 30;
+
+
+int cBocon::getComida()
+{
+    return comida;
+}
+
+void cBocon::cambioComida(int suma)
+{
+    comida += suma;
+}
+
+int cBocon::getCantDrag()
+{
+    return dragones.size();
+}
+
+int cBocon::getCantVik()
+{
+    return vikingos.size();
+}
+
+int cBocon::getCantJin()
+{
+    return jinetes.size();
+}
+
 cBocon::cBocon()
 {
     vikingos.clear();
@@ -178,7 +206,6 @@ void cBocon::elegirVikingo(int* elegidos, int n)
 //Busca en la lista de dragones que tiene (En el futuro deberia de ser de jinetes) y al final llama a pelear
 void cBocon::elegirDragon(int elegido)
 {
-
     list<cDragon*>::iterator it = dragones.begin();
     bool encontrado = false;
     int j = 0;
@@ -213,11 +240,11 @@ void cBocon:: atacarDragones(list<cVikingo*> vikingos)//en el main especificamos
         return; // Exception??
     unsigned int dado;
 
-    cVikingo::cambioComida(-cantidadeVikingos);
+    cBocon::cambioComida(-cantidadeVikingos);
 
     cout << "los vikingos que enviaras consumiran: " << cantidadeVikingos << " de comida." << endl;
 
-    dado = cantidadeVikingos + rand() % (12 - cantidadeVikingos);
+    dado = cantidadeVikingos + rand() % (15 - cantidadeVikingos);
 
     int premio = 0;
 
@@ -234,12 +261,21 @@ void cBocon:: atacarDragones(list<cVikingo*> vikingos)//en el main especificamos
         premio = cantidadeVikingos;
         cout << "exito de la encruzijada de un 100%, obtienes comida: " << cantidadeVikingos << endl;
     }
-    else {
+    else if (dragonesNoDomados.empty()){
         premio = cantidadeVikingos * 2;
         cout << "exito de la encruzijada de un 200%, obtienes comida: " << cantidadeVikingos * 2 << endl;
     }
+    else {
+        cDragon* d = dragonesNoDomados.front();
+        list<cVikingo*> v;
+        dragonesNoDomados.front();
+        for (list<cVikingo*>::iterator it = vikingos.begin(), unsigned int i = 0; it != vikingos.end() && i < d->getCantCabezas(); it++, i++)
+            v.push_back((*it));
+        conversion(d, v);
+        (*this) + (d);
+    }
 
-    if (dado > 2) {
+    if (dado > 2 && dado<13) {
         list<cVikingo*>::iterator it = vikingos.begin();
 
         while (it != vikingos.end()) {
@@ -248,12 +284,13 @@ void cBocon:: atacarDragones(list<cVikingo*> vikingos)//en el main especificamos
         }
     }
 
-    cVikingo::cambioComida(premio);
+    cBocon::cambioComida(premio);
 }
 
 //Pelea pokemon de dragones
 void cBocon::pelea(list<cJinete*> jin)
 {
+    cBocon::cambioComida((jin.size() * -5));
     int lim = 1 + rand() % 4;
     cDragon* enemigo = new cDragon(new cAtaque());
     //Crea a un ataque y dragon genericos para combatir
@@ -375,8 +412,9 @@ void cBocon::pelea(list<cJinete*> jin)
     if (!dragon->getVivo()) {
         cout << "Lamentamos fuertemente la perdida de " << dragon->getNombre() << endl << "peleo bien." << endl;
         encuentrePaz(dragon);
-        if (!perdida) 
+        if (!perdida) {
             cout << "Nuestros fuertes jinetes volveran a casa, con pena y tristeza, pero victorios." << endl;
+        }
         else {
             cout << "Que el Valhalla les guarde un lugar a nuestros grandes guerreros." << endl;
             for (list<cJinete*>::iterator it = jin.begin(); it != jin.end(); it++)
@@ -387,6 +425,12 @@ void cBocon::pelea(list<cJinete*> jin)
         string mayus = dragon->getNombre();
         transform(mayus.begin(), mayus.end(), mayus.begin(), ::toupper); //Recorre el string completo, haciendo mayuscula todos sus caracteres
         cout << "INCREIBLE BATALLA DADA POR " << mayus << "!!!" << endl << "Hoy vuelve victorioso a casa." << endl;
+    }
+
+    if (!perdida) {
+        cBocon::cambioComida(stoi(enemigo->getPeso())/10);
+        for (list<cJinete*>::iterator it = jin.begin(); it != jin.end(); it++)
+            (*it)->setDragonesTerminados(1);
     }
     delete enemigo;
 }
