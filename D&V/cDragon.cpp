@@ -8,6 +8,7 @@ string FUEGO[] = { "Fogon", "Chispas", "Fogata", "Llamaleon" };
 string AIRE[] = { "Nomada", "Tornado", "Cizalla", "Piloto" };
 string VENENO[] = { "Toxina", "Patogeno", "Ponzona", "Ala letal" };
 string FISICO[] = { "Patada", "Fuerza bruta", "Mr. Musculo", "Pinzas" };
+string ataq[] = { "fuego", "aire", "veneno", "fisico" };
 
 //Genera estadisticas al azar para un dragon
 void cDragon::generarStats()
@@ -64,7 +65,7 @@ void cDragon::altaNombre()
 void cDragon::impresion() const
 {
     if (getDomado())
-        cout << "Edad: " << fecha << endl;
+        cout << "Edad: " << edad << endl;
     cout << "Color de escamas: " << color << endl;
 }
 
@@ -220,7 +221,9 @@ void cDragon::domar()
     this->domado = true;
     time(&fecha);
     this->cantJinetes++;
-    this->identificador = sumaVuelta();
+    if(cantJinetes==1)
+        this->identificador = sumaVuelta();
+    this->edad = getAnios();
 }
 
 //Imprime por pantalla las estadisticas del dragon
@@ -282,8 +285,10 @@ void cDragon::curarse()
 }
 
 //Imprime por pantalla la descripcion del dragon
-void cDragon::descripcion()const
+void cDragon::descripcion()
 {
-    cout << "el es el poderoso "<<nombre<<", un magnifico dragon de "<<peso<<" kg y de escamas "<<color<<" que lleva "<<" 3 " << "volando por estas tierras." << endl;
-    cout << "tiene un temible tipo_ataque de " << tipo_ataque << endl;
+    cout << "El es el poderoso " << nombre << ", un magnifico dragon de " << peso << " kg y de escamas " << color;
+    if(domado)
+        cout <<" que lleva "<< getAnios() << " dias y noches sobrevolando por estas tierras con nosotros." << endl;
+    cout << "tiene un temible ataque de " << ataq[tipo_ataque] << endl;
 }

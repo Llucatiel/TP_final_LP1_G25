@@ -33,5 +33,5 @@ public:
 
 	void setTrabajo(string nuevo);
 	void setDragonesTerminados(int suma);
-	void descripcion()const;
+	void descripcion();
 };

@@ -22,11 +22,6 @@ void cPersonaje::generarStats()
     }
 }
 
-void cPersonaje::impresion() const
-{
-    cout << "Edad: " << fecha << endl;
-}
-
 cPersonaje::cPersonaje(string nombre, string color, string peso, string tamano, int d, int m, int a)
 {
     ataques.clear();
@@ -36,11 +31,16 @@ cPersonaje::cPersonaje(string nombre, string color, string peso, string tamano, 
     this->tamano = tamano;
     this->vivo = true;
 
-    struct tm date = { 0 };
-    date.tm_year = a - 1900;
-    date.tm_mon = m - 1;
-    date.tm_mday = d;
-    this->fecha = mktime(&date);
+    if (d == 0) 
+        this->fecha = NULL;
+    else{
+        struct tm date = { 0 };
+        date.tm_year = a - 1900;
+        date.tm_mon = m - 1;
+        date.tm_mday = d;
+        this->fecha = mktime(&date);
+        this->edad = getAnios();
+    }
 }
 
 //Imprime por pantalla las estadisticas
@@ -86,7 +86,7 @@ string cPersonaje::To_string()
     ss << "Color de pelo: " << color << endl;
     ss << "Peso: " << peso << endl;
     ss << "Tamano: " << tamano << endl;
-    ss << "Edad: " << fecha << endl;
+    ss << "Edad: " << getAnios() << endl;
 
     return ss.str();
 }
@@ -109,7 +109,7 @@ int cPersonaje::getAnios()
 
 void cPersonaje::imprimirDatos()
 {
-    cout << *this << endl;
+    cout << this->To_string() << endl;
 }
 
 float cPersonaje::atacar(int i)

@@ -7,7 +7,7 @@ void cVikingo::impresion() const
 {
     cout << "Apellido: " << apellido << endl;
     cout << "Trabajo: " << trabajo << endl;
-    cout << "Edad: " << fecha << endl;
+    cout << "Edad: " << edad << endl;
     cout << "Color de pelo: " << color << endl;
 }
 
@@ -27,11 +27,11 @@ cVikingo::cVikingo(string nombre, string color, string apellido, int d, int m, i
 }
 
 //Imprime por pantalla la descripcion del vikingo
-void cVikingo::descripcion() const
+void cVikingo::descripcion()
 {
-    cout << " El es nuestro gran guerrero " <<nombre<<" "<<apellido<<" nuestro gran "<<trabajo<<" que lleva rondando por estas tierras desde hace "<<" 3 " << " primaveras." << endl;
-    cout << "su brillante cabellera " << color << " resplandece ante el atardecer de este peso pesado de " << peso << "kg"<<endl;
-    if (dragones_terminados > 0)
+    cout << " El es nuestro gran guerrero " <<nombre<<" "<<apellido<<" nuestro gran "<<trabajo<<" que lleva rondando por estas tierras desde hace "<< getAnios() << " primaveras." << endl;
+    cout << "su brillante cabellera " << color << " resplandece ante el atardecer de este peso pesado de " << peso << "kg"<<endl << endl;
+    if (dragonesMatados())
         cout << "lleva " << dragones_terminados << " cadaveres de dragones en su espalda" << endl;
 }
 

@@ -5,7 +5,7 @@ void cJinete::impresion() const
 	cout << "Apellido: " << apellido << endl;
 	cout << "Apodo: " << apodo << endl;
 	cout << "Dragon: " << dragon->getNombre() << endl;
-	cout << "Edad: " << fecha << endl;
+	cout << "Edad: " << edad << endl;
 	cout << "Color de pelo: " << color << endl;
 }
 
@@ -18,7 +18,7 @@ cJinete::cJinete(string nombre, string apellido, string pelo,string altura, stri
 	this->notaEntrenar = 5;
 }
 
-cJinete::cJinete(cVikingo& viki, cDragon *dragon):cVikingo(viki.getNombre(),viki.getColor(), viki.getApellido(), 1, 1, 1000, viki.getTamano(),viki.getPeso(), "Jinete", NULL)
+cJinete::cJinete(cVikingo& viki, cDragon *dragon):cVikingo(viki.getNombre(),viki.getColor(), viki.getApellido(), 0, 0, 0, viki.getTamano(),viki.getPeso(), "Jinete", NULL)
 {
 	try {
 		dragon->domar();
@@ -33,6 +33,8 @@ cJinete::cJinete(cVikingo& viki, cDragon *dragon):cVikingo(viki.getNombre(),viki
 	this->ataques = viki.getListAtaques();
 	for (int i = 0; i < 3; i++)
 		this->estadisticas[i] = viki.getStat(i);
+	this->fecha = viki.getTimer();
+	this->edad = getAnios();
 }
 
 void cJinete::asignarDragon(cDragon* dragon)

@@ -17,22 +17,23 @@ protected:
 	tipo tipo_ataque;
 	list<cAtaque*> ataques;
 	int* estadisticas = NULL;
+	int edad;
 	bool vivo;
 
 
 	virtual void generarStats();
 	void baja();
-	virtual void impresion() const;
+	virtual void impresion() const=0;
 
 public:
 	cPersonaje(string nombre, string color, string peso, string tamano, int d, int m, int a);
 
 	virtual void mostrarStats();
 	virtual void mostrarAtaques();
-	virtual void descripcion()const = 0;
+	virtual void descripcion() = 0;
 	virtual void operator+(cAtaque* atk);
 	virtual string To_string();
-	friend ostream& operator<<(ostream& os, const cPersonaje& cPe);
+	friend ostream& operator<<(ostream& os,const cPersonaje& cPe);
 	virtual ~cPersonaje();
 
 	int getCantAtk();
