@@ -1,6 +1,6 @@
 #include "cDragon.h"
 
-int cDragon::cantDragones = 0;
+int cDragon::cantDragonesDomados = 0;
 
 string col[5] = { "Verde", "Rojo", "Azul", "Marron", "Negro" };
 
@@ -71,7 +71,7 @@ void cDragon::impresion() const
 
 int cDragon::sumaVuelta()
 {
-    return ++cantDragones;
+    return ++cantDragonesDomados;
 }
 
 
@@ -83,7 +83,7 @@ cDragon::cDragon() :cPersonaje("sinNombre", col[rand() % 5], to_string(40 + rand
     this->estadisticas = new int[4];
     altaNombre();
     generarStats();
-    this->vidaMax = this->estadisticas[2] * 10;
+    this->vidaMax = this->estadisticas[2] * 20;
     this->vidaActual = this->vidaMax;
 
     this->domado = false;
@@ -110,7 +110,7 @@ cDragon::cDragon(cAtaque* atk) :cPersonaje("sinNombre", col[rand() % 5], to_stri
     this->estadisticas = new int[4];
     altaNombre();
     generarStats();
-    this->vidaMax = this->estadisticas[2] * 10;
+    this->vidaMax = this->estadisticas[2] * 20;
     this->vidaActual = this->vidaMax;
 
     this->domado = false;
@@ -135,7 +135,7 @@ cDragon::cDragon(cAtaque* atk, tipo secundario, string tamano, string color, str
     this->estadisticas = new int[4];
     altaNombre();
     generarStats();
-    this->vidaMax = this->estadisticas[2] * 10;
+    this->vidaMax = this->estadisticas[2] * 20;
     this->vidaActual = this->vidaMax;
 
     this->fecha = NULL;
@@ -159,7 +159,7 @@ cDragon::cDragon(cAtaque* atk, tipo secundario, string tamano, string color, str
     this->estadisticas = new int[4];
     altaNombre();
     generarStats();
-    this->vidaMax = this->estadisticas[2] * 10;
+    this->vidaMax = this->estadisticas[2] * 20;
     this->vidaActual = this->vidaMax;
 
     this->domado = true;
@@ -194,6 +194,11 @@ bool cDragon::getDomado() const
 int cDragon::getIdentificador() const
 {
     return this->identificador;
+}
+
+void cDragon::setBuff(int buffo)
+{
+    this->buff = buffo;
 }
 
 unsigned int cDragon::getCantCabezas() const

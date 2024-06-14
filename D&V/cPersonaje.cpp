@@ -109,14 +109,14 @@ int cPersonaje::getAnios()
 
 void cPersonaje::imprimirDatos()
 {
-    cout << this->To_string() << endl;
+    cout << *this << endl;
 }
 
 float cPersonaje::atacar(int i)
 {
 
     if (!this->vivo)
-        throw new exception("El dragon ya no puede ser utilizado");
+        throw new exception("Ya no se encunetra con nosotros");
 
     if (this->ataques.size() < i)
         throw new exception("No se conocen tantos ataques");
@@ -129,7 +129,7 @@ float cPersonaje::atacar(int i)
 
     cout << nombre << " a usado " << (*it)->getNombre() << endl;
 
-    return (*it)->probTotal(this->getStat((*it)->getStat()));
+    return (*it)->probTotal(this->getStat((*it)->getStat())+buff);
 }
 
 int cPersonaje::getCantAtk()

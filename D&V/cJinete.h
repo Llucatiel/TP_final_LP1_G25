@@ -13,7 +13,6 @@ class cJinete :public cVikingo
 	string apodo;
 	cDragon* dragon;
 	int notaEntrenar;
-	int buffeo;
 	relacion relacionDragon = pobre;
 
 	void impresion() const;

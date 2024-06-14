@@ -31,14 +31,14 @@ int main()
 
     draco->descripcion();
     cout << *draco << endl;
-    /*
+    
     bocon->elegirVikingo(i, 1);
 
     bocon->enlistarDragon();
     cout << "Elija el dragon a enviar: " << endl;
     Sleep(5000);
     bocon->elegirDragon(rand() % bocon->getCantDrag());
-    cout << cBocon::getComida() << endl;*/
+    cout << cBocon::getComida() << endl;
     delete bocon;
     return 0;
 }

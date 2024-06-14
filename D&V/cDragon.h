@@ -4,10 +4,10 @@
 class cDragon : public cPersonaje
 {
 private:
-	static int cantDragones;
+	static int cantDragonesDomados;
 
-	int identificador;
 	unsigned short int cantJinetes;
+	int identificador;
 	float vidaMax;
 	float vidaActual;
 	int cantCabezas;
@@ -33,6 +33,7 @@ public:
 	bool getDomado() const;
 	unsigned int getCantCabezas() const;
 	int getIdentificador() const;
+	void setBuff(int buffo);
 	tipo getAliento() const;
 	tipo getsecundario() const;
 

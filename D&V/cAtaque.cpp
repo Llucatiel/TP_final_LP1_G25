@@ -11,46 +11,43 @@ string elemento[4] = { "fuego", "aire", "veneno", "fisico" };
 cAtaque::cAtaque()
 {
 	this->type = (tipo)(rand() % 4);
-
-	this->nombre = "404";
-	this->estadisticaUsada = 0;
-	this->dano = 0;
-	this->probabilidad = 0;
-
 	int elegir = rand() % 4;
+
 	switch (this->type)
 	{
 	case 0:
 		this->nombre = Fuego[elegir];
 		this->estadisticaUsada = 3;
 		this->dano = 25 + rand() % 26;
-		this->probabilidad = 12 + rand() % 26;
+		this->probabilidad = 32 + rand() % 26;
 		break;
 
 	case 1:
 		this->nombre = Aire[elegir];
 		this->estadisticaUsada = 1;
 		this->dano = 12 + rand() % 26;
-		this->probabilidad = 25 + rand() % 26;
+		this->probabilidad = 45 + rand() % 26;
 		break;
 
 	case 2:
 		this->nombre = Veneno[elegir];
 		this->estadisticaUsada = 3;
 		this->dano = 19 + rand() % 26;
-		this->probabilidad = 20 + rand() % 26;
+		this->probabilidad = 40 + rand() % 26;
 		break;
 
 	case 3:
 		this->nombre = Fisico[elegir];
 		this->estadisticaUsada = 0;
 		this->dano = 27 + rand() % 26;
-		this->probabilidad = 10 + rand() % 26;
+		this->probabilidad = 30 + rand() % 26;
 		break;
 
 	default:
 		break;
 	}
+	if (this->probabilidad > 99.0)
+		this->probabilidad = 95.0;
 }
 
 //Crea ataque por su tipo
@@ -58,34 +55,35 @@ cAtaque::cAtaque(tipo type)
 {
 	int elegir = rand() % 4;
 	this->type = type;
-	switch (type)
+
+	switch (this->type)
 	{
 	case 0:
 		this->nombre = Fuego[elegir];
 		this->estadisticaUsada = 3;
-		this->dano = 35.0 + rand() % 26;
-		this->probabilidad = 83.0 + rand() % 26;
+		this->dano = 25 + rand() % 26;
+		this->probabilidad = 32 + rand() % 26;
 		break;
 
 	case 1:
 		this->nombre = Aire[elegir];
 		this->estadisticaUsada = 1;
-		this->dano = 22.0 + rand() % 26;
-		this->probabilidad = 89.0 + rand() % 26;
+		this->dano = 12 + rand() % 26;
+		this->probabilidad = 45 + rand() % 26;
 		break;
 
 	case 2:
 		this->nombre = Veneno[elegir];
 		this->estadisticaUsada = 3;
-		this->dano = 29.0 + rand() % 26;
-		this->probabilidad = 85.0 + rand() % 26;
+		this->dano = 19 + rand() % 26;
+		this->probabilidad = 40 + rand() % 26;
 		break;
 
 	case 3:
 		this->nombre = Fisico[elegir];
 		this->estadisticaUsada = 0;
-		this->dano = 37.0 + rand() % 26;
-		this->probabilidad = 80.0 + rand() % 26;
+		this->dano = 27 + rand() % 26;
+		this->probabilidad = 30 + rand() % 26;
 		break;
 
 	default:

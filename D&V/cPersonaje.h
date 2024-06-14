@@ -18,6 +18,7 @@ protected:
 	list<cAtaque*> ataques;
 	int* estadisticas = NULL;
 	int edad;
+	int buff = 0;
 	bool vivo;
 
 

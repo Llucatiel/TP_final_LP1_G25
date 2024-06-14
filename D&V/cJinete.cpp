@@ -14,7 +14,6 @@ cJinete::cJinete(string nombre, string apellido, string pelo,string altura, stri
 {
 	this->apodo = apodo;
 	this->dragon = dragon;
-	this->buffeo = 0;
 	this->notaEntrenar = 5;
 }
 
@@ -49,10 +48,8 @@ void cJinete::setApodo(string apodito)
 
 void cJinete::entrenar()
 {
-	int buffeo;
 	notaEntrenar = rand() % 11;
-
-	buffeo = (notaEntrenar - 5) / 2;
+	getDragon()->setBuff((notaEntrenar - 5) / 2);
 }
 
 string cJinete::getApodo() const {
