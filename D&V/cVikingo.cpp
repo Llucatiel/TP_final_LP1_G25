@@ -230,7 +230,6 @@ void cVikingo::setDragonesTerminados(int suma)
 
 cVikingo:: ~cVikingo() {
     cantVikingos--;
-    if(this )
 }
 
 

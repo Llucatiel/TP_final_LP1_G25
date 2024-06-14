@@ -172,10 +172,11 @@ void cBocon::conversion(cDragon* dragon, list<cVikingo*> vikingo)
     list<cVikingo*>::iterator its = vikingos.begin();
     int cant = vikingo.size();
     for (int i = 0; i < cant; i++) {
-        (*this) + new cJinete(*(*it), dragon);
+        (*this) + new cJinete((*it), dragon);
         
         while (its != vikingos.end()) {
             if ((*its)->getNombre() == (*it)->getNombre()) {
+                (*it)->convertido();
                 this->encuentrePaz((*it));
                 break;
             }

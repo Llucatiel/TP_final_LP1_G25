@@ -4,7 +4,7 @@
 #include <algorithm>
 #include <cctype>
 
-class cDragon;
+class cVikingo;
 
 class cBocon
 {

@@ -6,7 +6,9 @@
 #include <list>
 #include "cPersonaje.h"
 #include "cDragon.h"
+
 using namespace std;
+
 
 enum trabajos {
 	herrero, carpintero, cantinero, pastor, entrenadordedragones
@@ -15,7 +17,7 @@ enum trabajos {
 class cVikingo : public cPersonaje
 {
 	static int cantVikingos;
-
+	//friend void cBocon::encuentrePaz(cVikingo* perdida);
 protected:
 	trabajos trabajo;
 	int dragones_terminados;
@@ -31,10 +33,12 @@ public:
 	int trabajar();
 	bool dragonesMatados();
 	bool domar(cDragon* dragon);
+	
 	string getApellido() const;
 	string getTrabajo();
 	int getDragonesTerminados() const;
 
 	void setTrabajo(trabajos nuevo);
 	void setDragonesTerminados(int suma);
+	
 };

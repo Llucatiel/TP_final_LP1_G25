@@ -142,6 +142,11 @@ float cPersonaje::getStat(int i)
     return this->estadisticas[i];
 }
 
+bool cPersonaje::getBorrado() const
+{
+    return borrado;
+}
+
 bool cPersonaje::getVivo() const
 {
     return this->vivo;
@@ -245,6 +250,11 @@ void cPersonaje::operator-(cAtaque* atk)
         throw new exception("Ataque no conocido");
 }
 
+void cPersonaje::convertido()
+{
+    this->borrado = true;
+}
+
 time_t cPersonaje::getTimer()
 {
     return fecha;
@@ -254,7 +264,7 @@ time_t cPersonaje::getTimer()
 cPersonaje::~cPersonaje()
 {   
     baja();
-    this->ataques.clear();
+    if(estadisticas != nullptr)
     delete[]estadisticas;
 }
 
@@ -267,14 +277,19 @@ ostream& operator<<(ostream& os, const cPersonaje& cPe)
 
 void cPersonaje::baja() {
     this->vivo = false;
-    list<cAtaque*>::iterator it = ataques.begin();
+    if (!borrado) {
+        list<cAtaque*>::iterator it = ataques.begin();
 
-    if (!ataques.empty()) {
-        while (it != ataques.end()) {
-            delete (*it);
-            it++;
+        if (!ataques.empty()) {
+            while (it != ataques.end()) {
+                if (*it != nullptr)
+                    delete (*it);
+                *it = nullptr;
+                it++;
+            }
         }
     }
+    ataques.clear();
 }
 
 list<cAtaque*> cPersonaje::getListAtaques() const{

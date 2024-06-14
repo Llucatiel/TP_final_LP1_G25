@@ -8,6 +8,10 @@ void cJinete::impresion() const
 		cout << "Lleva " << dragones_terminados << " cadaveres de dragones en su espalda" << endl;
 }
 
+cJinete::~cJinete()
+{
+}
+
 cJinete::cJinete(string nombre, string apellido, string pelo,string altura, string peso, int d, int m, int a, string apodo, cDragon* dragon):
 	cVikingo(nombre, pelo, apellido, d, m, a, altura, peso, entrenadordedragones, dragones_terminados)
 {
@@ -16,7 +20,7 @@ cJinete::cJinete(string nombre, string apellido, string pelo,string altura, stri
 	this->notaEntrenar = 5;
 }
 
-cJinete::cJinete(cVikingo& viki, cDragon *dragon):cVikingo(viki.getNombre(),viki.getColor(), viki.getApellido(), 0, 0, 0, viki.getTamano(),viki.getPeso(), entrenadordedragones, NULL)
+cJinete::cJinete(cVikingo* viki, cDragon *dragon):cVikingo(viki->getNombre(),viki->getColor(), viki->getApellido(), 0, 0, 0, viki->getTamano(),viki->getPeso(), entrenadordedragones, NULL)
 {
 	try {
 		dragon->domar();
@@ -28,10 +32,13 @@ cJinete::cJinete(cVikingo& viki, cDragon *dragon):cVikingo(viki.getNombre(),viki
 		this->dragon = NULL;
 		delete e;
 	}
-	this->ataques = viki.getListAtaques();
+	this->ataques.clear();
+
+	this->ataques = viki->getListAtaques();
+
 	for (int i = 0; i < 3; i++)
-		this->estadisticas[i] = viki.getStat(i);
-	this->fecha = viki.getTimer();
+		this->estadisticas[i] = viki->getStat(i);
+	this->fecha = viki->getTimer();
 	this->edad = getAnios();
 }
 

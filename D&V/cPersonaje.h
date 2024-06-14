@@ -20,6 +20,7 @@ protected:
 	int edad;
 	int buff = 0;
 	bool vivo;
+	bool borrado = false;
 
 
 	virtual void generarStats();
@@ -41,6 +42,7 @@ public:
 	void imprimirDatos();
 	float atacar(int i);
 	bool getVivo()const;
+	bool getBorrado()const;
 	float getStat(int i);
 	string getNombre()const;
 	string getTamano() const;
@@ -51,6 +53,7 @@ public:
 	time_t getTimer();
 
 	void mostrarDanos();
+	void convertido();
 	void operator-(cAtaque* atk);
 };
 

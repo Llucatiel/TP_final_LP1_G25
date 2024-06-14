@@ -20,11 +20,12 @@ int main()
     (*bocon) + (hipo);
     (*bocon) + (ocard);
     int i[1] = { 0 };
+    list<cVikingo*> lv;
+    (*mario)+(new cAtaque(fisico));
+    lv.push_back(mario);
+    bocon->conversion(draco, lv);
+    
 
-    bocon->elegirVikingo(i, 1);
-
-    bocon->enlistarDragon();
-    Sleep(5000);
     bocon->trabajar();
     //bocon->elegirDragon(rand() % bocon->getCantDrag());
     cout << cBocon::getComida() << endl;
