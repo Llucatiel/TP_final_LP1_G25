@@ -42,5 +42,4 @@ public:
 	void operator+(cAtaque* atk);
 	void perderVida(float dano);
 	void curarse();
-	void descripcion();
 };

@@ -20,7 +20,16 @@ int main()
     (*bocon) + (hipo);
     (*bocon) + (ocard);
     int i[1] = { 0 };
+    list<cVikingo*> lv;
+    list<cJinete*> jineteada;
 
+    lv.push_back(mario);
+    jineteada = bocon->conversion(ocard, lv);
+    lv.clear();
+    cJinete* marito = jineteada.front();
+
+    cout << *marito << endl;
+    
     bocon->elegirVikingo(i, 1);
 
     bocon->enlistarDragon();

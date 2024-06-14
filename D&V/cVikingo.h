@@ -37,5 +37,4 @@ public:
 
 	void setTrabajo(trabajos nuevo);
 	void setDragonesTerminados(int suma);
-	void descripcion();
 };

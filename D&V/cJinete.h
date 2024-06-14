@@ -2,18 +2,11 @@
 #include "cVikingo.h"
 #include "cDragon.h"
 
-enum eRelacion {
-	pobre = 0, mala, mediana, buena, superbuena
-};
-typedef eRelacion relacion;
-
-
 class cJinete :public cVikingo
 {
 	string apodo;
 	cDragon* dragon;
 	int notaEntrenar;
-	relacion relacionDragon = pobre;
 
 	void impresion() const;
 

@@ -260,11 +260,8 @@ cPersonaje::~cPersonaje()
 
 ostream& operator<<(ostream& os, const cPersonaje& cPe)
 {
-    os << "Nombre: " << cPe.nombre << endl;
+    os << "El es el poderoso " << cPe.nombre;
     cPe.impresion();
-    os << "Peso: " << cPe.peso << " kg" << endl;
-    os << "Tamano: " << cPe.tamano << " cm" << endl;
-
     return os;
 }
 

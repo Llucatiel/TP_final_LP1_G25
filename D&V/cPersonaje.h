@@ -31,7 +31,6 @@ public:
 
 	virtual void mostrarStats();
 	virtual void mostrarAtaques();
-	virtual void descripcion() = 0;
 	virtual void operator+(cAtaque* atk);
 	virtual string To_string();
 	friend ostream& operator<<(ostream& os,const cPersonaje& cPe);

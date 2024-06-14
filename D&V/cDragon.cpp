@@ -64,9 +64,10 @@ void cDragon::altaNombre()
 
 void cDragon::impresion() const
 {
-    if (getDomado())
-        cout << "Edad: " << edad << endl;
-    cout << "Color de escamas: " << color << endl;
+    cout <<", un magnifico dragon de " << peso << " kg y de escamas color " << color;
+    if (domado)
+        cout << " que lleva " << edad << " dias y noches sobrevolando por estas tierras con nosotros." << endl;
+    cout << "Su increible altura de " << tamano << " metros es casi tan impresionante como su temible ataque de " << ataq[tipo_ataque] << endl;
 }
 
 int cDragon::sumaVuelta()
@@ -287,13 +288,4 @@ void cDragon::perderVida(float dano)
 void cDragon::curarse()
 {
     this->vidaActual = this->vidaMax;
-}
-
-//Imprime por pantalla la descripcion del dragon
-void cDragon::descripcion()
-{
-    cout << "El es el poderoso " << nombre << ", un magnifico dragon de " << peso << " kg y de escamas " << color;
-    if(domado)
-        cout <<" que lleva "<< getAnios() << " dias y noches sobrevolando por estas tierras con nosotros." << endl;
-    cout << "tiene un temible ataque de " << ataq[tipo_ataque] << endl;
 }

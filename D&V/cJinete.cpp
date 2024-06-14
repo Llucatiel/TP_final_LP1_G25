@@ -2,22 +2,21 @@
 
 void cJinete::impresion() const
 {
-	cout << "Apellido: " << apellido << endl;
-	cout << "Apodo: " << apodo << endl;
-	cout << "Dragon: " << dragon->getNombre() << endl;
-	cout << "Edad: " << edad << endl;
-	cout << "Color de pelo: " << color << endl;
+	cout << " " << apellido << " nuestro gran jinete de " <<dragon->getNombre() << " que lleva rondando por estas tierras desde hace " << edad << " primaveras." << endl;
+	cout << "Su brillante cabellera " << color << " resplandece ante el atardecer de este peso pesado de " << peso << " kg ademas de su estatura de " << tamano << " metros" << endl;
+	if (dragones_terminados > 0)
+		cout << "Lleva " << dragones_terminados << " cadaveres de dragones en su espalda" << endl;
 }
 
 cJinete::cJinete(string nombre, string apellido, string pelo,string altura, string peso, int d, int m, int a, string apodo, cDragon* dragon):
-	cVikingo(nombre, pelo, apellido, d, m, a, altura, peso, "Jinete", dragones_terminados)
+	cVikingo(nombre, pelo, apellido, d, m, a, altura, peso, entrenadordedragones, dragones_terminados)
 {
 	this->apodo = apodo;
 	this->dragon = dragon;
 	this->notaEntrenar = 5;
 }
 
-cJinete::cJinete(cVikingo& viki, cDragon *dragon):cVikingo(viki.getNombre(),viki.getColor(), viki.getApellido(), 0, 0, 0, viki.getTamano(),viki.getPeso(), "Jinete", NULL)
+cJinete::cJinete(cVikingo& viki, cDragon *dragon):cVikingo(viki.getNombre(),viki.getColor(), viki.getApellido(), 0, 0, 0, viki.getTamano(),viki.getPeso(), entrenadordedragones, NULL)
 {
 	try {
 		dragon->domar();

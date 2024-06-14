@@ -35,7 +35,7 @@ public:
 	void encuentrePaz(cJinete* perdida);
 	void enlistarVikingo();
 	void enlistarDragon();
-	void conversion(cDragon* dragon, list<cVikingo*> vikingo);
+	list<cJinete*> conversion(cDragon* dragon, list<cVikingo*> vikingo);
 	void trabajar();
 
 

@@ -45,40 +45,35 @@ cBocon::~cBocon()
     if (!vikingos.empty()) {
         list<cVikingo*>::iterator v = vikingos.begin();
         while (v != vikingos.end()) {
-            if (*v != nullptr)
-                delete (*v);
+            delete (*v);
             v++;
         }
     }
     if (!jinetes.empty()) {
         list<cJinete*>::iterator j = jinetes.begin();
         while (j != jinetes.end()) {
-            if (*j != nullptr)
-                delete (*j);
+            delete (*j);
             j++;
         }
     }
     if (!dragones.empty()) {
         list<cDragon*>::iterator d = dragones.begin();
         while (d != dragones.end()) {
-            if (*d != nullptr)
-                delete (*d);
+            delete (*d);
             d++;
         }
     }
     if (!dragonesNoDomados.empty()) {
         list<cDragon*>::iterator d = dragonesNoDomados.begin();
         while (d != dragonesNoDomados.end()) {
-            if(*d != nullptr)
-                delete (*d);
+            delete (*d);
             d++;
         }
     }
     if (!valhalla.empty()) {
         list<cPersonaje*>::iterator p = valhalla.begin();
         while (p != valhalla.end()) {
-            if(*p != nullptr)
-             delete (*p);
+            delete (*p);
             p++;
         }
     }
@@ -166,13 +161,17 @@ void cBocon::enlistarDragon()
     }
 }
 
-void cBocon::conversion(cDragon* dragon, list<cVikingo*> vikingo)
+list<cJinete*> cBocon::conversion(cDragon* dragon, list<cVikingo*> vikingo)
 {
     list<cVikingo*>::iterator it = vikingo.begin();
     list<cVikingo*>::iterator its = vikingos.begin();
     int cant = vikingo.size();
     for (int i = 0; i < cant; i++) {
-        (*this) + new cJinete(*(*it), dragon);
+        cVikingo* aux = nullptr;
+        cJinete* jin = new cJinete(*(*it), dragon);
+        aux = *it;
+        
+        (*this) + (jin);
         
         while (its != vikingos.end()) {
             if ((*its)->getNombre() == (*it)->getNombre()) {
@@ -184,6 +183,7 @@ void cBocon::conversion(cDragon* dragon, list<cVikingo*> vikingo)
         //cout << **it;
         it++;
     }
+    return jinetes;
 }
 
 void cBocon::trabajar()
