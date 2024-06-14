@@ -37,6 +37,7 @@ public:
 	void enlistarDragon();
 	void conversion(cDragon* dragon, list<cVikingo*> vikingo);
 
+
 	void elegirVikingo(int* elegidos, int n);
 	void elegirDragon(int elegido);
 

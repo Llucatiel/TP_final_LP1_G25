@@ -231,6 +231,7 @@ void cBocon::elegirDragon(int elegido)
     pelea(jin);
 }
 
+
 //Pelea entre los vikingos y los dragones
 void cBocon:: atacarDragones(list<cVikingo*> vikingos)//en el main especificamos que no se puede enviar mas de 6
 {

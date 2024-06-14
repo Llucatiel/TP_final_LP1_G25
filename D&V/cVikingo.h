@@ -8,30 +8,34 @@
 #include "cDragon.h"
 using namespace std;
 
+enum trabajos {
+	herrero, carpintero, cantinero, pastor, entrenadordedragones
+};
+
 class cVikingo : public cPersonaje
 {
 	static int cantVikingos;
 
 protected:
-	string trabajo;
+	trabajos trabajo;
 	int dragones_terminados;
 	string apellido;
 
 	virtual void impresion() const;
 public:
-	cVikingo(string nombre, string color, string apellido, int d, int m, int a, string altura, string peso, string trabajo, int dragones_terminados);
+	cVikingo(string nombre, string color, string apellido, int d, int m, int a, string altura, string peso, trabajos trabajo, int dragones_terminados);
 	virtual ~cVikingo();
 
 	static int getCantVikingos();
 
-	//bool trabajar();
+	int trabajar();
 	bool dragonesMatados();
 	bool domar(cDragon* dragon);
 	string getApellido() const;
 	string getTrabajo();
 	int getDragonesTerminados() const;
 
-	void setTrabajo(string nuevo);
+	void setTrabajo(trabajos nuevo);
 	void setDragonesTerminados(int suma);
 	void descripcion();
 };
