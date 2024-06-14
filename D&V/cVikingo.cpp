@@ -1,5 +1,6 @@
 #include "cVikingo.h"
 
+string TRABAJOS[] = { "herrero", "carpintero","cantinero", "pastor"};
 //Inicializa sus atributos estaticos
 int cVikingo::cantVikingos = 0;
 
@@ -12,7 +13,7 @@ void cVikingo::impresion() const
 }
 
 //Creacion por parametro de un vikingo
-cVikingo::cVikingo(string nombre, string color, string apellido, int d, int m, int a, string altura, string peso, string trabajo, int dragones_terminados)
+cVikingo::cVikingo(string nombre, string color, string apellido, int d, int m, int a, string altura, string peso, trabajos trabajo, int dragones_terminados)
  : cPersonaje(nombre, color, peso, altura, d, m, a) 
 {
 
@@ -33,6 +34,111 @@ void cVikingo::descripcion()
     cout << "su brillante cabellera " << color << " resplandece ante el atardecer de este peso pesado de " << peso << "kg"<<endl << endl;
     if (dragonesMatados())
         cout << "lleva " << dragones_terminados << " cadaveres de dragones en su espalda" << endl;
+}
+
+int cVikingo::trabajar()
+{
+    int premio = -5 + rand() % +10;
+
+    switch (trabajo) {
+    case 0:
+        if (premio > 0) {
+            int i = rand() % +2;
+            switch (i) {
+            case 0:
+                cout << "creaste una increible espada y la vendiste a un muy buen precio, con ese dinero optuviste " << premio << " de comida" << endl;
+                return premio;
+            case 1:
+                cout << " tu arsenal entero se vendio, y con todo ese dinero obtuviste" << premio * 2 << "de comida" << endl;
+                return premio * 2;
+            }
+        }
+        else if (premio < 0) {
+            int i = rand() % +2;
+            switch (i) {
+            case 0:
+                cout << "se te rompio una espada y tuviste que usar dinero extra para repararla, se consume " << -premio << " de comida" << endl;
+                return premio;
+            case 1:
+                cout << " tu arsenal entero se cayo y rompio, tanto esfuerzo en reparar todo consumio " << -premio * 2 << "de comida" << endl;
+                return premio * 2;
+            }
+        }
+    case 1:
+        if (premio > 0) {
+            int i = rand() % +2;
+            switch (i) {
+            case 0:
+                cout << "reparaste esa mesa que te pidieron y te pagaron muy bien, con eso puedes comprar" << premio << " de comida" << endl;
+                return premio;
+            case 1:
+                cout << "reparaste toda la casa, muy buen trabajo, te pagan" << premio * 2 << "de comida" << endl;
+                return premio * 2;
+            }
+        }
+        else if (premio < 0) {
+            int i = rand() % +2;
+            switch (i) {
+            case 0:
+                cout << "se te rompio tu martillo y tuviste que usar dinero extra para repararla, se consume " << -premio << " de comida" << endl;
+                return premio;
+            case 1:
+                cout << " se te rompio la casa que segun la dejaste en perfectas condiciones, te demandan y te quitan" << -premio * 2 << "de comida :(" << endl;
+                return premio * 2;
+            }
+        }
+        break;
+    case 2:
+        if (premio > 0) {
+            int i = rand() % +2;
+            switch (i) {
+            case 0:
+                cout << "el tomador del pueblo te compro su botella energizante usual, te paga con " << premio << " de comida" << endl;
+                return premio;
+            case 1:
+                cout << " el tomador del pueblo trajo a sus amigos de otras tierras, te pagan una gran ronda de bebidas con " << premio * 2 << "de comida" << endl;
+                return premio * 2;
+            }
+        }
+        else if (premio < 0) {
+            int i = rand() % +2;
+            switch (i) {
+            case 0:
+                cout << "sin que te des cuenta, el tomador se lleva una botella sin pagar y tuviste que reponerla, eso te consumio " << -premio << " de comida" << endl;
+                return premio;
+            case 1:
+                cout << "hubo una pelea en el bar por culpa del tomador del pueblo, tuviste que reponer todos los daños y eso te costo" << -premio * 2 << "de comida" << endl;
+                return premio * 2;
+            }
+        }
+        break;
+    case 3:
+        if (premio > 0) {
+            int i = rand() % +2;
+            switch (i) {
+            case 0:
+                cout << "te compran una oveja a un muy buen precio, te pagan con " << premio << " de comida" << endl;
+                return premio;
+            case 1:
+                cout << " tu compran todo un rebaño, te pagan muy bien con " << premio * 2 << "de comida" << endl;
+                return premio * 2;
+            }
+        }
+        else if (premio < 0) {
+            int i = rand() % +2;
+            switch (i) {
+            case 0:
+                cout << "se te enferma una oveja y tienes que pagarle al medico del pueblo para que sane, esto te costara" << -premio << " de comida" << endl;
+                return premio;
+            case 1:
+                cout << " un dragon salvaje arrazo con tu rebaño, reponer todo te costara " << -premio * 2 << "de comida" << endl;
+                return premio * 2;
+            }
+        }
+        break;
+    }
+        cout << "jornada laboral comun, no obtuviste ganancia";
+        return 0;
 }
 
 bool cVikingo::dragonesMatados()
@@ -113,7 +219,7 @@ string cVikingo::getApellido() const
 
 string cVikingo::getTrabajo()
 {
-    return trabajo;
+    return TRABAJOS[trabajo];
 }
 
 int cVikingo::getDragonesTerminados() const
@@ -121,7 +227,7 @@ int cVikingo::getDragonesTerminados() const
     return this->dragones_terminados;
 }
 
-void cVikingo::setTrabajo(string nuevo)
+void cVikingo::setTrabajo(trabajos nuevo)
 {
     this->trabajo = nuevo;
 }
