@@ -268,14 +268,19 @@ void cBocon:: atacarDragones(list<cVikingo*> vikingos)//en el main especificamos
     else {
         cDragon* d = dragonesNoDomados.front();
         list<cVikingo*> v;
-        dragonesNoDomados.front();
-        for (list<cVikingo*>::iterator it = vikingos.begin(), unsigned int i = 0; it != vikingos.end() && i < d->getCantCabezas(); it++, i++)
+        dragonesNoDomados.pop_front();
+        list<cVikingo*>::iterator it = vikingos.begin();
+        unsigned int i = 0;
+        while (it != vikingos.end() && i < d->getCantCabezas()) {
             v.push_back((*it));
+            it++;
+            i++; 
+        }
         conversion(d, v);
         (*this) + (d);
     }
 
-    if (dado > 2 && dado<13) {
+    if (premio!=0) {
         list<cVikingo*>::iterator it = vikingos.begin();
 
         while (it != vikingos.end()) {

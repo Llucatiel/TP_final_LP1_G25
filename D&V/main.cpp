@@ -19,7 +19,7 @@ int main()
     (*bocon) + (mario);
     (*bocon) + (hipo);
     (*bocon) + (ocard);
-    
+    int i[1] = { 0 };
     list<cVikingo*> lv;
     lv.push_back(bodoque);
 
@@ -29,6 +29,7 @@ int main()
     lv.push_back(mario);
     bocon->conversion(ocard, lv);
     lv.clear();
+    bocon->elegirVikingo(i, 1);
 
     bocon->enlistarDragon();
     cout << "Elija el dragon a enviar: " << endl;
