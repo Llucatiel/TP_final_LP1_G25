@@ -145,6 +145,8 @@ void cBocon::enlistarVikingo()
 {
     list<cVikingo*>::iterator it = vikingos.begin();
 
+    cout << "tu lista actual de vikingos es: " << endl;
+
     int i = 0;
     while (it != vikingos.end()) {
         cout << i << ". " << (*it)->getNombre() << endl;
@@ -157,6 +159,8 @@ void cBocon::enlistarVikingo()
 void cBocon::enlistarDragon()
 {
     list<cDragon*>::iterator it = dragones.begin();
+
+    cout << "tu lista actual de dragones es: " << endl;
 
     int i = 0;
     while (it != dragones.end()) {
@@ -191,6 +195,7 @@ void cBocon::trabajar()
 {
     list<cVikingo*>::iterator it = vikingos.begin();
     while (it != vikingos.end()) {
+        cout << "pusiste a trabajar a " << (*it)->getNombre() << endl;
         cBocon::cambioComida((*it)->trabajar());
         it++;
     }

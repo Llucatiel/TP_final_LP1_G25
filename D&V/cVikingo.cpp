@@ -98,7 +98,7 @@ int cVikingo::trabajar()
                 cout << "Sin que te des cuenta, el tomador se lleva una botella sin pagar y tuviste que reponerla, eso te consumio " << -premio << " de comida" << endl;
                 return premio;
             case 1:
-                cout << "Hubo una pelea en el bar por culpa del tomador del pueblo, tuviste que reponer todos los daños y eso te costo " << -premio * 2 << " de comida" << endl;
+                cout << "Hubo una pelea en el bar por culpa del tomador del pueblo, tuviste que reponer todos los danios y eso te costo " << -premio * 2 << " de comida" << endl;
                 return premio * 2;
             }
         }
@@ -128,7 +128,7 @@ int cVikingo::trabajar()
         }
         break;
     }
-        cout << "Jornada laboral comun, no obtuviste ganancia";
+        cout << "Jornada laboral comun, no obtuviste ganancia"<<endl;
         return 0;
 }
 
