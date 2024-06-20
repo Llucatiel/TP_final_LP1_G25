@@ -14,7 +14,7 @@ int main()
     cVikingo* mario = new cVikingo("Mario", "Gris", "Hugo", 2, 12, 2003, "0.50", "3", pastor, 0);
     cVikingo* hipo = new cVikingo("Hipo", "Negro", "Hipo", 3, 9, 1999, "1.80", "75", herrero, 3);
     cVikingo* lauti = new cVikingo("Lautaro", "rubio", "canale", 2, 12, 2003, "1.74", "60", pastor, 0);
-    cVikingo* oscar = new cVikingo("Oscar", "negro", "apellido", 30, 6, 2005, "1,77", "60", pastor, 0);
+    cVikingo* oscar = new cVikingo("Oscar", "negro", "Perdomo", 30, 6, 2005, "1,77", "60", pastor, 0);
     cVikingo* messi = new cVikingo("Lionel", "negro", "messi", 24, 6, 1987, "0.45", "50", herrero, 0);
 
     (*bocon)+(draco);
@@ -55,10 +55,12 @@ int main()
     Sleep(4000);
     system("cls");
 
-    hipo->imprimirDatos();
-    messi->imprimirDatos();
+    bocon->vikRandom()->imprimirDatos();
+    bocon->vikRandom()->imprimirDatos();
     Sleep(10000);
     system("cls");
+
+    
 
     bocon->trabajar();
     //bocon->elegirDragon(rand() % bocon->getCantDrag());
