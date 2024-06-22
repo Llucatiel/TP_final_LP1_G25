@@ -189,6 +189,15 @@ void cBocon::conversion(cDragon* dragon, list<cVikingo*> vikingo)
         //cout << **it;
         it++;
     }
+    list<cDragon*>::iterator dr = dragones.begin();
+    bool domado = false;
+    while (dr != dragones.end()) {
+        if ((*dr)->getIdentificador() == dragon->getIdentificador())
+            domado = true;
+        dr++;
+    }
+    if (!domado)
+        *this + dragon;
 }
 
 void cBocon::trabajar()
@@ -302,7 +311,7 @@ void cBocon:: atacarDragones(list<cVikingo*> vikingos)//en el main especificamos
         premio = cantidadeVikingos;
         cout << "exito de la encruzijada de un 100%, obtienes comida: " << cantidadeVikingos << endl;
     }
-    else if (dragonesNoDomados.empty()){
+    else if (dado < 12 || dragonesNoDomados.empty()){
         premio = cantidadeVikingos * 2;
         cout << "exito de la encruzijada de un 200%, obtienes comida: " << cantidadeVikingos * 2 << endl;
     }
@@ -318,7 +327,6 @@ void cBocon:: atacarDragones(list<cVikingo*> vikingos)//en el main especificamos
             i++; 
         }
         conversion(d, v);
-        (*this) + (d);
     }
 
     if (premio!=0) {

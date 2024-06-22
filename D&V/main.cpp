@@ -21,7 +21,7 @@ int main()
     (*bocon) + (bodoque);
     (*bocon) + (mario);
     (*bocon) + (hipo);
-    (*bocon) + (ocard);
+    //(*bocon) + (ocard);
     (*bocon) + (lauti);
     (*bocon) + (oscar);
     (*bocon) + (messi);
@@ -31,7 +31,7 @@ int main()
     (*mario)+(new cAtaque(fisico));
     lv.push_back(mario);
     bocon->conversion(draco, lv);
-
+    
     cout << "cargando";Sleep(1000);cout << "."; Sleep(1000);cout << ".";Sleep(1000);cout << ".";Sleep(1000);cout << endl;
     cout << "BIENVENIDO A D&V BOCON" << endl;
     cout << "                 ___====-_  _-====___\n";
@@ -60,10 +60,8 @@ int main()
     Sleep(10000);
     system("cls");
 
-    
-
     bocon->trabajar();
-    //bocon->elegirDragon(rand() % bocon->getCantDrag());
+    bocon->elegirDragon(rand() % bocon->getCantDrag());
     cout <<"cantidad actual de comida: "<< cBocon::getComida() << endl;
     delete bocon;
     return 0;
