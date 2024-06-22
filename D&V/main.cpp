@@ -53,7 +53,7 @@ int main()
     cout << "_#/|........./\\......(   ()   )...... /\\.........|\\#_\n";
     cout << "|/ |.|/\\|/\\  \\/|.|/\\  \\    /  \\|.|/\\/  \\/|/\\|/|.\\| \\\n";
     cout << "  |/  V  |  |    |  |    \\  |  |  |    |  |  V  \\\n";
-    PlaySound(TEXT("DIVINE EMANATION BUNDLE DRAGONS VOLUME 2.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
+    PlaySound(TEXT("../DIVINE EMANATION BUNDLE DRAGONS VOLUME 2.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
     system("pause");
     system("cls");
 
