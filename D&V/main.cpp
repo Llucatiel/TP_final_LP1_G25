@@ -63,7 +63,7 @@ int main()
     
 
     bocon->trabajar();
-    //bocon->elegirDragon(rand() % bocon->getCantDrag());
+    bocon->elegirDragon(rand() % bocon->getCantDrag());
     cout <<"cantidad actual de comida: "<< cBocon::getComida() << endl;
     delete bocon;
     return 0;
