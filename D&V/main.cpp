@@ -17,11 +17,9 @@ int main()
     cVikingo* oscar = new cVikingo("Oscar", "negro", "Perdomo", 30, 6, 2005, "1,77", "60", pastor, 0);
     cVikingo* messi = new cVikingo("Lionel", "negro", "messi", 24, 6, 1987, "0.45", "50", herrero, 0);
 
-    (*bocon)+(draco);
     (*bocon) + (bodoque);
     (*bocon) + (mario);
     (*bocon) + (hipo);
-    //(*bocon) + (ocard);
     (*bocon) + (lauti);
     (*bocon) + (oscar);
     (*bocon) + (messi);
