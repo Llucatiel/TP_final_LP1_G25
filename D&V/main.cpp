@@ -76,6 +76,8 @@ int main()
     bocon->getVik(se)->imprimirDatos();
     Sleep(10000);
     system("cls");
+
+    cout<<"DRAGON DEL DIA: "<<endl;
     cout << bocon->getDrag(rand() % bocon->getCantDrag())->To_string() << endl;
 
     Sleep(5000);
@@ -85,14 +87,20 @@ int main()
     Sleep(10000);
     system("cls");
 
+    
     bocon->elegirVikingo(v, 3);
     Sleep(5000);
     pr = rand() % bocon->getCantJin();
     bocon->getJin(pr)->entrenar();
     
     Sleep(5000);
+    system("cls");
     se = bocon->getJin(pr)->getDragon()->getIdentificador() - 1;
+    
+    cout << "El dragon con el que iras para la batalla hoy es " << bocon->getDrag(se)->getNombre() << endl;
+    cout << "MOVIMIENTO DESTACADO: " << endl;
     bocon->getDrag(se)->mostrarDanos();
+    cout <<endl<< "ESTADISTICAS:" << endl;
     bocon->getDrag(se)->mostrarStats();
     Sleep(10000);
     bocon->elegirDragon(se);

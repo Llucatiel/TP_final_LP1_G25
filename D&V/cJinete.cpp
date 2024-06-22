@@ -54,6 +54,10 @@ void cJinete::setApodo(string apodito)
 
 void cJinete::entrenar()
 {
+	cout << "HORA DE EJERCITAR ESOS MUSCULOS"<<endl<<endl;
+	cout<<"levantando una roca de 100 kg";Sleep(500);cout << "."; Sleep(500);cout << ".";Sleep(500);cout << ".";Sleep(500);cout << endl;
+	cout<<"sobrevolando por una montania de 6000 metros a 150km/h";Sleep(500);cout << "."; Sleep(500);cout << ".";Sleep(500);cout << ".";Sleep(500);cout << endl;
+
 	notaEntrenar = 1 + rand() % 10;
 	int buff = (notaEntrenar - 5) / 2;
 	getDragon()->setBuff(buff);

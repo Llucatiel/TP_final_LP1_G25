@@ -203,11 +203,15 @@ void cBocon::conversion(cDragon* dragon, list<cVikingo*> vikingo)
 void cBocon::trabajar()
 {
     list<cVikingo*>::iterator it = vikingos.begin();
+
+    cout << "A LABURAR" << endl << endl;
+
     while (it != vikingos.end()) {
         cout << "pusiste a trabajar a " << (*it)->getNombre() << endl;
         cBocon::cambioComida((*it)->trabajar());
         it++;
     }
+    cout << "Un dia laboral comun en berk, tu cantidad de comida actual es de: " << getComida()<<endl;
 }
 
 
@@ -274,6 +278,7 @@ void cBocon::elegirVikingo(int* elegidos, int n)
         return;
 
     v.unique();
+    cout << "HORA DE CAZAR DRAGONES"<<endl<<endl;
     atacarDragones(v);
 }
 
