@@ -1,12 +1,13 @@
 #include <iostream>
 #include "cBocon.h"
 
+#pragma comment(lib, "winmm.lib")
 using namespace std;
 
 int main() 
 {
     srand(time(0));
-
+    
     cDragon* draco = new cDragon();
     cBocon* bocon = new cBocon();
     cVikingo* bodoque = new cVikingo("Juan Carlos", "Rojo", "Bodoque", 2, 12, 2003, "0.50", "3", cantinero, 0);
@@ -52,7 +53,8 @@ int main()
     cout << "_#/|........./\\......(   ()   )...... /\\.........|\\#_\n";
     cout << "|/ |.|/\\|/\\  \\/|.|/\\  \\    /  \\|.|/\\/  \\/|/\\|/|.\\| \\\n";
     cout << "  |/  V  |  |    |  |    \\  |  |  |    |  |  V  \\\n";
-    Sleep(2000);
+    PlaySound(TEXT("DIVINE EMANATION BUNDLE DRAGONS VOLUME 2.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
+    system("pause");
     system("cls");
 
     bocon->enlistarVikingo();
