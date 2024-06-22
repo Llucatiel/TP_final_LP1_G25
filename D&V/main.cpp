@@ -8,7 +8,6 @@ int main()
     srand(time(0));
 
     cDragon* draco = new cDragon();
-    cDragon* ocard = new cDragon();
     cBocon* bocon = new cBocon();
     cVikingo* bodoque = new cVikingo("Juan Carlos", "Rojo", "Bodoque", 2, 12, 2003, "0.50", "3", cantinero, 0);
     cVikingo* mario = new cVikingo("Mario", "Gris", "Hugo", 2, 12, 2003, "0.50", "3", pastor, 0);
@@ -26,11 +25,20 @@ int main()
 
     int i[1] = { 0 };
     list<cVikingo*> lv;
-    (*mario)+(new cAtaque(fisico));
+    for (int i = 0; i < 2; i++) {
+        try {
+            (*mario) + (new cAtaque(fisico));
+        }
+        catch (const exception* e) {
+            i--;
+        }
+    }
     lv.push_back(mario);
     bocon->conversion(draco, lv);
+    bocon->getJin(0)->setApodo("Charlatan");
+    lv.clear();
     
-    cout << "cargando";Sleep(1000);cout << "."; Sleep(1000);cout << ".";Sleep(1000);cout << ".";Sleep(1000);cout << endl;
+    cout << "cargando";Sleep(500);cout << "."; Sleep(500);cout << ".";Sleep(500);cout << ".";Sleep(500);cout << endl;
     cout << "BIENVENIDO A D&V BOCON" << endl;
     cout << "                 ___====-_  _-====___\n";
     cout << "           _--^^^.....//      \\\\.....^^^--_\n";
@@ -53,13 +61,39 @@ int main()
     Sleep(4000);
     system("cls");
 
-    bocon->vikRandom()->imprimirDatos();
-    bocon->vikRandom()->imprimirDatos();
+    int pr = rand() % bocon->getCantVik();
+    int se;
+    do {
+        se = rand() % bocon->getCantVik();
+    } while (se == pr);
+    int v[3];
+    for (int i = 0; i < 3; i++) {
+        v[i] = rand() % bocon->getCantVik();
+    }
+    bocon->getVik(pr)->imprimirDatos();
+    bocon->getVik(se)->imprimirDatos();
+    Sleep(10000);
+    system("cls");
+    cout << bocon->getDrag(rand() % bocon->getCantDrag())->To_string() << endl;
+
+    Sleep(5000);
+    system("cls");
+    
+    bocon->trabajar();
     Sleep(10000);
     system("cls");
 
-    bocon->trabajar();
-    bocon->elegirDragon(rand() % bocon->getCantDrag());
+    bocon->elegirVikingo(v, 3);
+    Sleep(5000);
+    pr = rand() % bocon->getCantJin();
+    bocon->getJin(pr)->entrenar();
+    
+    Sleep(5000);
+    se = bocon->getJin(pr)->getDragon()->getIdentificador() - 1;
+    bocon->getDrag(se)->mostrarDanos();
+    bocon->getDrag(se)->mostrarStats();
+    Sleep(10000);
+    bocon->elegirDragon(se);
     cout <<"cantidad actual de comida: "<< cBocon::getComida() << endl;
     delete bocon;
     return 0;

@@ -37,13 +37,15 @@ public:
 	void enlistarDragon();
 	void conversion(cDragon* dragon, list<cVikingo*> vikingo);
 	void trabajar();
-	cVikingo* vikRandom();
-
 
 	void elegirVikingo(int* elegidos, int n);
 	void elegirDragon(int elegido);
-
 	void atacarDragones(list<cVikingo*> vikingos);
 	void pelea(list<cJinete*> jin);
+	
+
+	cVikingo* getVik(int i);
+	cDragon* getDrag(int i);
+	cJinete* getJin(int i);
 };
 

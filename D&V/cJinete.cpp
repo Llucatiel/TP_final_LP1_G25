@@ -54,8 +54,20 @@ void cJinete::setApodo(string apodito)
 
 void cJinete::entrenar()
 {
-	notaEntrenar = rand() % 11;
-	getDragon()->setBuff((notaEntrenar - 5) / 2);
+	notaEntrenar = 1 + rand() % 10;
+	int buff = (notaEntrenar - 5) / 2;
+	getDragon()->setBuff(buff);
+	cout << "El entrenamiento de hoy ";
+	if (notaEntrenar < 4) {
+		cout << "fue un fracaso\n";
+	}
+	else if (notaEntrenar < 6)
+		cout << "podrias haberlo hecho mejor\n";
+	else if (notaEntrenar < 10)
+		cout << "estuviste muy bien, con espacio a mejora\n";
+	else cout << "es un bellisimo 10\n";
+	
+		cout << getDragon()->getNombre() << " tendra un modificador de " << buff << " a sus estadisticas durante su siguiente pelea\n";
 }
 
 string cJinete::getApodo() const {

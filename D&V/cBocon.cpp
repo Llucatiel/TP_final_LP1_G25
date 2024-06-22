@@ -210,22 +210,47 @@ void cBocon::trabajar()
     }
 }
 
-cVikingo* cBocon::vikRandom()
-{
-    int i=0;
-    int Nrandom = rand() % cBocon::getCantVik();
-    list<cVikingo*>::iterator it = vikingos.begin();
 
+cVikingo* cBocon::getVik(int i)
+{
+    list<cVikingo*>::iterator it = vikingos.begin();
+    int j = 0;
     while (it != vikingos.end()) {
-        if (i==Nrandom) {
+        if (j == i)
             return (*it);
-        }
-        i++;
         it++;
+        j++;
     }
-    if (it == vikingos.end()) {
-        throw new exception("no se encontro vikingo");
+
+    return *(it = vikingos.begin()); //En caso de fallo, enviar el primero
+}
+
+cDragon* cBocon::getDrag(int i)
+{
+    list<cDragon*>::iterator it = dragones.begin();
+    int j = 0;
+    while (it != dragones.end() && j != i) {
+        if (j == i)
+            return (*it);
+        it++;
+        j++;
     }
+
+    return *(it = dragones.begin()); //En caso de fallo, enviar el primero
+}
+
+cJinete* cBocon::getJin(int i)
+{
+    list<cJinete*>::iterator it = jinetes.begin();
+    int j = 0;
+    while (it != jinetes.end() && j != i) {
+        if (j == i)
+            return (*it);
+        it++;
+        j++;
+    }
+
+    return *(it = jinetes.begin()); //En caso de fallo, enviar el primero
 }
 
 //Busca en la lista de vikingos a aquellos elegidos para usarlos al llamar atacarDragones
@@ -248,8 +273,8 @@ void cBocon::elegirVikingo(int* elegidos, int n)
     if (!c)
         return;
 
+    v.unique();
     atacarDragones(v);
-
 }
 
 //Busca en la lista de dragones que tiene (En el futuro deberia de ser de jinetes) y al final llama a pelear

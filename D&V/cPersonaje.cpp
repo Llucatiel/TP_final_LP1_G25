@@ -83,7 +83,7 @@ string cPersonaje::To_string()
      stringstream ss;
 
     ss << "Nombre: " << nombre << endl;
-    ss << "Color de pelo: " << color << endl;
+    ss << "Color: " << color << endl;
     ss << "Peso: " << peso << endl;
     ss << "Tamano: " << tamano << endl;
     ss << "Edad: " << getAnios() << endl;
