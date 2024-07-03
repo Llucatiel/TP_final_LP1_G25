@@ -32,7 +32,7 @@ public:
 
 	int trabajar();
 	bool dragonesMatados();
-	bool domar(cDragon* dragon);
+	//bool domar(cDragon* dragon); No implentado :(
 	
 	string getApellido() const;
 	string getTrabajo();

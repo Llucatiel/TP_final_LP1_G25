@@ -20,5 +20,6 @@ public:
 	void entrenar();
 	~cJinete();
 
+	int getNota();
 };
 

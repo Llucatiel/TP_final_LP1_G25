@@ -18,7 +18,6 @@ private:
 	float probabilidad;
 
 
-	float danoTotal(int stat);
 
 public:
 	cAtaque();
@@ -26,6 +25,7 @@ public:
 	cAtaque(string nombre, tipo type, int stat, float dano, float prob);
 	~cAtaque();
 
+	float danoTotal(int stat);
 	float probTotal(int stat);
 	float getDano();
 	float getProb();

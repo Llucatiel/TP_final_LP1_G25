@@ -12,6 +12,11 @@ cJinete::~cJinete()
 {
 }
 
+int cJinete::getNota()
+{
+	return notaEntrenar;
+}
+
 cJinete::cJinete(string nombre, string apellido, string pelo,string altura, string peso, int d, int m, int a, string apodo, cDragon* dragon):
 	cVikingo(nombre, pelo, apellido, d, m, a, altura, peso, entrenadordedragones, dragones_terminados)
 {
@@ -54,24 +59,9 @@ void cJinete::setApodo(string apodito)
 
 void cJinete::entrenar()
 {
-	cout << "HORA DE EJERCITAR ESOS MUSCULOS"<<endl<<endl;
-	cout<<"levantando una roca de 100 kg";Sleep(500);cout << "."; Sleep(500);cout << ".";Sleep(500);cout << ".";Sleep(500);cout << endl;
-	cout<<"sobrevolando por una montania de 6000 metros a 150km/h";Sleep(500);cout << "."; Sleep(500);cout << ".";Sleep(500);cout << ".";Sleep(500);cout << endl;
-
 	notaEntrenar = 1 + rand() % 10;
 	int buff = (notaEntrenar - 5) / 2;
 	getDragon()->setBuff(buff);
-	cout << "El entrenamiento de hoy ";
-	if (notaEntrenar < 4) {
-		cout << "fue un fracaso\n";
-	}
-	else if (notaEntrenar < 6)
-		cout << "podrias haberlo hecho mejor\n";
-	else if (notaEntrenar < 10)
-		cout << "estuviste muy bien, con espacio a mejora\n";
-	else cout << "es un bellisimo 10\n";
-	
-		cout << getDragon()->getNombre() << " tendra un modificador de " << buff << " a sus estadisticas durante su siguiente pelea\n";
 }
 
 string cJinete::getApodo() const {

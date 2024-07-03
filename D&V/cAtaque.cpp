@@ -114,27 +114,11 @@ float cAtaque::probTotal(int stat)
 
 	int hit = rand() % 100;
 	if (hit <= 10.0) {
-		cout << "HA SACADO UN CRITICO" << endl;
-		for (int i = 0; i < 3; i++) {
-			system("color 47");
-			Sleep(100);
-			system("color 67");
-			Sleep(100);
-		}
-		system("color 07");
-		return danoTotal(stat) * 2;
+		return 2;
 	}
 	else if (hit <= prob) {
-		cout << "Ha acertado al objetivo" << endl;
-		for (int i = 0; i < 3; i++) {
-			system("color 87");
-			Sleep(100);
-			system("color 07");
-			Sleep(100);
-		}
-		return danoTotal(stat);
+		return 1;
 	}
-	cout << "El ataque fallo lastimosamente..." << endl;
 	return 0;
 }
 
@@ -168,10 +152,6 @@ tipo cAtaque::getTipo()
 float cAtaque::danoTotal(int stat)
 {
 	float total = (this->dano * (float)stat / 10) + (rand() % 16);
-	if (total <= 0)
-		total = 5;
-
-	cout << total << " de dano de " << elemento[this->type] << endl;
 	return total;
 }
 

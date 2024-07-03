@@ -111,8 +111,11 @@ void cPersonaje::imprimirDatos()
 {
     cout << *this << endl;
 }
+int cPersonaje::getBuff() {
+    return buff;
+}
 
-float cPersonaje::atacar(int i)
+int cPersonaje::atacar(int i)
 {
 
     if (!this->vivo)
@@ -127,11 +130,20 @@ float cPersonaje::atacar(int i)
     for (int j = 0; j < i; j++)
         it++;
 
-    cout << nombre << " a usado " << (*it)->getNombre() << endl;
+    
 
     return (*it)->probTotal(this->getStat((*it)->getStat())+buff);
 }
+float cPersonaje::ataque(int i, int critico)
+{
+    list<cAtaque*>::iterator it = this->ataques.begin();
+    i--;
 
+    for (int j = 0; j < i; j++)
+        it++;
+
+    return (*it)->danoTotal((this->getStat((*it)->getStat()) + buff)*critico);
+}
 int cPersonaje::getCantAtk()
 {
     return (int)this->ataques.size();
@@ -189,6 +201,7 @@ cAtaque* cPersonaje::getAtk(int i)
     return (*it);
 }
 
+//Imprime los danos y probabilidad de golpe de todos los ataques
 void cPersonaje::mostrarDanos()
 {
     if (!this->vivo)

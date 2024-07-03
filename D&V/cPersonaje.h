@@ -39,8 +39,10 @@ public:
 
 	int getCantAtk();
 	int getAnios();
+	int getBuff();
 	void imprimirDatos();
-	float atacar(int i);
+	int atacar(int i);
+	float ataque(int i, int critico);
 	bool getVivo()const;
 	bool getBorrado()const;
 	float getStat(int i);

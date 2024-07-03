@@ -273,19 +273,17 @@ void cDragon::perderVida(float dano)
 {
     this->vidaActual -= dano;
     
-    if (this->vidaActual <= 0) {
-        cout << getNombre() << " a perecido en batalla" << endl;
+    if (this->vidaActual <= 0) 
         this->vivo = false;
-    }
-    else if (dano > 0)
-        cout << "Dejandolo a " << nombre << " a " << vidaActual << " puntos de vida" << endl << endl;
-    else
-        cout << endl;
-
-    //ANIADIR COLOSITOS TODOS VIOLENTOS BIEN BONITOS, system("color...");
+    
 }
 
 void cDragon::curarse()
 {
     this->vidaActual = this->vidaMax;
+}
+
+int cDragon::getCantDrag()
+{
+    return cantDragonesDomados;
 }

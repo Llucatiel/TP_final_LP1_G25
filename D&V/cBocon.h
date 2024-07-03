@@ -33,13 +33,14 @@ public:
 	void encuentrePaz(cDragon* perdida);
 	void encuentrePaz(cVikingo* perdida);
 	void encuentrePaz(cJinete* perdida);
+	//Imprimir vikingos y dragones
 	void enlistarVikingo();
 	void enlistarDragon();
+
 	void conversion(cDragon* dragon, list<cVikingo*> vikingo);
 	void trabajar();
 
 	void elegirVikingo(int* elegidos, int n);
-	void elegirDragon(int elegido);
 	void atacarDragones(list<cVikingo*> vikingos);
 	void pelea(list<cJinete*> jin);
 	
@@ -47,5 +48,6 @@ public:
 	cVikingo* getVik(int i);
 	cDragon* getDrag(int i);
 	cJinete* getJin(int i);
+	list<cJinete*> elegirDragon(int elegido);
 };
 
